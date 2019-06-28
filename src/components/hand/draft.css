@@ -1,0 +1,53 @@
+.draft {
+    border: 2px solid black;
+    padding: 0.5em;
+    display: flex;
+}
+
+.draft-sidebar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.draft-sidebar-items {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-item {
+    flex: 1;
+    border:2px solid;
+    margin: 0.5em;
+}
+
+.draft-main {
+    flex: 4;
+    position: relative;
+}
+
+.draft-gold-bar {
+    border-bottom: none;
+    margin-bottom: -2px;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.draft-gold {
+    border: 2px solid;
+    padding: 0.5em;
+}
+
+.hand {
+    display: flex;
+    border: 2px solid;
+    z-index: 1;
+}
+
+.champ-card {
+    border: 1px solid black;
+    flex: 1;
+    height: 5em;
+    margin: 1em;
+}

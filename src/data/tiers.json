@@ -1,0 +1,10 @@
+{
+    "version": "9.13",
+    "unitsPerTier": {
+        "tier1": 39,
+        "tier2": 26,
+        "tier3": 21,
+        "tier4": 13,
+        "tier5": 10
+    }
+}

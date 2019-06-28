@@ -1,0 +1,96 @@
+{
+    "version": "v9.13",
+    "champions": [
+        {
+            "name": "Ahri",
+            "id": "ahri",
+            "cost": 2,
+            "classes": [
+                "wild",
+                "sorcerer"
+            ]
+        },
+        {
+            "name": "Aureleon Sol",
+            "id": "aureleon",
+            "cost": 4,
+            "classes": [
+                "dragon",
+                "sorcerer"
+            ]
+        },
+        {
+            "name": "Blitzcrank",
+            "id": "blitzcrank",
+            "cost": 2,
+            "classes": [
+                "brawler",
+                "robot"
+            ]
+        },
+        {
+            "name": "Draven",
+            "id": "draven",
+            "cost": 4,
+            "classes": [
+                "imperial",
+                "blademaster"
+            ]
+        },
+        {
+            "name": "Garen",
+            "id": "garen",
+            "cost": 1,
+            "classes": [
+                "noble",
+                "knight"
+            ]
+        },
+        {
+            "name": "Nidalee",
+            "id": "nidalee",
+            "cost": 1,
+            "classes": [
+                "wild",
+                "shapeshifter"
+            ]
+        },
+        {
+            "name": "Poppy",
+            "id": "poppy",
+            "cost": 3,
+            "classes": [
+                "knight",
+                "yordle"
+            ]
+        },
+        {
+            "name": "Swain",
+            "id": "swain",
+            "cost": 5,
+            "classes": [
+                "demon",
+                "imperial",
+                "shapeshifter"
+            ]
+        },
+        {
+            "name": "Yasuo",
+            "id": "yasuo",
+            "cost": 5,
+            "classes": [
+                "blademaster",
+                "exiler"
+            ]
+        },
+        {
+            "name": "Veigar",
+            "id": "veigar",
+            "cost": 3,
+            "classes": [
+                "sorcerer",
+                "yordle"
+            ]
+        }
+    ]
+}

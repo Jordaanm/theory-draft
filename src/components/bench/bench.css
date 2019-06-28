@@ -1,0 +1,12 @@
+.bench {
+    border: 2px solid black;
+    padding: 0.5em;
+    display: flex;
+}
+
+.bench-slot {
+    border: 1px solid black;
+    flex: 1;
+    height: 5em;
+    margin: 1em;
+}
