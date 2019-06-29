@@ -26,9 +26,6 @@ export class MainPage extends React.Component {
     }
 
     public render() {
-
-        const units = [...Array(Bench.BENCH_SIZE)].map(x => null);
-
         return (
             <section className="main-page">
                 <Provider draft={this.draftStore} >

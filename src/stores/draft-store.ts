@@ -40,7 +40,7 @@ export class DraftStore {
     level: number = 4;
 
     @observable
-    gold: number = 30;
+    gold: number = 300;
 
     constructor() {
         this.pool = [];
@@ -129,24 +129,118 @@ export class DraftStore {
     @action
     public buyCard(champ: ChampData) {
         console.log("DraftStore::buyCard", champ);
+        let cost = champ.cost;
+        let removeExtra = false;
+
         if(this.gold < champ.cost) {
             console.log(`You cannot afford to buy ${champ.name} for ${champ.cost} coins`);
         }
 
+        /* Several cases:
+        1. Player has empty space for unit, all good
+        2. Player has no empty space, but has 2 units of the same type at tier 1 already, merge to free up space
+        3. Player has no empty space, but has 1 unit of the same type at tier 1,
+           and the hand has 2 of that same champ
+           3a. If they have the gold to buy 2, buy both and merge to free up space
+           3b. If they don't have the gold, abort
+        */
+
+
         //Add unit to bench
         const firstEmpty = this.benchedUnits.findIndex(x => x === null);
-        this.benchedUnits[firstEmpty] = ({
-            tier: 1,
-            champ
-        });
+        //Case 1
+        if(firstEmpty >= 0) {
+            this.benchedUnits[firstEmpty] = ({
+                tier: 1,
+                champ
+            });
+
+        } else {
+            const matchingUnits = this.benchedUnits
+                .filter(unit => unit !== null && unit.tier === 1 && unit.champ.id === champ.id);
+
+            const availableToBuy = this.currentHand
+                .filter(c => c !== null && c.id === champ.id) as ChampData[];
+
+            //Case 2
+            if (matchingUnits.length === 2) {
+                this.mergeUnits(1, availableToBuy); //Upgrade
+            } else if (matchingUnits.length === 1 && availableToBuy.length === 2) {
+                if(this.gold >= champ.cost * 2) { //3a
+                    cost *= 2; //Increase Cost
+                    this.mergeUnits(1, availableToBuy); //Upgrade
+                    removeExtra = true; //Flag that theres a 2nd card to remove
+                } else { //3b
+                    console.log("You don't space and can't afford to buy 2 of unit: ", champ.name);
+                    return;
+                }
+            }
+        }
 
         //Remove card
         const index = this.currentHand.findIndex(card => card != null && card.id === champ.id);
         this.currentHand[index] = null;
 
-        //Merge Units
-        //TODO
+        //Remove 2nd card if needed
+        if(removeExtra) {
+            const index = this.currentHand.findIndex(card => card != null && card.id === champ.id);
+            this.currentHand[index] = null;    
+        }
 
+        //Merge Units
+        this.mergeUnits(1);
+
+        //Pay money
+        this.gold -= cost;
+    }
+
+    @action
+    private mergeUnits(tier: number = 1, extraChamps: ChampData[] = []) {
+        const extraUnits: Unit[] = extraChamps.map(champ => ({champ, tier: 1}));
+        const totalUnits: (Unit|null)[] = [...this.benchedUnits, ...extraUnits];
+
+        const onlyCurrentTier = totalUnits.filter(c => c!== null && c.tier === tier) as Unit[];
+        
+        //Remap to count champions
+        const champCount = onlyCurrentTier.reduce((m: object, unit: Unit) => {
+            const id = unit.champ.id;
+            const val = (m as any)[id];
+            if (!val) {
+                (m as any)[id] = 1;
+            } else {
+                (m as any)[id] = val+1;
+            }
+            return m;
+        }, {});
+
+        //Find champs to merge
+        const idsToMerge = Object.keys(champCount).filter(x => (champCount as any)[x] >= 3);
+
+        //Merge and upgrade the champs
+        idsToMerge.forEach(id => {
+            const champ = (champions.champions as ChampData[]).find(c => c.id === id);
+            
+            let index = -1;
+            //Remove all of that unit
+            while(-1 !== (index = this.benchedUnits.findIndex(unit => 
+                unit !== null &&
+                unit.champ.id === id &&
+                unit.tier === tier
+            ))) {
+                this.benchedUnits[index] = null;
+            }
+
+            //Add upgraded unit
+            const firstEmpty = this.benchedUnits.findIndex(x => x === null);
+            this.benchedUnits[firstEmpty] = {
+                tier: tier + 1,
+                champ
+            } as Unit;
+        });
+
+        if (tier === 1) {
+            this.mergeUnits(2);
+        }
     }
 
     private getXpForLevelUp(currentLevel: number) {
