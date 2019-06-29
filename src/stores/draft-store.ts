@@ -156,6 +156,7 @@ export class DraftStore {
 
         if(this.gold < champ.cost) {
             console.log(`You cannot afford to buy ${champ.name} for ${champ.cost} coins`);
+            return;
         }
 
         /* Several cases:
