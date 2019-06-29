@@ -9,14 +9,14 @@ export class Champion extends React.Component<ChampionProps> {
 
     public render() {
         const { unit } = this.props;
+        const { champ } = unit;
 
         const stars = this.getTierString(unit);
 
         return (
             <div className="champion">
-                <div className="champion-name">{unit.name}</div>
+                <div className="champion-name">{champ.name}</div>
                 <div className="champion-tier">{stars}</div>
-                <div className="champion-cost">{unit.cost}</div>
             </div>
         );
     }

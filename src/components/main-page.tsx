@@ -7,6 +7,7 @@ import { DraftStore } from '../stores/draft-store';
 import { observable } from 'mobx';
 
 import * as ChampionsData from '../data/champions.json';
+import { Provider } from 'mobx-react';
 export class MainPage extends React.Component {
 
     @observable
@@ -30,9 +31,13 @@ export class MainPage extends React.Component {
 
         return (
             <section className="main-page">
-                <Board cellData={[]}/>
-                <Bench units={units} />
-                <Draft currentHand={this.draftStore.currentHand} currentGold={23} />
+                <Provider draft={this.draftStore} >
+                    <>
+                        <Board cellData={[]}/>
+                        <Bench />
+                        <Draft />
+                    </>
+                </Provider>
             </section>
         )
     }

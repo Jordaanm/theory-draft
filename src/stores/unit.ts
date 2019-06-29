@@ -1,6 +1,6 @@
+import { ChampData } from "./champ-data";
+
 export interface Unit {
     tier: number;
-    cost: number;
-    name: string;
-    id: string;
+    champ: ChampData;
 }

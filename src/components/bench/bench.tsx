@@ -1,21 +1,22 @@
 import * as React from 'react';
-import { Unit } from '../../stores/unit';
 import { BenchSlot } from './bench-slot';
 import './bench.css';
+import { inject, observer } from 'mobx-react';
+import { DraftStore } from '../../stores/draft-store';
 interface BenchProps {
-    units: Unit[];
+    draft?: DraftStore;
 }
 
+@inject('draft')
+@observer
 export class Bench extends React.Component<BenchProps> {
-
-    public static BENCH_SIZE = 9;
-
     public render() {
-        const { units } = this.props;
+        const { draft } = this.props;
+        const { benchedUnits } = draft;
 
         return (
             <div className="bench">
-                {units.map((unit, index) => <BenchSlot unit={unit} key={index}/>)}
+                {benchedUnits.map(unit => <BenchSlot unit={unit} key={Math.random()}/>)}
             </div>
         );
     }

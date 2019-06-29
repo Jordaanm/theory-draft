@@ -20,23 +20,49 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    position: relative;
 
     &.champ-cost-1 {
         border-color: $tierColor1;
+        .decoration {
+            background-image: none;
+        }
     }
     &.champ-cost-2 {
         border-color: $tierColor2;
+        .decoration {
+            background-image: url(/img/profile-deco/2.png);
+        }
     }
     &.champ-cost-3 {
         border-color: $tierColor3;
+        .decoration {
+            background-image: url(/img/profile-deco/3.png);
+        }
     }
     &.champ-cost-4 {
         border-color: $tierColor4;
+        .decoration {
+            background-image: url(/img/profile-deco/4.png);
+        }
     }
     &.champ-cost-5 {
         border-color: $tierColor5;
+        .decoration {
+            background-image: url(/img/profile-deco/5.png);
+        }
     }
     
+    .decoration {
+        position: absolute;
+        top: 0%;
+        width: 100%;
+        height: 25%;
+        z-index: 100;
+        background-repeat: no-repeat;
+        background-position: top center;
+    }
+
     .hero {
         flex: 1;
         display: flex;
