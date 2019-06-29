@@ -1,5 +1,13 @@
 @import '../../styles/colors';
 
+%text-outline {
+    text-shadow:
+    -1px -1px 0 #000,  
+     1px -1px 0 #000,
+     -1px 1px 0 #000,
+      1px 1px 0 #000;
+}
+
 .champ-card {
     border: 3px solid black;
     border-radius: 3px;
@@ -12,49 +20,50 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-}
 
-.champ-card.champ-cost-1 {
-    border-color: $tierColor1;
-}
-.champ-card.champ-cost-2 {
-    border-color: $tierColor2;
-}
-.champ-card.champ-cost-3 {
-    border-color: $tierColor3;
-}
-.champ-card.champ-cost-4 {
-    border-color: $tierColor4;
-}
-.champ-card.champ-cost-5 {
-    border-color: $tierColor5;
-}
-
-.champ-card .hero {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-align: left;
-    background: black;
-    color: white;
-    padding: 0.5em;
-    text-shadow:
-    -1px -1px 0 #000,  
-     1px -1px 0 #000,
-     -1px 1px 0 #000,
-      1px 1px 0 #000;
+    &.champ-cost-1 {
+        border-color: $tierColor1;
+    }
+    &.champ-cost-2 {
+        border-color: $tierColor2;
+    }
+    &.champ-cost-3 {
+        border-color: $tierColor3;
+    }
+    &.champ-cost-4 {
+        border-color: $tierColor4;
+    }
+    &.champ-cost-5 {
+        border-color: $tierColor5;
+    }
+    
+    .hero {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        text-align: left;
+        background: black;
+        color: white;
+        padding: 0.5em;
+        @extend %text-outline;
+    } 
+        
+    .banner .cost img {
+        display: inline-block;
+        /* width: 1em; */
+        height: 1em;
+        vertical-align: middle;
+        margin-right: 0.1em;
+    }
+   
 }
 
 .champ-card .banner {
     display: flex;
     padding: 0.5em;
     color: white;
-    text-shadow:
-    -1px -1px 0 #000,  
-     1px -1px 0 #000,
-     -1px 1px 0 #000,
-      1px 1px 0 #000;
+    @extend %text-outline;
 }
 
 .champ-card .banner .name {

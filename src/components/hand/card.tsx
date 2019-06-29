@@ -25,7 +25,12 @@ export class Card extends React.Component<CardProps> {
                 </div>
                 <div className={`banner banner-cost-${cost}`}>
                     <div className="name">{name}</div>
-                    <div className="cost">{cost}</div>
+                    <div className="cost">
+                        <span>
+                            <img src="img/coin.svg" alt="cost"></img>
+                            {cost}
+                        </span>
+                    </div>
                 </div>
             </div>
         )
