@@ -2,12 +2,48 @@
     "version": "v9.13",
     "champions": [
         {
+            "name": "Aatrox",
+            "id": "aatrox",
+            "cost": 3,
+            "classes": [
+                "demon",
+                "blademaster"
+            ]
+        },
+        {
             "name": "Ahri",
             "id": "ahri",
             "cost": 2,
             "classes": [
                 "wild",
                 "sorcerer"
+            ]
+        },
+        {
+            "name": "Akali",
+            "id": "akali",
+            "cost": 4,
+            "classes": [
+                "ninja",
+                "assassin"
+            ]
+        },
+        {
+            "name": "Anivia",
+            "id": "anivia",
+            "cost": 5,
+            "classes": [
+                "glacial",
+                "elementalist"
+            ]
+        },
+        {
+            "name": "Ashe",
+            "id": "ashe",
+            "cost": 3,
+            "classes": [
+                "glacial",
+                "ranger"
             ]
         },
         {
@@ -29,6 +65,42 @@
             ]
         },
         {
+            "name": "Brand",
+            "id": "brand",
+            "cost": 4,
+            "classes": [
+                "demon",
+                "elementalist"
+            ]
+        },
+        {
+            "name": "Braum",
+            "id": "Braum",
+            "cost": 2,
+            "classes": [
+                "glacial",
+                "guardian"
+            ]
+        },
+        {
+            "name": "Cho'Gath",
+            "id": "chogath",
+            "cost": 3,
+            "classes": [
+                "void",
+                "brawler"
+            ]
+        },
+        {
+            "name": "Darius",
+            "id": "darius",
+            "cost": 2,
+            "classes": [
+                "imperial",
+                "knight"
+            ]
+        },
+        {
             "name": "Draven",
             "id": "draven",
             "cost": 4,
@@ -38,12 +110,195 @@
             ]
         },
         {
+            "name": "Elise",
+            "id": "elise",
+            "cost": 2,
+            "classes": [
+                "demon",
+                "shapeshifter"
+            ]
+        },
+        {
+            "name": "Evelynn",
+            "id": "evelynn",
+            "cost": 3,
+            "classes": [
+                "demon",
+                "assassin"
+            ]
+        },
+        {
+            "name": "Fiora",
+            "id": "fiora",
+            "cost": 1,
+            "classes": [
+                "noble",
+                "blademaster"
+            ]
+        },
+        {
+            "name": "Gangplank",
+            "id": "gangplank",
+            "cost": 3,
+            "classes": [
+                "pirate",
+                "blademaster",
+                "gunslinger"
+            ]
+        },
+        {
             "name": "Garen",
             "id": "garen",
             "cost": 1,
             "classes": [
                 "noble",
                 "knight"
+            ]
+        },
+        {
+            "name": "Gnar",
+            "id": "gnar",
+            "cost": 4,
+            "classes": [
+                "wild",
+                "yordle",
+                "shapeshifter"
+            ]
+        },
+        {
+            "name": "Graves",
+            "id": "graves",
+            "cost": 1,
+            "classes": [
+                "pirate",
+                "gunslinger"
+            ]
+        },
+        {
+            "name": "Karthus",
+            "id": "karthus",
+            "cost": 5,
+            "classes": [
+                "phantom",
+                "sorcerer"
+            ]
+        },
+        {
+            "name": "Kassadin",
+            "id": "kassadin",
+            "cost": 1,
+            "classes": [
+                "void",
+                "sorcerer"
+            ]
+        },
+        {
+            "name": "Katarina",
+            "id": "katarina",
+            "cost": 3,
+            "classes": [
+                "imperial",
+                "assassin"
+            ]
+        },
+        {
+            "name": "Kayle",
+            "id": "kayle",
+            "cost": 5,
+            "classes": [
+                "noble",
+                "knight"
+            ]
+        },
+        {
+            "name": "Kennen",
+            "id": "kennen",
+            "cost": 3,
+            "classes": [
+                "yordle",
+                "ninja",
+                "elementalist"
+            ]
+        },
+        {
+            "name": "Kha'Zix",
+            "id": "khazix",
+            "cost": 1,
+            "classes": [
+                "void",
+                "assassin"
+            ]
+        },
+        {
+            "name": "Kindred",
+            "id": "kindred",
+            "cost": 4,
+            "classes": [
+                "phantom",
+                "ranger"
+            ]
+        },
+        {
+            "name": "Leona",
+            "id": "leona",
+            "cost": 4,
+            "classes": [
+                "noble",
+                "guardian"
+            ]
+        },
+        {
+            "name": "Lissandra",
+            "id": "lissandra",
+            "cost": 2,
+            "classes": [
+                "glacial",
+                "elementalist"
+            ]
+        },
+        {
+            "name": "Lucian",
+            "id": "lucian",
+            "cost": 2,
+            "classes": [
+                "noble",
+                "gunslinger"
+            ]
+        },
+        {
+            "name": "Lulu",
+            "id": "lulu",
+            "cost": 2,
+            "classes": [
+                "yordle",
+                "sorcerer"
+            ]
+        },
+        {
+            "name": "Miss Fortune",
+            "id": "missfortune",
+            "cost": 5,
+            "classes": [
+                "pirate",
+                "gunslinger"
+            ]
+        },
+        {
+            "name": "Mordekaiser",
+            "id": "mordekaiser",
+            "cost": 1,
+            "classes": [
+                "phantom",
+                "knight"
+            ]
+        },
+        {
+            "name": "Morgana",
+            "id": "morgana",
+            "cost": 3,
+            "classes": [
+                "demon",
+                "sorcerer"
             ]
         },
         {
@@ -65,6 +320,60 @@
             ]
         },
         {
+            "name": "Pyke",
+            "id": "pyke",
+            "cost": 2,
+            "classes": [
+                "pirate",
+                "assassin"
+            ]
+        },
+        {
+            "name": "Rek'Sai",
+            "id": "reksai",
+            "cost": 2,
+            "classes": [
+                "void",
+                "brawler"
+            ]
+        },
+        {
+            "name": "Rengar",
+            "id": "rengar",
+            "cost": 3,
+            "classes": [
+                "wild",
+                "assassin"
+            ]
+        },
+        {
+            "name": "Sejuani",
+            "id": "Sejuani",
+            "cost": 4,
+            "classes": [
+                "glacial",
+                "knight"
+            ]
+        },
+        {
+            "name": "Shen",
+            "id": "shen",
+            "cost": 2,
+            "classes": [
+                "ninja",
+                "blademaster"
+            ]
+        },
+        {
+            "name": "Shyvana",
+            "id": "shyvana",
+            "cost": 3,
+            "classes": [
+                "dragon",
+                "shapeshifter"
+            ]
+        },
+        {
             "name": "Swain",
             "id": "swain",
             "cost": 5,
@@ -75,12 +384,30 @@
             ]
         },
         {
-            "name": "Yasuo",
-            "id": "yasuo",
-            "cost": 5,
+            "name": "Tristana",
+            "id": "tristana",
+            "cost": 1,
             "classes": [
-                "blademaster",
-                "exiler"
+                "yordle",
+                "gunslinger"
+            ]
+        },
+        {
+            "name": "Varus",
+            "id": "varus",
+            "cost": 2,
+            "classes": [
+                "demon",
+                "ranger"
+            ]
+        },
+        {
+            "name": "Vayne",
+            "id": "vayne",
+            "cost": 1,
+            "classes": [
+                "noble",
+                "ranger"
             ]
         },
         {
@@ -90,6 +417,42 @@
             "classes": [
                 "sorcerer",
                 "yordle"
+            ]
+        },
+        {
+            "name": "Volibear",
+            "id": "volibear",
+            "cost": 3,
+            "classes": [
+                "glacial",
+                "brawler"
+            ]
+        },
+        {
+            "name": "Warwick",
+            "id": "warwick",
+            "cost": 1,
+            "classes": [
+                "wild",
+                "brawler"
+            ]
+        },
+        {
+            "name": "Yasuo",
+            "id": "yasuo",
+            "cost": 5,
+            "classes": [
+                "blademaster",
+                "exile"
+            ]
+        },
+        {
+            "name": "Zed",
+            "id": "zed",
+            "cost": 2,
+            "classes": [
+                "ninja",
+                "assassin"
             ]
         }
     ]
