@@ -1,11 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { MainPage } from './components/main-page';
 
 function App() {
   return (
-    <div className="App">
+    <div className="theory-draft app">
       <main>
         <MainPage />
       </main>

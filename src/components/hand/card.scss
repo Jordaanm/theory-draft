@@ -1,12 +1,30 @@
 @import '../../styles/colors';
 
 .champ-card {
-    border: 1px solid black;
+    border: 3px solid black;
+    border-radius: 3px;
     flex: 1;
     height: 8em;
     margin: 1em;
     display: flex;
     flex-direction: column;
+    filter: drop-shadow(-5px -5px 5px rgba(0,0,0,0.5));
+}
+
+.champ-card.champ-cost-1 {
+    border-color: $tierColor1;
+}
+.champ-card.champ-cost-2 {
+    border-color: $tierColor2;
+}
+.champ-card.champ-cost-3 {
+    border-color: $tierColor3;
+}
+.champ-card.champ-cost-4 {
+    border-color: $tierColor4;
+}
+.champ-card.champ-cost-5 {
+    border-color: $tierColor5;
 }
 
 .champ-card .hero {
@@ -15,7 +33,7 @@
     flex-direction: column;
     justify-content: flex-end;
     text-align: end;
-    background: grey;
+    background: black;
     color: white;
     padding: 0.5em;
 }

@@ -15,7 +15,7 @@ export class Card extends React.Component<CardProps> {
         const { name, cost, id, classes } = this.props;
 
         return (
-            <div className="champ-card">
+            <div className={`champ-card champ-cost-${cost}`}>
                 <div className={`hero champ-bg-${id}`}>
                     {classes.map(x => <div className="champ-class" key={x}>{x}</div>)}
                 </div>

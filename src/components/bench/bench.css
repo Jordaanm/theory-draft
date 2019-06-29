@@ -5,8 +5,9 @@
 }
 
 .bench-slot {
-    border: 1px solid black;
+    border: 2px solid black;
+    border-radius: 5px;
     flex: 1;
     height: 5em;
-    margin: 1em;
+    margin: 0.1em;
 }

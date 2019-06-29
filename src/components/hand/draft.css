@@ -6,16 +6,18 @@
 
 .draft-area {
     border: 2px solid grey;
+    border-radius: 3px;
     position: relative;
 }
 
 .above-bar {
     position: absolute;
-    top: -2.5em;
+    top: -2.25em;
     left: 50%;
     transform: translateX(-50%);
     border: 2px solid grey;
     border-bottom: none;
+    border-radius: 3px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
@@ -27,6 +29,9 @@
 
     border-right: none;
     border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
 }
 
 .draft-sidebar-items {
@@ -55,11 +60,7 @@
     padding: 0.5em;
 }
 
-.draft-gold {
-}
-
 .hand {
     display: flex;
-    border: 2px solid;
     z-index: 1;
 }

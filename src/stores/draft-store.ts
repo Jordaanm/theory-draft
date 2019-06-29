@@ -1,8 +1,9 @@
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 
 import * as tiers from '../data/tiers.json';
 import * as levels from '../data/levels.json';
 import * as champions from '../data/champions.json';
+import { Unit } from './unit.js';
 
 export interface ChampData {
     id: string;
@@ -18,6 +19,21 @@ export class DraftStore {
 
     @observable
     currentHand: ChampData[];
+
+    @observable
+    benchedUnits: Unit[] = [];
+
+    @observable
+    boardUnits: Unit[] = [];
+
+    @observable
+    xp: number = 0;
+
+    @observable
+    level: number = 1;
+
+    @observable
+    gold: number = 3;
 
     constructor() {
         this.pool = [];
@@ -47,17 +63,18 @@ export class DraftStore {
         }
     }
 
+    @action
     public drawHand() {
         while(this.currentHand.length < 5) {
             this.drawCard();
         }
     }
 
+    @action
     public drawCard() {
-        //TODO: player level;
-        const level = 6;
-
-        const odds = levels.levels[level].tierOdds;
+        const key = `level${this.level}`;
+        
+        const odds = (levels.levels as any)[key].tierOdds;
         const roll = Math.random();
 
         const cost = this.getCost(roll, odds);
