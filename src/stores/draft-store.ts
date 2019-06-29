@@ -17,6 +17,7 @@ export class DraftStore {
     public static REFRESH_COST = 2;
     public static BUY_XP_COST = 4;
     public static BENCH_SIZE = 9;
+    public static XP_PER_ROUND = 2;
 
     @observable
     pool: ChampData[];
@@ -37,17 +38,38 @@ export class DraftStore {
     nextLevelXp: number = 2;
 
     @observable
-    level: number = 4;
+    level: number = 1;
 
     @observable
-    gold: number = 300;
+    gold: number = 3;
+
+    @observable
+    isHandLocked: boolean = false;
+
+    @observable
+    goldPerRound: number = 8;
 
     constructor() {
         this.pool = [];
         this.currentHand = [];
-        this.nextLevelXp = this.getXpForLevelUp(this.level);
+        this.nextLevelXp = this.getXpForLevelUp(this.level + 1);
         this.benchedUnits = [...Array(DraftStore.BENCH_SIZE)].fill(null);
         this.boardUnits = [];
+    }
+
+    @action
+    public toggleHandLock() {
+        this.isHandLocked = !this.isHandLocked;
+    }
+
+    @action
+    public nextRound() {
+        this.gold += this.goldPerRound
+        this.addXP(DraftStore.XP_PER_ROUND);
+        if(!this.isHandLocked) {
+            this.gold += DraftStore.REFRESH_COST;
+            this.refreshHand();    
+        }
     }
 
     @action

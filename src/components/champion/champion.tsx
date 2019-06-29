@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Unit } from '../../stores/unit';
+import { url } from 'inspector';
 
 interface ChampionProps {
     unit: Unit;
@@ -13,19 +14,23 @@ export class Champion extends React.Component<ChampionProps> {
 
         const stars = this.getTierString(unit);
 
+        const style = {
+            backgroundImage: `url(img/champ-square/${champ.id}.png)`
+        };
+
         return (
-            <div className="champion">
-                <div className="champion-name">{champ.name}</div>
+            <div className="champion" style={style}>
                 <div className="champion-tier">{stars}</div>
+                <div className="champion-name">{champ.name}</div>
             </div>
         );
     }
 
     private getTierString(unit: Unit): string {
         switch(unit.tier) {
-            case 1: return '*';
-            case 2: return '**';
-            case 3: return '***';
+            case 1: return '★';
+            case 2: return '★★';
+            case 3: return '★★★';
         }
     }
 }

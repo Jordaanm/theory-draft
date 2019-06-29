@@ -1,0 +1,171 @@
+@import '../../styles/colors';
+
+.draft {
+    padding: 0.5em;
+    display: flex;
+    margin-top: 3em;
+
+    .draft-area {        
+        @extend %ui-border-gold;
+        border-radius: 3px;
+        position: relative;
+        background-color: black;
+    }
+
+    .above-bar {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -100%);
+        @extend %ui-border-gold-upper;
+        border-bottom: none;
+        border-radius: 3px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        background-color: black;
+        color: white;
+        @extend %text-outline;
+    }
+
+    .draft-sidebar {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        border-right: none;
+        border-bottom-left-radius: 3px;
+        border-top-left-radius: 3px;
+        border-bottom-right-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+
+    .draft-sidebar-items {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sidebar-item {
+        flex: 1;
+        border:2px solid goldenrod;
+        margin: 0.5em;
+        padding: 0.1em;
+        background-color: black;
+
+        &.refresh {
+            border-color: $refresh-bg;
+        }
+
+        &.xp {
+            border-color: $xp-bg;
+        }
+        
+        .content {
+            flex: 1;
+        };
+        .icon {
+          width: 4em;
+          background-position: center;
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+    }
+
+    .draft-lock {
+        padding: 0.5em;
+        padding-bottom: 0;
+        .lock {
+            height: 2em;
+            width: 4em;
+            @extend %icon-bg;
+            @extend %ui-border;
+            background-image: url('/img/lock-open.png');
+            &.closed {
+                background-image: url('/img/lock-closed.png');
+            }
+        }
+    }
+
+    .draft-main {
+        flex: 4;
+        border-left:none;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .draft-gold-bar {
+        padding: 0.5em;
+        padding-bottom: 0;
+        .draft-gold {
+            padding: 0.5em 1em;
+            @extend %ui-border;
+        }
+    }
+
+    .hand {
+        display: flex;
+        z-index: 1;
+        height: 100%;
+    }
+
+    .refresh-panel {
+        color: white;
+        @extend %text-outline;
+        background-color: $refresh-bg;
+        padding: 0.5em;
+        display: flex;
+    }
+
+    .xp-panel {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        background: $xp-bg;
+        color: white;
+        @extend %text-outline;
+        padding: 0.5em;
+
+        .details {
+            display: flex;
+        }
+
+        .level {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            height: 2em;
+            width: 2em;
+            padding: 0.5em;
+            background-color: rgba(255,255,255,0.5);
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .xp-progress {
+            width: 100%;
+            height: 1em;
+            flex: 1;
+            display: flex;
+
+            .xp-progress-bar {
+                flex: 1;
+                display: flex;
+                flex-direction: column-reverse;
+                padding: 0 2em 0 0.5em;
+
+                .bar {
+                    background-color: black;
+                    height: 1em;
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .fill {
+                    background-color: lightblue;
+                    height: 100%;
+                    width: 100%;
+                    transition: transform 0.2s;
+                }
+            }
+        }
+    }
+}

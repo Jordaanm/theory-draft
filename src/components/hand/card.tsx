@@ -1,7 +1,8 @@
 import * as React from 'react';
 
 import './card.scss';
-import { ChampData } from '../../stores/draft-store';
+import { ChampData } from '../../stores/champ-data';
+import { Coin } from '../shared/coin';
 
 interface CardProps {
     champ: ChampData;
@@ -28,7 +29,7 @@ export class Card extends React.Component<CardProps> {
                     <div className="name">{name}</div>
                     <div className="cost">
                         <span>
-                            <img src="img/coin.svg" alt="cost"></img>
+                            <Coin />
                             {cost}
                         </span>
                     </div>

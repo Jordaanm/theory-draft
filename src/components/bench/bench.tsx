@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BenchSlot } from './bench-slot';
-import './bench.css';
+import './bench.scss';
 import { inject, observer } from 'mobx-react';
 import { DraftStore } from '../../stores/draft-store';
 interface BenchProps {

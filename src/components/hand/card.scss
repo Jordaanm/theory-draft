@@ -1,25 +1,14 @@
 @import '../../styles/colors';
 
-%text-outline {
-    text-shadow:
-    -1px -1px 0 #000,  
-     1px -1px 0 #000,
-     -1px 1px 0 #000,
-      1px 1px 0 #000;
-}
-
 .champ-card {
     border: 3px solid black;
     border-radius: 3px;
     flex: 1;
-    height: 8em;
+    min-height: 8em;
     margin: 1em;
     display: flex;
     flex-direction: column;
     filter: drop-shadow(-5px -5px 5px rgba(0,0,0,0.5));
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     position: relative;
 
     &.champ-cost-1 {
@@ -69,15 +58,15 @@
         flex-direction: column;
         justify-content: flex-end;
         text-align: left;
-        background: black;
+        background-color: black;
         color: white;
         padding: 0.5em;
         @extend %text-outline;
+        @extend %hero-bg;
     } 
         
     .banner .cost img {
         display: inline-block;
-        /* width: 1em; */
         height: 1em;
         vertical-align: middle;
         margin-right: 0.1em;

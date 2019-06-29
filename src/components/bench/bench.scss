@@ -1,0 +1,29 @@
+@import '../../styles/colors';
+
+.bench {
+    border: 2px solid black;
+    padding: 0.5em;
+    display: flex;
+}
+
+.bench-slot {
+    border: 2px solid black;
+    border-radius: 5px;
+    flex: 1;
+    height: 5em;
+    margin: 0.1em;
+    
+    .champion {
+        background-color: black;
+        color: white;
+        @extend %text-outline;
+        @extend %hero-bg;
+        height: 100%;
+        text-align: center;
+
+        .champion-tier {
+            font-size: 1.5em;
+            // color: goldenrod;
+        }        
+    }
+}

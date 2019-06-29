@@ -30,7 +30,8 @@ export class MainPage extends React.Component {
             <section className="main-page">
                 <Provider draft={this.draftStore} >
                     <>
-                        <Board cellData={[]}/>
+                        <button onClick={() => this.draftStore.nextRound()}>Next Round</button>
+                        {/* <Board cellData={[]}/> */}
                         <Bench />
                         <Draft />
                     </>
