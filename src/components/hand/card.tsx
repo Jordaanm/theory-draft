@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import './card.css';
+import './card.scss';
 
 interface CardProps {
     id: string,
