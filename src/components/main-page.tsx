@@ -6,6 +6,7 @@ import { Draft } from './hand/draft';
 import { DraftStore } from '../stores/draft-store';
 import { observable } from 'mobx';
 
+import * as ChampionsData from '../data/champions.json';
 export class MainPage extends React.Component {
 
     @observable
@@ -18,6 +19,8 @@ export class MainPage extends React.Component {
         this.draftStore.initializePool();
         this.draftStore.drawHand();
         console.log(this.draftStore);
+
+        window["champions"] = ChampionsData;
 
     }
 

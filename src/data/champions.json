@@ -47,8 +47,8 @@
             ]
         },
         {
-            "name": "Aureleon Sol",
-            "id": "aureleon",
+            "name": "Aurelion Sol",
+            "id": "aurelionsol",
             "cost": 4,
             "classes": [
                 "dragon",
