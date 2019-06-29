@@ -14,8 +14,8 @@ export class Draft extends React.Component<DraftProps> {
 
         return (
             <div className="draft">
-                <div className="draft-sidebar">
-                    <div className="draft-lock">
+                <div className="draft-sidebar draft-area">
+                    <div className="draft-lock above-bar">
                         Lock
                     </div>
                     <div className="draft-sidebar-items">
@@ -36,8 +36,8 @@ export class Draft extends React.Component<DraftProps> {
                         </div>
                     </div>
                 </div>
-                <div className="draft-main">
-                    <div className="draft-gold-bar">
+                <div className="draft-main draft-area">
+                    <div className="draft-gold-bar above-bar">
                         <div className="draft-gold">
                             {currentGold}
                         </div>
