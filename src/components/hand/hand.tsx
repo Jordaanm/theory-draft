@@ -2,12 +2,12 @@ import * as React from 'react';
 import { Card } from './card';
 import { BlankCard } from './blank-card';
 import { observer } from 'mobx-react';
-import { ChampData } from '../../stores/champ-data';
+import { ChampCard } from '../../stores/types';
 
 
 interface HandProps {
-    hand: ChampData[];
-    action: (ChampData) => void;
+    hand: ChampCard[];
+    action: (ChampCard) => void;
 }
 
 
@@ -19,8 +19,8 @@ interface HandProps {
 
         return (
             <div className="hand">
-                {hand.map( (champ, index) => Boolean(champ) ? 
-                    <Card champ={champ} key={Math.random()} action={action}/> :
+                {hand.map( (card, index) => Boolean(card) ? 
+                    <Card card={card} key={card.guid} action={action}/> :
                     <BlankCard key={index + '-blank'} />
                 )}
             </div>

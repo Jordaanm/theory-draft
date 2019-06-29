@@ -1,26 +1,26 @@
 import * as React from 'react';
 
 import './card.scss';
-import { ChampData } from '../../stores/champ-data';
+import { ChampData, ChampCard } from '../../stores/types';
 import { Coin } from '../shared/coin';
 
 interface CardProps {
-    champ: ChampData;
+    card: ChampCard;
     action: (ChampData) => void;
 }
 
 export class Card extends React.Component<CardProps> {
 
     public render() {
-        const { champ, action } = this.props;
-        const { name, cost, id, classes } = champ;
+        const { card, action } = this.props;
+        const { name, cost, id, classes } = card.champ;
 
         const style = {
             backgroundImage: `url('img/champ-square/${id}.png')`
         };
 
         return (
-            <div className={`champ-card champ-cost-${cost}`} onClick={() => action(champ)}>
+            <div className={`champ-card champ-cost-${cost}`} onClick={() => action(card)}>
                 <div className="decoration"></div>
                 <div className={`hero champ-bg-${id}`} style={style}>
                     {classes.map(x => <div className="champ-class" key={x}>{x}</div>)}

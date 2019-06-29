@@ -3,8 +3,7 @@ import { observable, action } from 'mobx';
 import * as tiers from '../data/tiers.json';
 import * as levels from '../data/levels.json';
 import * as champions from '../data/champions.json';
-import { Unit } from './unit.js';
-import { ChampData } from './champ-data';
+import { Unit, ChampData, ChampCard } from './types';
 
 export interface BoardUnit {
     x: number;
@@ -20,10 +19,10 @@ export class DraftStore {
     public static XP_PER_ROUND = 2;
 
     @observable
-    pool: ChampData[];
+    pool: ChampCard[];
 
     @observable
-    currentHand: (ChampData | null)[];
+    currentHand: (ChampCard | null)[];
 
     @observable
     benchedUnits: (Unit | null)[] = [];
@@ -129,27 +128,35 @@ export class DraftStore {
 
         const cost = this.getCost(roll, odds);
 
-        const cardSet = this.pool.filter(x => x.cost === cost);
+        const cardSet = this.pool.filter(x => x.champ.cost === cost);
         const index = Math.floor(Math.random() * cardSet.length);
         const card = cardSet[index];
 
         this.currentHand.push(card);
         this.pool.splice(index, 1);
-        console.log(`Your new card: ${card.name}`);
+        console.log(`Your new card: ${card.champ.name}`);
     }
 
     @action
     public initializePool() {
         this.pool = champions.champions.flatMap(champ => {
             const poolSize = this.getInitialPoolSizeForChamp(champ.id);
-            return [...Array(poolSize)].fill({
-                ...champ
-            });
+            return [...Array(poolSize)].map((_, index) => ({
+                champ,
+                guid: champ.id + "_" + index
+            } as ChampCard));            
         });
     }
 
     @action
-    public buyCard(champ: ChampData) {
+    public buyCard(card: ChampCard) {
+
+        if(!card || !card.champ) {
+            return;
+        }
+
+        const { guid, champ } = card;
+        
         console.log("DraftStore::buyCard", champ);
         let cost = champ.cost;
         let removeExtra = false;
@@ -183,12 +190,12 @@ export class DraftStore {
                 .filter(unit => unit !== null && unit.tier === 1 && unit.champ.id === champ.id);
 
             const availableToBuy = this.currentHand
-                .filter(c => c !== null && c.id === champ.id) as ChampData[];
+                .filter(card => card != null && card.champ.id === champ.id) as ChampCard[];
 
             //Case 2
             if (matchingUnits.length === 2) {
                 this.mergeUnits(1, availableToBuy); //Upgrade
-            } else if (matchingUnits.length === 1 && availableToBuy.length === 2) {
+            } else if (matchingUnits.length === 1 && availableToBuy.length >= 2) {
                 if(this.gold >= champ.cost * 2) { //3a
                     cost *= 2; //Increase Cost
                     this.mergeUnits(1, availableToBuy); //Upgrade
@@ -197,16 +204,20 @@ export class DraftStore {
                     console.log("You don't space and can't afford to buy 2 of unit: ", champ.name);
                     return;
                 }
+            } else {
+                
+                console.log("You don't space to buy this unit: ", champ.name);
+                return;
             }
         }
 
         //Remove card
-        const index = this.currentHand.findIndex(card => card != null && card.id === champ.id);
+        const index = this.currentHand.findIndex(c => c != null && c.guid === guid);
         this.currentHand[index] = null;
 
         //Remove 2nd card if needed
         if(removeExtra) {
-            const index = this.currentHand.findIndex(card => card != null && card.id === champ.id);
+            const index = this.currentHand.findIndex(card => card != null && card.champ.id === champ.id);
             this.currentHand[index] = null;    
         }
 
@@ -218,8 +229,8 @@ export class DraftStore {
     }
 
     @action
-    private mergeUnits(tier: number = 1, extraChamps: ChampData[] = []) {
-        const extraUnits: Unit[] = extraChamps.map(champ => ({champ, tier: 1}));
+    private mergeUnits(tier: number = 1, extraCards: ChampCard[] = []) {
+        const extraUnits: Unit[] = extraCards.map(card => ({champ: card.champ, tier: 1}));
         const totalUnits: (Unit|null)[] = [...this.benchedUnits, ...extraUnits];
 
         const onlyCurrentTier = totalUnits.filter(c => c!== null && c.tier === tier) as Unit[];

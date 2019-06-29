@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Unit } from '../../stores/unit';
-import { url } from 'inspector';
+import { Unit } from '../../stores/types';
 
 interface ChampionProps {
     unit: Unit;

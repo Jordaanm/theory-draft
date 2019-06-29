@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Unit } from '../../stores/unit';
+import { Unit } from '../../stores/types';
 import { Champion } from '../champion/champion';
 
 interface BenchSlotProps {

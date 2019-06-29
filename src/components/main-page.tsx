@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Board } from './board/board';
+// import { Board } from './board/board';
 import { Bench } from './bench/bench';
 import { Draft } from './hand/draft';
 

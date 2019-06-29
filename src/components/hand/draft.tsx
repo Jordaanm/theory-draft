@@ -5,7 +5,7 @@ import { DraftStore } from '../../stores/draft-store';
 import { inject } from 'mobx-react';
 import { observer } from 'mobx-react';
 import { Coin } from '../shared/coin';
-import { ChampData } from '../../stores/champ-data';
+import { ChampData, ChampCard } from '../../stores/types';
 
 interface DraftProps {
     draft?: DraftStore;
@@ -77,8 +77,8 @@ export class Draft extends React.Component<DraftProps> {
         );
     }
 
-    private buyUnit(champ: ChampData) {
-        console.log("Attempting to buy champ", champ.name);
-        this.props.draft.buyCard(champ);
+    private buyUnit(card: ChampCard) {
+        console.log("Attempting to buy champ", card.champ.name);
+        this.props.draft.buyCard(card);
     }
 }
