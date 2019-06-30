@@ -1,74 +1,84 @@
 import * as React from 'react';
-import { CellOccupancy } from './cell-occupancy';
 import { Cell } from './cell';
+import { inject, observer } from 'mobx-react';
+import { DraftStore } from '../../stores/draft-store';
+import "./board.scss";
+import { BOARD_HEIGHT, BOARD_WIDTH } from '../../utils';
+import { BoardUnit, UnitSelection } from '../../stores/types';
+
 interface BoardProps {
-    cellData: CellOccupancy[];
+    draft?: DraftStore;
 }
 
+@inject('draft')
+@observer
 export class Board extends React.Component<BoardProps> {
-    public static WIDTH = 7;
-    public static HEIGHT = 3;
 
-    public constructor(props) {
+    public constructor(props: BoardProps) {
         super(props);
-        this.renderRow = this.renderRow.bind(this);
     }
 
     public render() {
+        const { draft } = this.props;
 
-        let fullBoard = [];
-        for (let x = 0; x < Board.WIDTH * Board.HEIGHT; ++x) {
-            fullBoard.push(this.findCellData(x) || Board.getCoords(x));
-        }
+        if(!draft) { return; }
 
-        let rows = [];
-        for (let x = 1; x <= Board.HEIGHT; ++x) {
-            rows.push(this.getRow(fullBoard, x));
-        }
+        const rows = [...Array(BOARD_HEIGHT)].map((_, index) => this.getRow(index + 1));
 
         return (
             <div className="board">
-                {rows.map(this.renderRow)}                
+                {rows.map((row: BoardUnit[], index: number) => this.renderRow(row, index))}                
             </div>
         );
     }
 
-    private getRow(fullBoard, i) {
-        const start = Board.WIDTH * (i-1);
-        const end = Board.WIDTH * i;
+    private getRow(i: number): BoardUnit[] {
+        const { draft } = this.props;
+        const start = BOARD_WIDTH * (i - 1);
+        const end = BOARD_WIDTH * i;
 
-        return fullBoard.slice(start, end);
+        return draft.boardUnits.slice(start, end);
     }
 
 
-    private renderRow(cells, row) {
+    private renderRow(boardUnits: BoardUnit[], row: number) {
         const isOdd = row%2 === 1; 
         return (
             <div className="board__row" key={row}>
                 {isOdd && <div className="board-spacer spacer--left"></div>}
-                {cells.map(c=>
-                    <Cell key={c.x + ',' + c.y} {...c} />
+                {boardUnits.map(bu=>
+                    <Cell key={this.getKey(bu)} boardUnit={bu} onSelect={x => this.onSelect(x)} />
                 )}
                 {!isOdd && <div className="board-spacer spacer--right"></div>}
             </div>
         );
     }
 
-    private findCellData(index) {
-        const { cellData } = this.props;
-        const {x, y} = Board.getCoords(index);
-
-        return cellData.find(datum => datum.x === x && datum.y === y) || null;
+    private getKey(boardUnit: BoardUnit): string {
+        const { unit, index } = boardUnit;
+        if(unit === undefined) {
+            return `blank_${index}`;
+        } else {
+            return `${unit.champ.id}_${unit.tier}_${index}`;
+        }
     }
 
-    public static getIndex(x, y) {
-        return y * Board.WIDTH + x;
-    }
+    private onSelect(boardUnit: BoardUnit) {
+        const { draft } = this.props;
 
-    public static getCoords(index) {
-        return {
-            x: index % Board.WIDTH,
-            y: Math.floor(index / Board.WIDTH)
-        };
+        console.log("Selected Board Unit", boardUnit);
+        //If empty space
+        if(boardUnit.unit === undefined) {
+            draft.moveSelectedUnitToBoard(boardUnit.index);
+            return;
+        }
+
+        const selection = {
+            unit: boardUnit.unit,
+            index: boardUnit.index,
+            isBenched: false
+        } as UnitSelection;
+
+        draft.toggleSelectedUnit(selection);
     }
 }

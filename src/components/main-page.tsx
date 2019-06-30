@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import { Board } from './board/board';
+import { Board } from './board/board';
 import { Bench } from './bench/bench';
 import { Draft } from './hand/draft';
 
@@ -31,7 +31,7 @@ export class MainPage extends React.Component {
                 <Provider draft={this.draftStore} >
                     <>
                         <button onClick={() => this.draftStore.nextRound()}>Next Round</button>
-                        {/* <Board cellData={[]}/> */}
+                        <Board />
                         <Bench />
                         <Draft />
                     </>

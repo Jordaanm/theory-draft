@@ -22,35 +22,3 @@ html, body {
 *, *:before, *:after {
   box-sizing: border-box;
 }
-
-.board {
-  display: flex;
-  flex-direction: column;
-}
-
-.board__row {
-  display: flex;
-}
-
-.board-spacer {
-  flex: 1
-}
-
-
-.cell {
-  flex: 2;
-  height: calc(100vw / 7.5);
-  position: relative;
-  padding: 1em;
-  border: 1px solid;
-}
-
-/* .contents {
-  height: 100%;
-  width: 100%;
-  padding: 1em;
-  background: url(/img/hex.png);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-} */

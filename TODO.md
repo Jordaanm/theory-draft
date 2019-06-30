@@ -12,5 +12,3 @@ Round Tracking (creeps, carousel, pvp)
 Income Tooltip
 
 Merge Animation
-
-Fix card GUID/key issue

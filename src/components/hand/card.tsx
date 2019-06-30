@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import './card.scss';
-import { ChampData, ChampCard } from '../../stores/types';
+import { ChampCard } from '../../stores/types';
 import { Coin } from '../shared/coin';
 
 interface CardProps {
     card: ChampCard;
-    action: (ChampData) => void;
+    action: (card: ChampCard) => void;
 }
 
 export class Card extends React.Component<CardProps> {

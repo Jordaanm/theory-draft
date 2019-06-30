@@ -1,19 +1,22 @@
 import * as React from 'react';
+import { BoardUnit } from '../../stores/types';
+import { getCoordsForIndex } from '../../utils';
+import { Champion } from '../champion/champion';
 
 interface CellProps {
-    x: number;
-    y: number;
-    unit?: any;
+    boardUnit: BoardUnit;
+    onSelect: (bu: BoardUnit) => void;
 }
 
 export class Cell extends React.Component<CellProps> {
     public render() {
-        const { x, y, unit } = this.props;
+        const { boardUnit, onSelect } = this.props;
+        const { unit } = boardUnit;
         
         return (
-            <div className="cell">
+            <div className="cell" onClick={() => onSelect(boardUnit)}>
                 <div className="contents">
-                    {x}, {y}, {unit && JSON.stringify(unit, null, 2)}
+                    {unit && <Champion unit={unit} /> }
                 </div>
             </div>
         )

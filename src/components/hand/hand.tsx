@@ -7,7 +7,7 @@ import { ChampCard } from '../../stores/types';
 
 interface HandProps {
     hand: ChampCard[];
-    action: (ChampCard) => void;
+    action: (card: ChampCard) => void;
 }
 
 

@@ -3,13 +3,9 @@ import { observable, action } from 'mobx';
 import * as tiers from '../data/tiers.json';
 import * as levels from '../data/levels.json';
 import * as champions from '../data/champions.json';
-import { Unit, ChampData, ChampCard } from './types';
+import { Unit, ChampData, ChampCard, UnitSelection, BoardUnit } from './types';
+import { BOARD_WIDTH, BOARD_HEIGHT } from '../utils';
 
-export interface BoardUnit {
-    x: number;
-    y: number;
-    unit: Unit;
-};
 
 export class DraftStore {
 
@@ -28,7 +24,7 @@ export class DraftStore {
     benchedUnits: (Unit | null)[] = [];
 
     @observable
-    boardUnits: (BoardUnit | null)[] = [];
+    boardUnits: BoardUnit[] = [];
 
     @observable
     xp: number = 0;
@@ -48,12 +44,95 @@ export class DraftStore {
     @observable
     goldPerRound: number = 8;
 
+    @observable
+    selectedUnit?: UnitSelection = undefined;
+
     constructor() {
         this.pool = [];
         this.currentHand = [];
         this.nextLevelXp = this.getXpForLevelUp(this.level + 1);
         this.benchedUnits = [...Array(DraftStore.BENCH_SIZE)].fill(null);
-        this.boardUnits = [];
+        this.boardUnits = [...Array(BOARD_WIDTH * BOARD_HEIGHT)].map(
+            (_, index) => ({ unit: undefined, index } as BoardUnit)
+        );
+    }
+
+    @action
+    public toggleSelectedUnit(selection: UnitSelection) {
+
+        if(this.selectedUnit === undefined) {
+            this.selectedUnit = selection;
+            console.log("Selected", selection.unit);
+            return;
+        }
+        
+        const isSameUnit = this.selectedUnit !== undefined && selection.index === this.selectedUnit.index;
+
+        //Click the same unit twice to Deselect it.
+        //Click 2 different units to swap their positions
+        if(isSameUnit) { 
+            this.selectedUnit = undefined;
+            console.log("Deselected", selection.unit.champ.name);
+        } else {
+           if(this.selectedUnit.isBenched) {
+               this.moveUnitToBench(selection.unit, this.selectedUnit.index);
+           } else {
+               this.moveUnitToBoard(selection.unit, this.selectedUnit.index);
+           }
+
+           if(selection.isBenched) {
+                this.moveUnitToBench(this.selectedUnit.unit, selection.index);
+            } else {
+               this.moveUnitToBoard(this.selectedUnit.unit, selection.index);
+            }
+
+            this.selectedUnit = undefined;
+        }
+    }
+
+    @action
+    public moveSelectedUnitToBench(index: number) {
+        if(this.selectedUnit === undefined || this.selectedUnit.unit === null) { return; }
+        //Remove selected unit from current space;
+        if(this.selectedUnit.isBenched) {
+            this.benchedUnits[this.selectedUnit.index] = null;
+        } else {
+            this.boardUnits[this.selectedUnit.index].unit = undefined;
+        }
+        //Move into new space
+        this.moveUnitToBench(this.selectedUnit.unit, index);
+
+        //Remove selection
+        this.selectedUnit = undefined;
+    }
+
+    @action
+    public moveSelectedUnitToBoard(index: number) {
+        if(this.selectedUnit === undefined || this.selectedUnit.unit === null) { return; }
+
+        //Remove the selected unit from current space
+        if(this.selectedUnit.isBenched) {
+            this.benchedUnits[this.selectedUnit.index] = null;
+        } else {
+            this.boardUnits[this.selectedUnit.index].unit = undefined;
+        }
+
+        //Move into new space
+        this.moveUnitToBoard(this.selectedUnit.unit, index);
+
+        //Remove selection
+        this.selectedUnit = undefined;
+    }
+
+    @action
+    private moveUnitToBench(unit: Unit, index: number) {
+        this.benchedUnits[index] = unit;
+    }
+
+    @action
+    private moveUnitToBoard(unit: Unit, index: number) {
+        const newBoardUnit = { index, unit } as BoardUnit;
+        this.boardUnits[index] = newBoardUnit;
     }
 
     @action
