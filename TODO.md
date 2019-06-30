@@ -1,5 +1,4 @@
 Board state
-
 1. Improve board hex rendering
 2. drag units from bench to board
 3. drag units from bench to sell

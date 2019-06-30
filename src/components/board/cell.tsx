@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { BoardUnit } from '../../stores/types';
-import { getCoordsForIndex } from '../../utils';
 import { Champion } from '../champion/champion';
 
 interface CellProps {

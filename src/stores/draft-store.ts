@@ -265,8 +265,13 @@ export class DraftStore {
             });
 
         } else {
-            const matchingUnits = this.benchedUnits
+            const matchingBenchUnits = this.benchedUnits
                 .filter(unit => unit !== null && unit.tier === 1 && unit.champ.id === champ.id);
+            const matchingBoardUnits = this.boardUnits
+                .map(bu => bu.unit || null)
+                .filter(unit => unit !== null && unit.tier === 1 && unit.champ.id === champ.id);
+
+            const matchingUnits = [...matchingBenchUnits, ...matchingBoardUnits];
 
             const availableToBuy = this.currentHand
                 .filter(card => card != null && card.champ.id === champ.id) as ChampCard[];
@@ -280,12 +285,12 @@ export class DraftStore {
                     this.mergeUnits(1, availableToBuy); //Upgrade
                     removeExtra = true; //Flag that theres a 2nd card to remove
                 } else { //3b
-                    console.log("You don't space and can't afford to buy 2 of unit: ", champ.name);
+                    console.log("You don't have space and can't afford to buy 2 of unit: ", champ.name);
                     return;
                 }
             } else {
                 
-                console.log("You don't space to buy this unit: ", champ.name);
+                console.log("You don't have space to buy this unit: ", champ.name);
                 return;
             }
         }
@@ -310,7 +315,8 @@ export class DraftStore {
     @action
     private mergeUnits(tier: number = 1, extraCards: ChampCard[] = []) {
         const extraUnits: Unit[] = extraCards.map(card => ({champ: card.champ, tier: 1}));
-        const totalUnits: (Unit|null)[] = [...this.benchedUnits, ...extraUnits];
+        const boardUnits: (Unit|null)[] = this.boardUnits.map(bu => bu.unit || null);
+        const totalUnits: (Unit|null)[] = [...this.benchedUnits, ...boardUnits, ...extraUnits];
 
         const onlyCurrentTier = totalUnits.filter(c => c!== null && c.tier === tier) as Unit[];
         
@@ -334,7 +340,7 @@ export class DraftStore {
             const champ = (champions.champions as ChampData[]).find(c => c.id === id);
             
             let index = -1;
-            //Remove all of that unit
+            //Remove all of that unit from bench
             while(-1 !== (index = this.benchedUnits.findIndex(unit => 
                 unit !== null &&
                 unit.champ.id === id &&
@@ -343,12 +349,32 @@ export class DraftStore {
                 this.benchedUnits[index] = null;
             }
 
+            //Remove all of that unit from the board
+            index = -1;
+            let boardIndex = 1;
+            while(-1 !== (index = this.boardUnits.findIndex(boardUnit => 
+                boardUnit.unit !== undefined &&
+                boardUnit.unit.champ.id === id &&
+                boardUnit.unit.tier === tier
+            ))) {
+                this.boardUnits[index].unit = undefined;
+                boardIndex = index;
+            }
+
             //Add upgraded unit
-            const firstEmpty = this.benchedUnits.findIndex(x => x === null);
-            this.benchedUnits[firstEmpty] = {
-                tier: tier + 1,
-                champ
-            } as Unit;
+            //Priorise returning to board
+            if(boardIndex !== -1) {
+                this.boardUnits[boardIndex].unit = {
+                    tier: tier + 1,
+                    champ
+                } as Unit;
+            } else {
+                const firstEmpty = this.benchedUnits.findIndex(x => x === null);
+                this.benchedUnits[firstEmpty] = {
+                    tier: tier + 1,
+                    champ
+                } as Unit;    
+            }
         });
 
         if (tier === 1) {
