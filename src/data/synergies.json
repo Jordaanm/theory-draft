@@ -1,0 +1,120 @@
+{
+    "version": "9.13",
+    "synergies": {
+        "assassin": {
+            "name": "Assassin",
+            "stages": [3,6],
+            "exact": false
+        },
+        "blademaster": {
+            "name": "Blademaster",
+            "stages": [2,4],
+            "exact": false
+        },
+        "brawler": {
+            "name": "Brawler",
+            "stages": [2,4],
+            "exact": false
+        },
+        "demon": {
+            "name": "Demon",
+            "stages": [2,4,6],
+            "exact": false
+        },
+        "dragon": {
+            "name": "Dragon",
+            "stages": [2],
+            "exact": false
+        },
+        "elementalist": {
+            "name": "Elementalist",
+            "stages": [3],
+            "exact": false
+        },
+        "exile": {
+            "name": "Exile",
+            "stages": [1],
+            "exact": false
+        },
+        "glacial": {
+            "name": "Glacial",
+            "stages": [2,4,6],
+            "exact": false
+        },
+        "guardian": {
+            "name": "Guardian",
+            "stages": [2],
+            "exact": false
+        },
+        "gunslinger": {
+            "name": "Gunslinger",
+            "stages": [2,4],
+            "exact": false
+        },
+        "imperial": {
+            "name": "Imperial",
+            "stages": [2,4],
+            "exact": false
+        },
+        "knight": {
+            "name": "Knight",
+            "stages": [2,4,6],
+            "exact": false
+        },
+        "ninja": {
+            "name": "Ninja",
+            "stages": [1, 4],
+            "exact": true
+        },
+        "noble": {
+            "name": "Noble",
+            "stages": [3,6],
+            "exact": false
+        },
+        "phantom": {
+            "name": "Phantom",
+            "stages": [2],
+            "exact": false
+        },
+        "pirate": {
+            "name": "Pirate",
+            "stages": [3],
+            "exact": false
+        },
+        "ranger": {
+            "name": "Ranger",
+            "stages": [2,4],
+            "exact": false
+        },
+        "robot": {
+            "name": "Robot",
+            "stages": [1],
+            "exact": false
+        },
+        "shapeshifter": {
+            "name": "Shapeshifter",
+            "stages": [3],
+            "exact": false
+        },
+        "sorcerer": {
+            "name": "Sorcerer",
+            "stages": [3,6],
+            "exact": false
+        },
+        "void": {
+            "name": "Void",
+            "stages": [2, 4],
+            "exact": false
+        },
+        "wild": {
+            "name": "Wild",
+            "stages": [2,4],
+            "exact": false
+        },
+        "yordle": {
+            "name": "Yordle",
+            "stages": [3,6],
+            "exact": false
+        }
+    }
+}
