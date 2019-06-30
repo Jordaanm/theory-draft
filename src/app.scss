@@ -1,0 +1,35 @@
+@import './styles/colors';
+
+.app {
+  text-align: center;
+  background-color: #282c34;
+  color: white;
+  @extend %text-outline;
+}
+
+button {
+  border: 2px solid white;
+  border-radius: 5px;
+  padding: 0.5em;
+  font-size: 1.2em;
+  background-color: transparent;
+  color: white;
+  @extend %text-outline;
+}
+
+.a11y {
+  display: none;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

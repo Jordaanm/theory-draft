@@ -11,6 +11,10 @@
     filter: drop-shadow(-5px -5px 5px rgba(0,0,0,0.5));
     position: relative;
 
+    &.blank {
+        @include ui-border();
+    }
+
     &.champ-cost-1 {
         border-color: $tierColor1;
         .decoration {

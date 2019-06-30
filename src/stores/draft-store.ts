@@ -13,6 +13,7 @@ export class DraftStore {
     public static BUY_XP_COST = 4;
     public static BENCH_SIZE = 9;
     public static XP_PER_ROUND = 2;
+    public static MAXIMIM_INTEREST = 5;
 
     @observable
     pool: ChampCard[];
@@ -42,10 +43,10 @@ export class DraftStore {
     isHandLocked: boolean = false;
 
     @observable
-    goldPerRound: number = 8;
+    selectedUnit?: UnitSelection = undefined;
 
     @observable
-    selectedUnit?: UnitSelection = undefined;
+    roundCount: number = 1;
 
     constructor() {
         this.pool = [];
@@ -142,11 +143,34 @@ export class DraftStore {
 
     @action
     public nextRound() {
-        this.gold += this.goldPerRound
+        this.roundCount += 1;      
+        this.gold += this.calculateIncome();
         this.addXP(DraftStore.XP_PER_ROUND);
         if(!this.isHandLocked) {
             this.gold += DraftStore.REFRESH_COST;
             this.refreshHand();    
+        }
+
+    }
+
+    private calculateIncome(): number {
+        const passive = this.calculatePassiveIncome();
+        const interest =  this.calculateInterest();
+        const streak = 0; //TODO: Simulate Wins/Losses??
+        return passive + interest + streak;
+    }
+
+    private calculateInterest(): number {
+        return Math.min(Math.floor(this.gold / 10), DraftStore.MAXIMIM_INTEREST);
+    }
+
+    private calculatePassiveIncome(): number {
+        if(this.roundCount > 6) {
+            return 5;
+        } else if (this.roundCount > 3) {
+            return 4
+        } else {
+            return 3;
         }
     }
 

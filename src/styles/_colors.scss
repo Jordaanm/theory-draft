@@ -7,6 +7,13 @@ $tierColor5: gold;
 $xp-bg: #3A7393;
 $refresh-bg: #857347;
 
+$goldLight: #816C34;
+$goldMedium:  #816C34;
+$goldDark: #725C31;
+
+$tftPrimary: #205257;
+$tftPrimaryDarker: #103435;
+
 %text-outline {
     text-shadow:
     -1px -1px 0 #000,  
@@ -27,16 +34,29 @@ $refresh-bg: #857347;
     background-size: cover;
 }
 
-%ui-border {
+@mixin ui-border($colorA: #205257, $colorB: #103435) {
     border-style: solid;
     border-width: 3px;
     border-radius: 3px;
     border-image: 
     linear-gradient(
-      -45deg, 
-      #205257, 
-      #103435
+      to bottom, 
+      $colorA, 
+      $colorB
     ) 1 25%;
+}
+
+
+%ui-border-gold-upper {
+  border-style: solid;
+  border-width: 6px;
+  border-radius: 3px;
+  border-image: 
+  linear-gradient(
+    to bottom, 
+    $goldLight, 
+    $goldMedium
+  ) 1 25%;
 }
 
 %ui-border-gold {
@@ -46,20 +66,8 @@ $refresh-bg: #857347;
     border-image: 
     linear-gradient(
       to bottom,      
-      #725C31, 
-      #42361D
-    ) 1 25%;
-}
-
-%ui-border-gold-upper {
-    border-style: solid;
-    border-width: 6px;
-    border-radius: 3px;
-    border-image: 
-    linear-gradient(
-      to bottom, 
-      #816C34, 
-      #725C31
+      $goldMedium, 
+      $goldDark
     ) 1 25%;
 }
 

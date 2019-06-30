@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './app.scss';
 import { MainPage } from './components/main-page';
 
 function App() {

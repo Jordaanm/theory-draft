@@ -32,7 +32,8 @@
       bottom: 0;
       margin: 0.5em;
       padding: 0.5em;
-      border: 2px solid goldenrod;
+      @include ui-border();
       border-radius: 4px;
-      box-shadow: 0 3px 9px black, inset 0 0 9px white;
+      // box-shadow: 0 3px 9px black, inset 0 0 9px white;
+      box-shadow: 0 3px 6px black;
   }

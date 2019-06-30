@@ -1,0 +1,13 @@
+.split {
+    display: flex;
+
+    .split-section {
+        &.main {
+            flex: 4;
+        }
+
+        &.aside {
+            flex: 1;
+        }
+    }
+}

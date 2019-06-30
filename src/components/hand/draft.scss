@@ -77,7 +77,7 @@
             height: 2em;
             width: 4em;
             @extend %icon-bg;
-            @extend %ui-border;
+            @include ui-border();
             background-image: url('/img/lock-open.png');
             &.closed {
                 background-image: url('/img/lock-closed.png');
@@ -97,7 +97,7 @@
         padding-bottom: 0;
         .draft-gold {
             padding: 0.5em 1em;
-            @extend %ui-border;
+            @include ui-border;
         }
     }
 
