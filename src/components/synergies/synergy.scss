@@ -1,5 +1,33 @@
 @import "../../styles/colors";
 
+.synergy-tier {
+    margin-bottom: 2em;
+    margin-left: 1em;
+    position: relative;
+
+    &:after {
+        content: '';
+        display: block;
+        height: 0.5em;
+        width: 0.5em;
+        border: 0.125em solid $tier-gold;
+        background-color: transparent;
+        position: absolute;
+        left: 0.25em;
+        bottom: -1.375em;
+        transform: rotate(45deg);
+    }
+
+    &:last-of-type:after{
+        display: none;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+}
+
 .synergy-item {
     border-radius: 5px;
     background-color: rgba(0,0,0,0.5);
