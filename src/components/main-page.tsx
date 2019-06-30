@@ -35,12 +35,12 @@ export class MainPage extends React.Component {
                 <Provider draft={this.draftStore} >
                     <>
                         <div className="split">
+                            <div className="split-section aside">
+                                <Simulation />
+                            </div>
                             <div className="split-section main">
                                 <Board />
                                 <Bench />
-                            </div>
-                            <div className="split-section aside">
-                                <Simulation />
                             </div>
                         </div>
                         <Draft />

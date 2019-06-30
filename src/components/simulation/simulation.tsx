@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react';
 import { DraftStore } from '../../stores/draft-store';
 
 import './simulation.scss';
+import { SynergiesBar } from '../synergies/synergies-bar';
 
 interface SimulationProps {
     draft?: DraftStore
@@ -23,6 +24,7 @@ export class Simulation extends React.Component<SimulationProps> {
                         <span>Current Round: {draft.roundCount}</span>
                         <button onClick={() => draft.nextRound()}>Next Round</button>
                     </div>
+                    <SynergiesBar draft={draft} />
                 </div>
             </section>
         );

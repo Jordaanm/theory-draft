@@ -1,9 +1,10 @@
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 
 import * as tiers from '../data/tiers.json';
 import * as levels from '../data/levels.json';
 import * as champions from '../data/champions.json';
-import { Unit, ChampData, ChampCard, UnitSelection, BoardUnit } from './types';
+import { synergies } from '../data/synergies.json';
+import { Unit, ChampData, ChampCard, UnitSelection, BoardUnit, SynergyData, Synergy } from './types';
 import { BOARD_WIDTH, BOARD_HEIGHT } from '../utils';
 
 
@@ -89,6 +90,46 @@ export class DraftStore {
 
             this.selectedUnit = undefined;
         }
+    }
+
+
+    @computed
+    public get unitSynergies() {
+        const champs: ChampData[] = this.boardUnits.map(x => x.unit).map(unit => unit ? unit.champ : null).filter(champ => champ !== null) as ChampData[];
+        const champIds: string[] = champs.map(champ => champ.id);
+        const uniqueChampIds: string[] = [...new Set(champIds)];
+
+        const champClasses: string[] = uniqueChampIds.map(id => champions.champions.find(champ => champ.id === id)).flatMap(champ => champ === undefined ? [] : champ.classes).sort();
+        const classCounts: object = champClasses.reduce((obj, id) => {
+            obj[id] = (obj[id] || 0) + 1;
+            return obj;
+        }, {} as any);
+
+        console.log("Class Counts", classCounts);
+        return classCounts;
+    }
+
+    @computed
+    public get unitSynergiesWithTiers(): Synergy[] {
+        const activeClasses = Object.keys(this.unitSynergies);
+
+        return activeClasses.map( key => {
+            const synergyData = (synergies as any)[key] as SynergyData;
+            const count = (this.unitSynergies as any)[key] as number;
+            const medalIndex = synergyData.stages.findIndex(x =>  synergyData.exact ? x === count : x <= count);
+
+            //Tiers, 1 = Gold, 2 = Silver, 3 = Bronze, 4 = Inactive;
+            const tier = medalIndex === -1 ? 4 : synergyData.stages.length - medalIndex;
+            const active = tier < 4;
+
+            return {
+                ...synergyData,
+                id: key,
+                tier,
+                active,
+                count
+            } as Synergy;
+        });
     }
 
     @action

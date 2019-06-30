@@ -35,3 +35,19 @@ export interface Coords {
     x: number;
     y: number;
 }
+
+export interface SynergyData {
+    name: string;
+    stages: number[];
+    exact: boolean;
+}
+
+export interface Synergy {
+    id: string;
+    name: string;
+    stages: number[];
+    exact: boolean;
+    count: number;
+    tier: number;
+    active: boolean;    
+}
