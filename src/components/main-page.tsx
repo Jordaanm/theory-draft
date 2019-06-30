@@ -4,7 +4,7 @@ import './main-page.scss';
 
 import { Board } from './board/board';
 import { Bench } from './bench/bench';
-import { Draft } from './hand/draft';
+import { Draft } from './draft/draft';
 
 import { DraftStore } from '../stores/draft-store';
 import { observable } from 'mobx';

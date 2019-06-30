@@ -216,6 +216,39 @@ export class DraftStore {
     }
 
     @action
+    public sellSelectedUnit() {
+        if(this.selectedUnit === undefined) { return; }
+
+        //Give gold;
+        this.gold += this.getUnitSalePrice(this.selectedUnit.unit);
+
+        //Remove Unit;
+        if(this.selectedUnit.isBenched) {
+            this.benchedUnits[this.selectedUnit.index] = null;
+        } else {
+            this.boardUnits[this.selectedUnit.index].unit = undefined;
+        }
+
+        this.selectedUnit = undefined;
+    }
+
+    public getUnitSalePrice(unit: Unit): number {
+        let tierBonus = 0;
+        switch (unit.tier) {
+            case 2: {
+                tierBonus = 2;
+                break; 
+            }
+            case 3: {
+                tierBonus = 4;
+                break;
+            }
+        }
+
+        return unit.champ.cost + tierBonus;
+    }
+
+    @action
     public drawHand() {
         while(this.currentHand.length < 5) {
             this.drawCard();
@@ -332,6 +365,7 @@ export class DraftStore {
         //Merge Units
         this.mergeUnits(1);
 
+        console.log("Hello", cost, this.gold);
         //Pay money
         this.gold -= cost;
     }
