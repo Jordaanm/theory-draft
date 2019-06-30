@@ -1,0 +1,51 @@
+@import "../../styles/colors";
+
+.synergy-item {
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.5);
+    margin-bottom: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0.5em;
+    height: 2em;
+    position: relative;
+
+    &.tier-1 {
+        .icon {
+            background-color: $tier-gold;
+        }
+    }
+    &.tier-2 {
+        .icon {
+            background-color: $tier-silver;
+        }
+    }
+    &.tier-3 {
+        .icon {
+            background-color: $tier-bronze;
+        }
+    }
+    &.tier-4 {
+        .icon {
+            background-color: $tier-grey;
+        }
+    }
+
+    .icon {
+        position: absolute;
+        left: -1em;
+        top: -0.4em;
+        height: 3em;
+        width: 3em;
+        clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
+
+        img {
+            margin-top: 12.5%;
+            height: 75%;
+            width: auto;
+            mix-blend-mode: difference;
+        }
+    }
+}
+

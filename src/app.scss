@@ -17,7 +17,7 @@ button {
   @extend %text-outline;
 }
 
-.a11y {
+.a11y, .hidden {
   display: none;
 }
 

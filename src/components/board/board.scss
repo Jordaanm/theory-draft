@@ -33,6 +33,9 @@
       margin: 0.5em;
       padding: 0.5em;
       @include ui-border();
+      // border: 2px solid black;
+      // background-color: black;
+      // clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
       border-radius: 4px;
       // box-shadow: 0 3px 9px black, inset 0 0 9px white;
       box-shadow: 0 3px 6px black;

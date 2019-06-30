@@ -18,9 +18,8 @@ export class SynergyTier extends React.Component<SynergyTierProps> {
 
         return (
             <div className="synergy-tier">
-                <h4>Synergy Tier {tier}</h4>
-                <ul>
-                    {synergies.map( s => <SynergyItem synergy={s} />)}
+                <ul className={`tier-${tier}`}>
+                    {synergies.map( s => <SynergyItem synergy={s} key={s.id} />)}
                 </ul>                
             </div>
         );

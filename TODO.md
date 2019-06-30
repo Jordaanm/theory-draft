@@ -21,3 +21,4 @@
 ## Known Bugs
 
 [] Bench merges moving to board;
+[] Duplicate cards

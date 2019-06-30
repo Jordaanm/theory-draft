@@ -4,6 +4,8 @@ import { observer } from 'mobx-react';
 import { Synergy } from '../../stores/types';
 import { SynergyTier } from './synergy-tier';
 
+import "./synergy.scss";
+
 interface SynergiesBarProps {
     draft: DraftStore
 }
