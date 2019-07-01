@@ -98,7 +98,6 @@ export class DraftStore {
     public shiftUnitToBench(selection: UnitSelection, index: number) {
         //Only if bench is empty
         if(this.benchedUnits[index] !== null) { 
-            console.log("Space occupied");
             return;
         }
 
@@ -111,9 +110,12 @@ export class DraftStore {
 
     @action
     public shiftUnitToBoard(selection: UnitSelection, index: number) {
-        //Only if bench is empty
+        //Only if board space is empty
         if(this.boardUnits[index].unit !== undefined) { 
-            console.log("ShiftUnitToBoard: Space occupied");
+            return;
+        }
+
+        if(this.placedUnitCount >= this.level) {
             return;
         }
 
@@ -164,7 +166,6 @@ export class DraftStore {
             return obj;
         }, {} as any);
 
-        console.log("Class Counts", classCounts);
         return classCounts;
     }
 
@@ -233,7 +234,6 @@ export class DraftStore {
     @action
     public refreshHand() {
         if (this.gold < DraftStore.REFRESH_COST) {
-            console.log("You cannot afford to refresh");
             return;
         }
 
@@ -253,7 +253,6 @@ export class DraftStore {
     @action
     public buyXP() {
         if(this.gold < DraftStore.BUY_XP_COST) {
-            console.log("You cannot afford to buy XP");
             return;
         }
         this.addXP(4);
@@ -333,7 +332,6 @@ export class DraftStore {
 
         this.currentHand.push(card);
         this.pool.splice(index, 1);
-        console.log(`Your new card: ${card.champ.name}`);
     }
 
     @action
@@ -356,12 +354,10 @@ export class DraftStore {
 
         const { guid, champ } = card;
         
-        console.log("DraftStore::buyCard", champ);
         let cost = champ.cost;
         let removeExtra = false;
 
         if(this.gold < champ.cost) {
-            console.log(`You cannot afford to buy ${champ.name} for ${champ.cost} coins`);
             return;
         }
 
@@ -404,12 +400,9 @@ export class DraftStore {
                     this.mergeUnits(1, availableToBuy); //Upgrade
                     removeExtra = true; //Flag that theres a 2nd card to remove
                 } else { //3b
-                    console.log("You don't have space and can't afford to buy 2 of unit: ", champ.name);
                     return;
                 }
-            } else {
-                
-                console.log("You don't have space to buy this unit: ", champ.name);
+            } else {        
                 return;
             }
         }
@@ -427,7 +420,6 @@ export class DraftStore {
         //Merge Units
         this.mergeUnits(1);
 
-        console.log("Hello", cost, this.gold);
         //Pay money
         this.gold -= cost;
     }
@@ -523,14 +515,10 @@ export class DraftStore {
     private getCost(roll: number, odds: number[]) {
         let total = 0;
         let index = 0;
-       console.log(`You rolled: ${roll}`, odds);
         while(total < roll) {
             total += odds[index];
             ++index;
-            console.log(`Total odds for cost ${index} unit: ${total}`);
         }
-        console.log(`You're getting as ${index} cost unit`);
-
         return index;
     }
 

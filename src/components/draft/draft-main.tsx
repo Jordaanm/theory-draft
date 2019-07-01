@@ -31,7 +31,6 @@ export class DraftMain extends React.Component<DraftMainProps> {
     }
 
     private buyCard(card: ChampCard) {
-        console.log("Attempting to buy champ", card.champ.name);
         this.props.draft.buyCard(card);
     }
 }

@@ -83,7 +83,6 @@ export class Board extends React.Component<BoardProps> {
 
     private onDrop(source, dest) {
         const { draft } = this.props;
-        console.log("on drop", source, dest);
         
         const selectionA = {
             unit: source.unit,
@@ -99,10 +98,8 @@ export class Board extends React.Component<BoardProps> {
 
         //Is destination empty
         if(!dest.unit) {
-            console.log("Move unit to Empty Space", dest);
             draft.shiftUnitToBoard(selectionA, dest.index);
         } else {
-            console.log("Swap Positions with another unit", dest);
             draft.swapUnits(selectionA, selectionB);
         }
     }

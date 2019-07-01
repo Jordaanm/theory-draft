@@ -49,7 +49,6 @@ export class Bench extends React.Component<BenchProps> {
 
     private onDrop(source, dest) {
         const { draft } = this.props;
-        console.log("on drop", source, dest);
         
         const selectionA = {
             unit: source.unit,
@@ -64,10 +63,8 @@ export class Bench extends React.Component<BenchProps> {
 
         //Is destination empty
         if(!dest.unit) {
-            console.log("Move unit to Empty Space", dest);
             draft.shiftUnitToBench(selectionA, dest.index);
         } else {
-            console.log("Swap Positions with another unit", dest);
             draft.swapUnits(selectionA, selectionB);
         }
 

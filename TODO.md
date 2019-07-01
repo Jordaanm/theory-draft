@@ -5,8 +5,9 @@
 * Round Tracking (creeps, carousel, pvp)
 * Income Tooltip
 * Keyboard Shortcuts
-## UI
 
+## UI
+* Improve Sell UI
 * Improve board hex rendering
 * Synergies UI
 * Merge Animation
@@ -18,3 +19,4 @@
 
 * Buy XP -> F
 * Refresh -> D
+* Next Round -> R

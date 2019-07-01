@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import { BoardUnit } from '../../stores/types';
+import { BoardUnit, Unit } from '../../stores/types';
 import { Champion } from '../champion/champion';
 import { Types } from '../../stores/drag-drop';
+import {Preview } from 'react-dnd-multi-backend';
 
 interface CellProps {
     boardUnit: BoardUnit;
@@ -11,6 +12,19 @@ interface CellProps {
     onDropUnit: () => void;
     onDrop:(source: any, dest: any) => void;
 }
+
+// const generatePreview = (type, item, style) => {
+//     const modStyle = {
+//         ...style,
+//         width: '8em',
+//         height: '8em'
+//     };
+//     return <div className="cell" style={modStyle}>
+//         <div className="contents">
+//             <Champion unit={item.unit} />
+//         </div>
+//     </div>;
+// }
 
 export const Cell: React.FC<CellProps> = ({
     boardUnit,
@@ -52,6 +66,7 @@ export const Cell: React.FC<CellProps> = ({
             <div ref={drag} className="contents">
                 {Boolean(unit) && <Champion unit={unit} /> }
             </div>
+            {/* <Preview generator={generatePreview} /> */}
         </div>
     );
 }

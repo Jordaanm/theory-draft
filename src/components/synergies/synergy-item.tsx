@@ -16,7 +16,7 @@ export class SynergyItem extends React.Component<SynergyItemProps> {
 
         const currentBonusIndex = tier === 4 ? -1 : synergy.stages.length - tier;
         const nextBonus = tier === 1 ? -1 : synergy.stages[currentBonusIndex + 1];
-        console.log("H", synergy, currentBonusIndex, nextBonus);
+        
         return (
             <div className={`synergy-item tier-${synergy.tier}`}>
                 <div className="icon">
