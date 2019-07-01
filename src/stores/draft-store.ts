@@ -460,7 +460,7 @@ export class DraftStore {
 
             //Remove all of that unit from the board
             index = -1;
-            let boardIndex = 1;
+            let boardIndex = -1;
             while(-1 !== (index = this.boardUnits.findIndex(boardUnit => 
                 boardUnit.unit !== undefined &&
                 boardUnit.unit.champ.id === id &&
