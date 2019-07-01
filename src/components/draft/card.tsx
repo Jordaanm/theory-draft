@@ -16,7 +16,7 @@ export class Card extends React.Component<CardProps> {
         const { name, cost, id, classes } = card.champ;
 
         const style = {
-            backgroundImage: `url('img/champ-square/${id}.png')`
+            backgroundImage: `url(${process.env.PUBLIC_URL}/img/champ-square/${id}.png)`
         };
 
         return (

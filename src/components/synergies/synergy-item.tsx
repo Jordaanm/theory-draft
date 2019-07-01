@@ -20,7 +20,7 @@ export class SynergyItem extends React.Component<SynergyItemProps> {
         return (
             <div className={`synergy-item tier-${synergy.tier}`}>
                 <div className="icon">
-                   <img className="" alt="icon" src={`/img/class-icons/${synergy.id}.png`} />
+                   <img className="" alt="icon" src={`img/class-icons/${synergy.id}.png`} />
                 </div>
                <span>
                 {synergy.name}: {synergy.count}

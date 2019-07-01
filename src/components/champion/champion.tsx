@@ -14,7 +14,7 @@ export class Champion extends React.Component<ChampionProps> {
         const stars = this.getTierString(unit);
 
         const style = {
-            backgroundImage: `url(img/champ-square/${champ.id}.png)`
+            backgroundImage: `url(${process.env.PUBLIC_URL}/img/champ-square/${champ.id}.png)`
         };
 
         return (

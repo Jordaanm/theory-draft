@@ -93,9 +93,9 @@
             width: 4em;
             @extend %icon-bg;
             @include ui-border();
-            background-image: url('/img/lock-open.png');
+            background-image: url('../..//img/lock-open.png');
             &.closed {
-                background-image: url('/img/lock-closed.png');
+                background-image: url('../../img/lock-closed.png');
             }
         }
     }
@@ -190,7 +190,7 @@ i.trash {
     height: 1em;
     width: 1em;
     margin-right: 0.1em;
-    background-image: url('/img/trash.png');
+    background-image: url('../../img/trash.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
