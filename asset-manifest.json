@@ -1,16 +1,18 @@
 {
   "files": {
-    "main.css": "/theory-draft/static/css/main.95c9808e.chunk.css",
-    "main.js": "/theory-draft/static/js/main.44d07006.chunk.js",
-    "main.js.map": "/theory-draft/static/js/main.44d07006.chunk.js.map",
+    "main.css": "/theory-draft/static/css/main.345c176e.chunk.css",
+    "main.js": "/theory-draft/static/js/main.99f36565.chunk.js",
+    "main.js.map": "/theory-draft/static/js/main.99f36565.chunk.js.map",
     "runtime~main.js": "/theory-draft/static/js/runtime~main.7f99ac66.js",
     "runtime~main.js.map": "/theory-draft/static/js/runtime~main.7f99ac66.js.map",
-    "static/js/2.7286b1f1.chunk.js": "/theory-draft/static/js/2.7286b1f1.chunk.js",
-    "static/js/2.7286b1f1.chunk.js.map": "/theory-draft/static/js/2.7286b1f1.chunk.js.map",
+    "static/js/2.0efb7159.chunk.js": "/theory-draft/static/js/2.0efb7159.chunk.js",
+    "static/js/2.0efb7159.chunk.js.map": "/theory-draft/static/js/2.0efb7159.chunk.js.map",
     "index.html": "/theory-draft/index.html",
-    "precache-manifest.a66502ace92c21e9cb8a9b947c5996ce.js": "/theory-draft/precache-manifest.a66502ace92c21e9cb8a9b947c5996ce.js",
+    "precache-manifest.9c34d2301de07d410ef8c8b5201fbcfc.js": "/theory-draft/precache-manifest.9c34d2301de07d410ef8c8b5201fbcfc.js",
     "service-worker.js": "/theory-draft/service-worker.js",
-    "static/css/main.95c9808e.chunk.css.map": "/theory-draft/static/css/main.95c9808e.chunk.css.map",
+    "static/css/main.345c176e.chunk.css.map": "/theory-draft/static/css/main.345c176e.chunk.css.map",
+    "static/media/app.scss": "/theory-draft/static/media/BeaufortBold.4b2bd100.woff",
+    "static/media/splash.scss": "/theory-draft/static/media/tft.a10940f6.png",
     "static/media/coin.scss": "/theory-draft/static/media/coin.97cee6e3.svg"
   }
 }
