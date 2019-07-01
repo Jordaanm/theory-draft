@@ -4,11 +4,12 @@ import { Coin } from '../../shared/coin';
 interface RefreshPanelProps {
     refresh: () => void;
     cost: number;
+    setTooltip: (area?: string) => void;
 }
 
-export const RefreshPanel: React.FC<RefreshPanelProps> = ({ refresh, cost }) => {
+export const RefreshPanel: React.FC<RefreshPanelProps> = ({ refresh, cost, setTooltip }) => {
     return (<div className="sidebar-item refresh clickable" onClick={refresh}>
-        <div className="refresh-panel">
+        <div className="refresh-panel" onMouseEnter={() => setTooltip('refresh')} onMouseLeave={() => setTooltip(null)}>
             <div className="content">
                 <div>Refresh</div>
                 <div><Coin /> {cost}</div>

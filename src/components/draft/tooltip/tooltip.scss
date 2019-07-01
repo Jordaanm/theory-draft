@@ -1,0 +1,25 @@
+@import "../../../styles/colors";
+
+.tooltip {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    top: -4em;
+    @include ui-border($goldLight, $goldMedium);
+    border-width: 2px;
+    border-radius: 0;
+    background-color: rgba(0,0,0,0.75);
+    padding: 1em;
+    font-weight: 300;
+    font-size: 1.1em;
+
+    h4 {
+        font-size: 1.3em;
+        font-weight: 300;
+        margin: 0;
+        padding: 0;
+        border-bottom: 1px solid $goldLight;
+        padding-bottom: 0.2em;
+        margin-bottom: 0.2em;
+    }
+}

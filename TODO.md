@@ -3,7 +3,6 @@
 ## Features
 
 * Round Tracking (creeps, carousel, pvp)
-* Income Tooltip
 
 ## UI
 
@@ -14,7 +13,6 @@
 
 ## Known Bugs
 
-* Units not selling for gold
 * Duplicate cards
 
 ### Shortcuts

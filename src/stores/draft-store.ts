@@ -210,18 +210,22 @@ export class DraftStore {
 
     }
 
-    private calculateIncome(): number {
+    public calculateIncome(): number {
         const passive = this.calculatePassiveIncome();
         const interest =  this.calculateInterest();
-        const streak = 0; //TODO: Simulate Wins/Losses??
+        const streak = this.calculateStreakBonus();
         return passive + interest + streak;
     }
 
-    private calculateInterest(): number {
+    public calculateInterest(): number {
         return Math.min(Math.floor(this.gold / 10), DraftStore.MAXIMIM_INTEREST);
     }
 
-    private calculatePassiveIncome(): number {
+    public calculateStreakBonus(): number {
+        return 0; //TODO: Simulate Wins/Losses??
+    }
+
+    public calculatePassiveIncome(): number {
         switch(this.roundCount) {
             case 0: 
             case 1: return 2;

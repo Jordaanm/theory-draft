@@ -3,10 +3,12 @@ import { DraftStore } from '../../../stores/draft-store';
 import { Coin } from '../../shared/coin';
 import { observer } from 'mobx-react';
 import { RefreshPanel } from './draft-refresh-panel';
+import { BuyXpPanel } from './draft-xp-panel';
 
 interface DraftSidebarProps {
     draft: DraftStore;
     hideAboveBar: boolean;
+    setTooltip: (area: string) => void;
 }
 
 @observer
@@ -14,13 +16,8 @@ export class DraftSidebar extends React.Component<DraftSidebarProps> {
     
     public render() {
 
-        const { draft, hideAboveBar } = this.props;
+        const { draft, hideAboveBar, setTooltip } = this.props;
         const { xp, nextLevelXp, level } = draft;
-
-        const progress = xp/nextLevelXp * 100;
-        const progressStyle = {
-            transform: `translateX(${-100 + progress}%)`
-        }
 
         const lockClass = draft.isHandLocked ? 'closed' : 'open';
 
@@ -30,29 +27,15 @@ export class DraftSidebar extends React.Component<DraftSidebarProps> {
                     <div className={`lock ${lockClass}`}></div>
                 </div> }
                 <div className="draft-sidebar-items">
-                    <RefreshPanel cost={DraftStore.REFRESH_COST} refresh={() => draft.refreshHand()} />
-                    <div className="sidebar-item xp clickable" onClick={() => draft.buyXP()}>
-                        <div className="xp-panel">
-                            <div className="details">
-                                <div className="content">
-                                    <div className="label">Buy XP</div>
-                                    <div className="sub-label">
-                                        <Coin />{DraftStore.BUY_XP_COST}
-                                    </div>
-                                </div>
-                                <div className="icon" style={{backgroundImage: "url(img/level-up.png)"}}></div>
-                            </div>
-                            <div className="xp-progress">
-                                <div className="xp-label">{xp}/{nextLevelXp}</div>
-                                <div className="xp-progress-bar">
-                                    <div className="bar">
-                                        <div className="fill" style={progressStyle}></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="level">{level}</div>
-                        </div>
-                    </div>
+                    <RefreshPanel cost={DraftStore.REFRESH_COST} refresh={() => draft.refreshHand()} setTooltip={setTooltip}/>
+                    <BuyXpPanel
+                        cost={DraftStore.BUY_XP_COST}
+                        buyXP={() => draft.buyXP()}
+                        setTooltip={setTooltip}
+                        level={level}
+                        xp={xp}
+                        nextLevelXp={nextLevelXp}
+                    />
                 </div>
             </div>
         );
