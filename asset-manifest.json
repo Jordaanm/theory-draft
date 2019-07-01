@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/theory-draft/static/css/main.8a489f14.chunk.css",
-    "main.js": "/theory-draft/static/js/main.2d311268.chunk.js",
-    "main.js.map": "/theory-draft/static/js/main.2d311268.chunk.js.map",
+    "main.js": "/theory-draft/static/js/main.9c9dadf9.chunk.js",
+    "main.js.map": "/theory-draft/static/js/main.9c9dadf9.chunk.js.map",
     "runtime~main.js": "/theory-draft/static/js/runtime~main.7f99ac66.js",
     "runtime~main.js.map": "/theory-draft/static/js/runtime~main.7f99ac66.js.map",
     "static/js/2.1be4c378.chunk.js": "/theory-draft/static/js/2.1be4c378.chunk.js",
     "static/js/2.1be4c378.chunk.js.map": "/theory-draft/static/js/2.1be4c378.chunk.js.map",
     "index.html": "/theory-draft/index.html",
-    "precache-manifest.4a8e477b9151bd44b41a85d24293d55c.js": "/theory-draft/precache-manifest.4a8e477b9151bd44b41a85d24293d55c.js",
+    "precache-manifest.2b69fefc0954f207ea6317c92d5404bc.js": "/theory-draft/precache-manifest.2b69fefc0954f207ea6317c92d5404bc.js",
     "service-worker.js": "/theory-draft/service-worker.js",
     "static/css/main.8a489f14.chunk.css.map": "/theory-draft/static/css/main.8a489f14.chunk.css.map",
     "static/media/coin.scss": "/theory-draft/static/media/coin.97cee6e3.svg"
