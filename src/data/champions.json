@@ -94,7 +94,7 @@
         {
             "name": "Darius",
             "id": "darius",
-            "cost": 2,
+            "cost": 1,
             "classes": [
                 "imperial",
                 "knight"
