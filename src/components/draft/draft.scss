@@ -93,7 +93,7 @@
             width: 4em;
             @extend %icon-bg;
             @include ui-border();
-            background-image: url('../..//img/lock-open.png');
+            background-image: url('../../img/lock-open.png');
             &.closed {
                 background-image: url('../../img/lock-closed.png');
             }
