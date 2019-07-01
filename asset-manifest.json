@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/theory-draft/static/css/main.429b1fea.chunk.css",
-    "main.js": "/theory-draft/static/js/main.c789f58f.chunk.js",
-    "main.js.map": "/theory-draft/static/js/main.c789f58f.chunk.js.map",
+    "main.css": "/theory-draft/static/css/main.45bd800e.chunk.css",
+    "main.js": "/theory-draft/static/js/main.2d311268.chunk.js",
+    "main.js.map": "/theory-draft/static/js/main.2d311268.chunk.js.map",
     "runtime~main.js": "/theory-draft/static/js/runtime~main.7f99ac66.js",
     "runtime~main.js.map": "/theory-draft/static/js/runtime~main.7f99ac66.js.map",
     "static/js/2.1be4c378.chunk.js": "/theory-draft/static/js/2.1be4c378.chunk.js",
     "static/js/2.1be4c378.chunk.js.map": "/theory-draft/static/js/2.1be4c378.chunk.js.map",
     "index.html": "/theory-draft/index.html",
-    "precache-manifest.9d436d115d83ce8b0ddecac13a77e466.js": "/theory-draft/precache-manifest.9d436d115d83ce8b0ddecac13a77e466.js",
+    "precache-manifest.9b4799efbc133f1b598a936e9e16fe0b.js": "/theory-draft/precache-manifest.9b4799efbc133f1b598a936e9e16fe0b.js",
     "service-worker.js": "/theory-draft/service-worker.js",
-    "static/css/main.429b1fea.chunk.css.map": "/theory-draft/static/css/main.429b1fea.chunk.css.map"
+    "static/css/main.45bd800e.chunk.css.map": "/theory-draft/static/css/main.45bd800e.chunk.css.map",
+    "static/media/coin.scss": "/theory-draft/static/media/coin.97cee6e3.svg"
   }
 }
