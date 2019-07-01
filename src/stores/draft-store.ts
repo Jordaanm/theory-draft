@@ -176,7 +176,15 @@ export class DraftStore {
         return activeClasses.map( key => {
             const synergyData = (synergies as any)[key] as SynergyData;
             const count = (this.unitSynergies as any)[key] as number;
-            const medalIndex = synergyData.stages.findIndex(x =>  synergyData.exact ? x === count : x <= count);
+
+            let medalIndex = -1;
+            synergyData.stages.forEach((x, index) => {
+                if (synergyData.exact && count === x) {
+                    medalIndex = index;
+                } else if(synergyData && count >= x) {
+                    medalIndex = index;
+                }
+            });
 
             //Tiers, 1 = Gold, 2 = Silver, 3 = Bronze, 4 = Inactive;
             const tier = medalIndex === -1 ? 4 : synergyData.stages.length - medalIndex;
