@@ -3,7 +3,7 @@ import { useDrag, useDrop } from 'react-dnd';
 import { BoardUnit, Unit } from '../../stores/types';
 import { Champion } from '../champion/champion';
 import { Types } from '../../stores/drag-drop';
-import {Preview } from 'react-dnd-multi-backend';
+// import {Preview } from 'react-dnd-multi-backend';
 
 interface CellProps {
     boardUnit: BoardUnit;

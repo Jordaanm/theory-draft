@@ -2,7 +2,6 @@ import * as React from 'react';
 import { DraftStore } from '../../../stores/draft-store';
 import { Coin } from '../../shared/coin';
 import { observer } from 'mobx-react';
-import { useHotkeys } from 'react-hotkeys-hook'
 import { RefreshPanel } from './draft-refresh-panel';
 
 interface DraftSidebarProps {

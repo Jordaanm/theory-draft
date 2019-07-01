@@ -222,12 +222,13 @@ export class DraftStore {
     }
 
     private calculatePassiveIncome(): number {
-        if(this.roundCount > 6) {
-            return 5;
-        } else if (this.roundCount > 3) {
-            return 4
-        } else {
-            return 3;
+        switch(this.roundCount) {
+            case 0: 
+            case 1: return 2;
+            case 2:
+            case 3: return 3;
+            case 4: return 4;
+            default: return 5;
         }
     }
 
