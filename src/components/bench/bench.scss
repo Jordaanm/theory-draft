@@ -12,13 +12,18 @@
     height: 5em;
     margin: 0.1em;
 
-    &:not(.selected) {
+    &:not(.active) {
         @include ui-border();
     }
 
-    &.selected {
+    &.active {
         @include ui-border($goldLight, $goldMedium);
     }
+}
+
+.bench-slot-inner {
+    height: 100%;
+    width: 100%;
 }
  
 .champion {

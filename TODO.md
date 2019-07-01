@@ -2,21 +2,19 @@
 
 ## Features
 
-[ ] Drag and drop
-    * drag units from bench to board
-    * drag units from bench to sell
-    * drag units from board to sell
-
-[ ] Round Tracking (creeps, carousel, pvp)
-
-[ ] Income Tooltip
-
+* Round Tracking (creeps, carousel, pvp)
+* Income Tooltip
+* Keyboard Shortcuts
 ## UI
-[ ] Improve board hex rendering
 
-[ ] Synergies UI
-
-[ ] Merge Animation
+* Improve board hex rendering
+* Synergies UI
+* Merge Animation
 
 ## Known Bugs
-[] Duplicate cards
+* Duplicate cards
+
+### Shortcuts
+
+* Buy XP -> F
+* Refresh -> D

@@ -18,7 +18,7 @@ export class Draft extends React.Component<DraftProps> {
     public render() {
         const { draft } = this.props;
 
-        const showSell = draft.selectedUnit !== undefined;
+        const showSell = draft.activeUnit !== undefined;
 
         return (
             <section className="draft">

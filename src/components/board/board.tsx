@@ -4,7 +4,8 @@ import { inject, observer } from 'mobx-react';
 import { DraftStore } from '../../stores/draft-store';
 import "./board.scss";
 import { BOARD_HEIGHT, BOARD_WIDTH } from '../../utils';
-import { BoardUnit, UnitSelection } from '../../stores/types';
+import { BoardUnit, UnitSelection, Unit } from '../../stores/types';
+import { Types } from '../../stores/drag-drop';
 
 interface BoardProps {
     draft?: DraftStore;
@@ -42,18 +43,70 @@ export class Board extends React.Component<BoardProps> {
 
 
     private renderRow(boardUnits: BoardUnit[], row: number) {
-        const isOdd = row%2 === 1; 
+        const {draft} = this.props;
+        const { activeUnit } = draft;
+        const isOdd = row%2 === 1;
+        const activeBoardIndex = (activeUnit !== undefined && !activeUnit.isBenched) ? activeUnit.index : -1;
+
         return (
             <div className="board__row" key={row}>
                 {isOdd && <div className="board-spacer spacer--left"></div>}
                 {boardUnits.map(bu=>
-                    <Cell key={this.getKey(bu)} boardUnit={bu} onSelect={x => this.onSelect(x)} />
+                    <Cell
+                        key={this.getKey(bu)}
+                        boardUnit={bu}
+                        isActive={activeBoardIndex === bu.index}
+                        onPickUpUnit={(unit, index) => this.onPickUpUnit(unit, index)}
+                        onDropUnit={() => this.onDropUnit()}
+                        onDrop={(source, dest) => this.onDrop(source, dest)}                        
+                    />
                 )}
                 {!isOdd && <div className="board-spacer spacer--right"></div>}
             </div>
         );
     }
 
+    private onPickUpUnit(unit: Unit, index: number) {
+        const { draft } = this.props;
+        draft.unitPickedUp({
+            unit,
+            index,
+            isBenched: false
+        } as UnitSelection);
+        
+    }
+
+    private onDropUnit() {
+        const { draft } = this.props;
+        draft.unitDropped();
+    }
+
+    private onDrop(source, dest) {
+        const { draft } = this.props;
+        console.log("on drop", source, dest);
+        
+        const selectionA = {
+            unit: source.unit,
+            index: source.index,
+            isBenched: source.type === Types.BENCH
+        } as UnitSelection;
+
+        const selectionB = {
+            unit: dest.unit,
+            index: dest.index,
+            isBenched: dest.type === Types.BENCH
+        } as UnitSelection;
+
+        //Is destination empty
+        if(!dest.unit) {
+            console.log("Move unit to Empty Space", dest);
+            draft.shiftUnitToBoard(selectionA, dest.index);
+        } else {
+            console.log("Swap Positions with another unit", dest);
+            draft.swapUnits(selectionA, selectionB);
+        }
+    }
+    
     private getKey(boardUnit: BoardUnit): string {
         const { unit, index } = boardUnit;
         if(unit === undefined) {
@@ -61,24 +114,5 @@ export class Board extends React.Component<BoardProps> {
         } else {
             return `${unit.champ.id}_${unit.tier}_${index}`;
         }
-    }
-
-    private onSelect(boardUnit: BoardUnit) {
-        const { draft } = this.props;
-
-        console.log("Selected Board Unit", boardUnit);
-        //If empty space
-        if(boardUnit.unit === undefined) {
-            draft.moveSelectedUnitToBoard(boardUnit.index);
-            return;
-        }
-
-        const selection = {
-            unit: boardUnit.unit,
-            index: boardUnit.index,
-            isBenched: false
-        } as UnitSelection;
-
-        draft.toggleSelectedUnit(selection);
     }
 }

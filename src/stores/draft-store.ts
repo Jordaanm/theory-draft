@@ -44,7 +44,7 @@ export class DraftStore {
     isHandLocked: boolean = false;
 
     @observable
-    selectedUnit?: UnitSelection = undefined;
+    activeUnit?: UnitSelection = undefined;
 
     @observable
     roundCount: number = 1;
@@ -59,40 +59,94 @@ export class DraftStore {
         );
     }
 
-    @action
-    public toggleSelectedUnit(selection: UnitSelection) {
+    
+ /*****************************
+ * Unit Selection and Movement
+ ******************************/
 
-        if(this.selectedUnit === undefined) {
-            this.selectedUnit = selection;
-            console.log("Selected", selection.unit);
+    public selectionsMatch(selA: UnitSelection, selB: UnitSelection): boolean {
+        return selA !== undefined
+            && selB !== undefined
+            && selB.index === selA.index
+            && selB.isBenched === selA.isBenched        
+    }
+
+    @action unitPickedUp(selection: UnitSelection) {
+        this.activeUnit = selection;
+    }
+
+    @action unitDropped() {
+        this.activeUnit = undefined;
+    }
+
+    @action
+    public swapUnits(source: UnitSelection, dest: UnitSelection) {
+        if(source.isBenched) {
+            this.moveUnitToBench(dest.unit, source.index);
+        } else {
+            this.moveUnitToBoard(dest.unit, source.index);
+        }
+
+        if(dest.isBenched) {
+             this.moveUnitToBench(source.unit, dest.index);
+         } else {
+            this.moveUnitToBoard(source.unit, dest.index);
+         }
+    }
+
+    @action
+    public shiftUnitToBench(selection: UnitSelection, index: number) {
+        //Only if bench is empty
+        if(this.benchedUnits[index] !== null) { 
+            console.log("Space occupied");
             return;
         }
-        
-        const isSameUnit = this.selectedUnit !== undefined && selection.index === this.selectedUnit.index;
 
-        //Click the same unit twice to Deselect it.
-        //Click 2 different units to swap their positions
-        if(isSameUnit) { 
-            this.selectedUnit = undefined;
-            console.log("Deselected", selection.unit.champ.name);
+        //Remove unit from current space
+        this.clearUnitFromCurrentSpace(selection);
+
+        //Move into new space
+        this.moveUnitToBench(selection.unit, index)
+    }
+
+    @action
+    public shiftUnitToBoard(selection: UnitSelection, index: number) {
+        //Only if bench is empty
+        if(this.boardUnits[index].unit !== undefined) { 
+            console.log("ShiftUnitToBoard: Space occupied");
+            return;
+        }
+
+        //Remove unit from current space
+        this.clearUnitFromCurrentSpace(selection);
+
+        //Move into new space
+        this.moveUnitToBoard(selection.unit, index)
+    }
+
+    private clearUnitFromCurrentSpace(selection: UnitSelection) {
+        if(selection.isBenched) {
+            this.benchedUnits[selection.index] = null;
         } else {
-           if(this.selectedUnit.isBenched) {
-               this.moveUnitToBench(selection.unit, this.selectedUnit.index);
-           } else {
-               this.moveUnitToBoard(selection.unit, this.selectedUnit.index);
-           }
-
-           if(selection.isBenched) {
-                this.moveUnitToBench(this.selectedUnit.unit, selection.index);
-            } else {
-               this.moveUnitToBoard(this.selectedUnit.unit, selection.index);
-            }
-
-            this.selectedUnit = undefined;
+            this.boardUnits[selection.index].unit = undefined;
         }
     }
 
+    @action
+    private moveUnitToBench(unit: Unit, index: number) {
+        this.benchedUnits[index] = unit;
+    }
 
+    @action
+    private moveUnitToBoard(unit: Unit, index: number) {
+        const newBoardUnit = { index, unit } as BoardUnit;
+        this.boardUnits[index] = newBoardUnit;
+    }
+
+/***************************
+ * Synergies and Place Units
+ ***************************/
+    
     @computed
     public get placedUnitCount() {
         return this.boardUnits.filter(bu => bu.unit).length;
@@ -137,55 +191,6 @@ export class DraftStore {
         });
     }
 
-    @action
-    public moveSelectedUnitToBench(index: number) {
-        if(this.selectedUnit === undefined || this.selectedUnit.unit === null) { return; }
-        //Remove selected unit from current space;
-        if(this.selectedUnit.isBenched) {
-            this.benchedUnits[this.selectedUnit.index] = null;
-        } else {
-            this.boardUnits[this.selectedUnit.index].unit = undefined;
-        }
-        //Move into new space
-        this.moveUnitToBench(this.selectedUnit.unit, index);
-
-        //Remove selection
-        this.selectedUnit = undefined;
-    }
-
-    @action
-    public moveSelectedUnitToBoard(index: number) {
-        if(this.selectedUnit === undefined || this.selectedUnit.unit === null) { return; }
-
-        if(this.placedUnitCount >= this.level) {
-            console.log("You've reached your unit cap. Level up to allow for more units");
-            return;
-        }
-
-        //Remove the selected unit from current space
-        if(this.selectedUnit.isBenched) {
-            this.benchedUnits[this.selectedUnit.index] = null;
-        } else {
-            this.boardUnits[this.selectedUnit.index].unit = undefined;
-        }
-
-        //Move into new space
-        this.moveUnitToBoard(this.selectedUnit.unit, index);
-
-        //Remove selection
-        this.selectedUnit = undefined;
-    }
-
-    @action
-    private moveUnitToBench(unit: Unit, index: number) {
-        this.benchedUnits[index] = unit;
-    }
-
-    @action
-    private moveUnitToBoard(unit: Unit, index: number) {
-        const newBoardUnit = { index, unit } as BoardUnit;
-        this.boardUnits[index] = newBoardUnit;
-    }
 
     @action
     public toggleHandLock() {
@@ -267,20 +272,27 @@ export class DraftStore {
     }
 
     @action
-    public sellSelectedUnit() {
-        if(this.selectedUnit === undefined) { return; }
-
-        //Give gold;
-        this.gold += this.getUnitSalePrice(this.selectedUnit.unit);
+    public sellUnit(unitSelection: UnitSelection) {
+        let unitExists = false;
+        const { unit, index, isBenched } = unitSelection;
 
         //Remove Unit;
-        if(this.selectedUnit.isBenched) {
-            this.benchedUnits[this.selectedUnit.index] = null;
+        if(isBenched) {
+            if(this.benchedUnits[index] !== null) {
+                this.benchedUnits[index] = null;
+                unitExists = true;
+            }
         } else {
-            this.boardUnits[this.selectedUnit.index].unit = undefined;
+            if(this.boardUnits[index].unit !== undefined) {
+                this.boardUnits[index].unit = undefined;
+                unitExists = true;
+            }
         }
 
-        this.selectedUnit = undefined;
+        //If there was a unit to sell, give gold;
+        if(!unitExists) {
+            this.gold += this.getUnitSalePrice(unit);
+        }
     }
 
     public getUnitSalePrice(unit: Unit): number {
@@ -361,7 +373,6 @@ export class DraftStore {
            3a. If they have the gold to buy 2, buy both and merge to free up space
            3b. If they don't have the gold, abort
         */
-
 
         //Add unit to bench
         const firstEmpty = this.benchedUnits.findIndex(x => x === null);

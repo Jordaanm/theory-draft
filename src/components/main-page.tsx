@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { DndProvider } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend'
 
 import './main-page.scss';
 
@@ -31,21 +33,23 @@ export class MainPage extends React.Component {
 
     public render() {
         return (
-            <section className="main-page">
-                <Provider draft={this.draftStore} >
-                    <>
-                        <div className="split">
-                            <div className="split-section aside">
-                                <Simulation />
+            <section className="main-page">                
+				<DndProvider backend={HTML5Backend}>
+                    <Provider draft={this.draftStore} >
+                        <>
+                            <div className="split">
+                                <div className="split-section aside">
+                                    <Simulation />
+                                </div>
+                                <div className="split-section main">
+                                    <Board />
+                                    <Bench />
+                                </div>
                             </div>
-                            <div className="split-section main">
-                                <Board />
-                                <Bench />
-                            </div>
-                        </div>
-                        <Draft />
-                    </>
-                </Provider>
+                            <Draft />
+                        </>
+                    </Provider>
+                </DndProvider>
             </section>
         )
     }
