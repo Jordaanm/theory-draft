@@ -13,6 +13,7 @@ import { Draft } from './draft/draft';
 
 import { DraftStore } from '../stores/draft-store';
 import { Simulation } from './simulation/simulation';
+import { Hotkeys } from './hotkeys';
 export class MainPage extends React.Component {
 
     @observable
@@ -45,6 +46,7 @@ export class MainPage extends React.Component {
                         </>
                     </Provider>
                 </DndProvider>
+                <Hotkeys draft={this.draftStore} />
             </section>
         )
     }

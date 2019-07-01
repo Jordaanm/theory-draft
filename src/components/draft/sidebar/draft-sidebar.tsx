@@ -2,6 +2,8 @@ import * as React from 'react';
 import { DraftStore } from '../../../stores/draft-store';
 import { Coin } from '../../shared/coin';
 import { observer } from 'mobx-react';
+import { useHotkeys } from 'react-hotkeys-hook'
+import { RefreshPanel } from './draft-refresh-panel';
 
 interface DraftSidebarProps {
     draft: DraftStore;
@@ -29,16 +31,7 @@ export class DraftSidebar extends React.Component<DraftSidebarProps> {
                     <div className={`lock ${lockClass}`}></div>
                 </div> }
                 <div className="draft-sidebar-items">
-                    <div className="sidebar-item refresh clickable" onClick={() => draft.refreshHand()}>
-                        <div className="refresh-panel">
-                            <div className="content">
-                                <div>Refresh</div>
-                                <div><Coin /> {DraftStore.REFRESH_COST}</div>
-                            </div>
-                            <div className="icon" style={{backgroundImage: "url(img/refresh.png)"}}>
-                            </div>
-                        </div>
-                    </div>
+                    <RefreshPanel cost={DraftStore.REFRESH_COST} refresh={() => draft.refreshHand()} />
                     <div className="sidebar-item xp clickable" onClick={() => draft.buyXP()}>
                         <div className="xp-panel">
                             <div className="details">
