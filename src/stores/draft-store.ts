@@ -290,7 +290,7 @@ export class DraftStore {
         }
 
         //If there was a unit to sell, give gold;
-        if(!unitExists) {
+        if(unitExists) {
             this.gold += this.getUnitSalePrice(unit);
         }
     }

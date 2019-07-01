@@ -14,6 +14,7 @@
 
 ## Known Bugs
 
+* Units not selling for gold
 * Duplicate cards
 
 ### Shortcuts
