@@ -1,0 +1,58 @@
+@mixin image-contain {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.splash {
+    height: 100%;
+    width: 100%;
+    padding: 1em;
+    background-image: url('./bg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-size: 3em;
+    color: #9e6c36;
+    
+    .inner {
+        background-image: url('./island.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tft-logo {
+        @include image-contain;
+        background-image: url('./tft.png');
+        height: 50vw;
+        width: 100%;
+    }
+
+    p {
+
+    }
+
+    .tft-end-cap {
+        @include image-contain;
+        background-image: url('./logo-end-cap.png');
+        height: 4em;
+    }
+
+    .actions {
+
+    }
+
+    .action {
+        border-color: #9e6c36;
+        color: #9e6c36;
+        background-color: rgba(255,255,255,0.5);
+
+        &:hover {
+            background-color: rgba(255,255,255,1);
+        }
+    }
+}

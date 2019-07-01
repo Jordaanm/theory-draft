@@ -3,7 +3,7 @@ import { DndProvider } from 'react-dnd';
 import MultiBackend from 'react-dnd-multi-backend';
 import HTML5toTouch from 'react-dnd-multi-backend/lib/HTML5toTouch'
 import { observable } from 'mobx';
-import { Provider } from 'mobx-react';
+import { Provider, observer } from 'mobx-react';
 
 import './main-page.scss';
 
@@ -14,6 +14,9 @@ import { Draft } from './draft/draft';
 import { DraftStore } from '../stores/draft-store';
 import { Simulation } from './simulation/simulation';
 import { Hotkeys } from './hotkeys';
+import { SplashScreen } from './splash/splash';
+
+@observer
 export class MainPage extends React.Component {
 
     @observable
@@ -22,14 +25,21 @@ export class MainPage extends React.Component {
     constructor(props) {
         super(props);
         this.draftStore = new DraftStore();
-
-        this.draftStore.initializePool();
-        this.draftStore.drawHand();
     }
 
     public render() {
+        const showSp1ash = this.draftStore.isSplashOpen;
+
+        if(showSp1ash) {
+            return (
+                <section className="main-page">
+                    <SplashScreen begin={() => this.draftStore.start()} />
+                </section>
+            );
+        }
+
         return (
-            <section className="main-page">                
+            <section className="main-page">
 				<DndProvider backend={MultiBackend(HTML5toTouch)}>
                     <Provider draft={this.draftStore} >
                         <>

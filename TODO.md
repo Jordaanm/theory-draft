@@ -3,7 +3,6 @@
 ## Features
 
 * Round Tracking (creeps, carousel, pvp)
-* Splash Screen
 
 ## UI
 

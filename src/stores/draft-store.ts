@@ -49,6 +49,9 @@ export class DraftStore {
     @observable
     roundCount: number = 1;
 
+    @observable
+    isSplashOpen = true;
+
     constructor() {
         this.pool = [];
         this.currentHand = [];
@@ -60,6 +63,14 @@ export class DraftStore {
     }
 
     
+    @action
+    public start() {
+        console.log("Lets Go!");     
+        this.initializePool();
+        this.drawHand();
+        this.isSplashOpen = false;
+    }
+
  /*****************************
  * Unit Selection and Movement
  ******************************/
