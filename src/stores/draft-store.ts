@@ -94,6 +94,11 @@ export class DraftStore {
 
 
     @computed
+    public get placedUnitCount() {
+        return this.boardUnits.filter(bu => bu.unit).length;
+    }
+
+    @computed
     public get unitSynergies() {
         const champs: ChampData[] = this.boardUnits.map(x => x.unit).map(unit => unit ? unit.champ : null).filter(champ => champ !== null) as ChampData[];
         const champIds: string[] = champs.map(champ => champ.id);
@@ -151,6 +156,11 @@ export class DraftStore {
     @action
     public moveSelectedUnitToBoard(index: number) {
         if(this.selectedUnit === undefined || this.selectedUnit.unit === null) { return; }
+
+        if(this.placedUnitCount >= this.level) {
+            console.log("You've reached your unit cap. Level up to allow for more units");
+            return;
+        }
 
         //Remove the selected unit from current space
         if(this.selectedUnit.isBenched) {

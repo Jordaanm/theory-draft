@@ -19,6 +19,6 @@
 [ ] Merge Animation
 
 ## Known Bugs
-
+[] Infinite Units on Board;
 [] Bench merges moving to board;
 [] Duplicate cards

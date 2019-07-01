@@ -24,6 +24,9 @@ export class Simulation extends React.Component<SimulationProps> {
                         <span>Current Round: {draft.roundCount}</span>
                         <button onClick={() => draft.nextRound()}>Next Round</button>
                     </div>
+                    <div className="level-section">
+                        <span>Units Placed: {draft.placedUnitCount} / { draft.level}</span>
+                    </div>
                     <SynergiesBar draft={draft} />
                 </div>
             </section>
