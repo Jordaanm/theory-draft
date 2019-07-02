@@ -354,8 +354,10 @@ export class DraftStore {
         const index = Math.floor(Math.random() * cardSet.length);
         const card = cardSet[index];
 
+        const indexToRemove = this.pool.findIndex(c => c.guid === card.guid);
+        this.pool.splice(indexToRemove, 1);
+        
         this.currentHand.push(card);
-        this.pool.splice(index, 1);
     }
 
     @action
