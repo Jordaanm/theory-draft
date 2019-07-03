@@ -69,6 +69,7 @@ export class DraftStore {
         console.log("Lets Go!");     
         this.initializePool();
         this.drawHand();
+        this.giveRandomStartingUnit();
         this.isSplashOpen = false;
     }
 
@@ -76,6 +77,25 @@ export class DraftStore {
  * Unit Selection and Movement
  ******************************/
 
+    private giveRandomStartingUnit() {
+        //Always start with a 2 cost unit
+        const potentialChamps = this.getChampsByCost(2);
+        const index = Math.floor(Math.random() * potentialChamps.length);
+        const champ = potentialChamps[index];
+
+        //Find that champ
+        const poolIndex = this.pool.findIndex(x => x.champ.id === champ.id);
+        //Remove from pool
+        this.pool.splice(poolIndex, 1);
+        
+        //Add to bench
+        this.benchedUnits[0] = {
+            tier: 1,
+            champ
+        };
+
+    }
+ 
     public selectionsMatch(selA: UnitSelection, selB: UnitSelection): boolean {
         return selA !== undefined
             && selB !== undefined
@@ -586,7 +606,7 @@ export class DraftStore {
         return index;
     }
 
-    private getUnitsByCost(cost: number) {
+    private getChampsByCost(cost: number) {
         return this.dataStore.champions.filter(champ => champ.cost === cost);
     }
 

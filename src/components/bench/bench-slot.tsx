@@ -49,7 +49,7 @@ export const BenchSlot: React.FC<BenchSlotProps> = ({
     const overClass = isOver && canDrop ? 'drag-over' : '';
     return (
         <div ref={drop} className={`bench-slot ${activeClass} ${dragClass} ${overClass}`}>
-            <div ref={drag} className="bench-slot-inner">
+            <div ref={unit ? drag : undefined} className="bench-slot-inner">
                 {Boolean(unit) && <Champion unit={unit} />}
             </div>
         </div>

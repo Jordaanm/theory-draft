@@ -63,7 +63,7 @@ export const Cell: React.FC<CellProps> = ({
 
     return (
         <div ref={drop} className={`cell ${dragClass} ${activeClass} ${overClass}`}>
-            <div ref={drag} className="contents">
+            <div ref={unit ? drag : undefined} className="contents">
                 {Boolean(unit) && <Champion unit={unit} /> }
             </div>
             {/* <Preview generator={generatePreview} /> */}
