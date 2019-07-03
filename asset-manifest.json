@@ -1,18 +1,21 @@
 {
   "files": {
-    "main.css": "/theory-draft/static/css/main.345c176e.chunk.css",
-    "main.js": "/theory-draft/static/js/main.4bfbe535.chunk.js",
-    "main.js.map": "/theory-draft/static/js/main.4bfbe535.chunk.js.map",
+    "main.css": "/theory-draft/static/css/main.fbf3b8a0.chunk.css",
+    "main.js": "/theory-draft/static/js/main.c709331b.chunk.js",
+    "main.js.map": "/theory-draft/static/js/main.c709331b.chunk.js.map",
     "runtime~main.js": "/theory-draft/static/js/runtime~main.7f99ac66.js",
     "runtime~main.js.map": "/theory-draft/static/js/runtime~main.7f99ac66.js.map",
-    "static/js/2.0efb7159.chunk.js": "/theory-draft/static/js/2.0efb7159.chunk.js",
-    "static/js/2.0efb7159.chunk.js.map": "/theory-draft/static/js/2.0efb7159.chunk.js.map",
+    "static/css/2.3d5f8d40.chunk.css": "/theory-draft/static/css/2.3d5f8d40.chunk.css",
+    "static/js/2.525dd58c.chunk.js": "/theory-draft/static/js/2.525dd58c.chunk.js",
+    "static/js/2.525dd58c.chunk.js.map": "/theory-draft/static/js/2.525dd58c.chunk.js.map",
     "index.html": "/theory-draft/index.html",
-    "precache-manifest.721710dd902701a7d1ace214abbf3c26.js": "/theory-draft/precache-manifest.721710dd902701a7d1ace214abbf3c26.js",
+    "precache-manifest.348efb98b60eb1bc6d56435c32e6d625.js": "/theory-draft/precache-manifest.348efb98b60eb1bc6d56435c32e6d625.js",
     "service-worker.js": "/theory-draft/service-worker.js",
-    "static/css/main.345c176e.chunk.css.map": "/theory-draft/static/css/main.345c176e.chunk.css.map",
+    "static/css/2.3d5f8d40.chunk.css.map": "/theory-draft/static/css/2.3d5f8d40.chunk.css.map",
+    "static/css/main.fbf3b8a0.chunk.css.map": "/theory-draft/static/css/main.fbf3b8a0.chunk.css.map",
     "static/media/app.scss": "/theory-draft/static/media/BeaufortBold.4b2bd100.woff",
     "static/media/splash.scss": "/theory-draft/static/media/tft.a10940f6.png",
-    "static/media/coin.scss": "/theory-draft/static/media/coin.97cee6e3.svg"
+    "static/media/coin.scss": "/theory-draft/static/media/coin.97cee6e3.svg",
+    "static/media/editor.min.css": "/theory-draft/static/media/jsoneditor-icons.d961fdfa.svg"
   }
 }
