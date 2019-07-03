@@ -31,7 +31,7 @@ export class SynergyItem extends React.Component<SynergyItemProps> {
                 <span className="synergy-name">{synergy.name}: </span>{synergy.count}
                 {nextBonus > 0 && <span> / {nextBonus}</span>}
                </span>
-               {(currentBonusIndex >= 0  || synergy.passive) && <div className="tooltip">
+               <div className="tooltip">
                     <div className="tooltip-name">
                         <img className="tooltip-icon" alt="icon" src={`img/class-icons/${synergy.id}.png`} />
                         <span>{synergy.name}</span>
@@ -48,7 +48,7 @@ export class SynergyItem extends React.Component<SynergyItemProps> {
                             </div>
                         )}
                     </div>
-               </div>}
+               </div>
             </div>
         );
     }
