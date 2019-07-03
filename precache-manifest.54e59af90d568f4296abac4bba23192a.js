@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "035d8139d3c7c924f0a4374f5a0cf911",
+    "revision": "aa43c77202d2782d3ac0e235c26d7ff8",
     "url": "/theory-draft/index.html"
   },
   {
@@ -8,15 +8,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/theory-draft/static/css/2.3d5f8d40.chunk.css"
   },
   {
-    "revision": "28de1bffc3ed149e373b",
-    "url": "/theory-draft/static/css/main.fbf3b8a0.chunk.css"
+    "revision": "32408d3199aebc9aa9ba",
+    "url": "/theory-draft/static/css/main.91a6258f.chunk.css"
   },
   {
     "revision": "a1963cee2b0b7013f76f",
     "url": "/theory-draft/static/js/2.525dd58c.chunk.js"
   },
   {
-    "revision": "28de1bffc3ed149e373b",
+    "revision": "32408d3199aebc9aa9ba",
     "url": "/theory-draft/static/js/main.c709331b.chunk.js"
   },
   {
