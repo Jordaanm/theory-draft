@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "aa43c77202d2782d3ac0e235c26d7ff8",
+    "revision": "5281506c3e1ca2dcabbc0581f3cae18b",
     "url": "/theory-draft/index.html"
   },
   {
-    "revision": "a1963cee2b0b7013f76f",
+    "revision": "d38d82d4fcfa5393bc61",
     "url": "/theory-draft/static/css/2.3d5f8d40.chunk.css"
   },
   {
-    "revision": "32408d3199aebc9aa9ba",
-    "url": "/theory-draft/static/css/main.91a6258f.chunk.css"
+    "revision": "8b038a599ff0d83f642e",
+    "url": "/theory-draft/static/css/main.acf28ecf.chunk.css"
   },
   {
-    "revision": "a1963cee2b0b7013f76f",
-    "url": "/theory-draft/static/js/2.525dd58c.chunk.js"
+    "revision": "d38d82d4fcfa5393bc61",
+    "url": "/theory-draft/static/js/2.8f339cb1.chunk.js"
   },
   {
-    "revision": "32408d3199aebc9aa9ba",
-    "url": "/theory-draft/static/js/main.c709331b.chunk.js"
+    "revision": "8b038a599ff0d83f642e",
+    "url": "/theory-draft/static/js/main.d03263d8.chunk.js"
   },
   {
     "revision": "40d4ecfa90576df4bd08",
