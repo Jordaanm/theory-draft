@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5281506c3e1ca2dcabbc0581f3cae18b",
+    "revision": "df0e6554b910c6399a2a1ccf07278f25",
     "url": "/theory-draft/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/theory-draft/static/css/2.3d5f8d40.chunk.css"
   },
   {
-    "revision": "8b038a599ff0d83f642e",
+    "revision": "6ffce64761fd7c3c2e3f",
     "url": "/theory-draft/static/css/main.acf28ecf.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/theory-draft/static/js/2.8f339cb1.chunk.js"
   },
   {
-    "revision": "8b038a599ff0d83f642e",
-    "url": "/theory-draft/static/js/main.d03263d8.chunk.js"
+    "revision": "6ffce64761fd7c3c2e3f",
+    "url": "/theory-draft/static/js/main.b7ccf648.chunk.js"
   },
   {
     "revision": "40d4ecfa90576df4bd08",
