@@ -2,19 +2,16 @@
 
 ## Features
 
+* Synergy Bonus Descriptions
 * Round Tracking (creeps, carousel, pvp)
 
 ## UI
-* More Accurate Tooltip recreations
-* Synergy Bonus Descriptions
 * Improve Sell UI
 * Synergies UI
 * Merge Animation
 * Improve board hex rendering
 
 ## Known Bugs
-
-* Sell cards => Account for tiers;
 
 ### Shortcuts
 

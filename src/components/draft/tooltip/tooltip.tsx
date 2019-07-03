@@ -14,7 +14,7 @@ const renderRefreshTooltip = () => {
     return (
         <>
             <div>Refresh [Shift + D]</div>
-            <div><i>Draw a new hand of cards</i></div>
+            <div>Refresh the store with a new set of champions</div>
         </>
     );
 };
@@ -23,7 +23,7 @@ const renderBuyXpTooltip = () => {
     return (
         <>
             <div>Buy XP [Shift + F]</div>
-            <div><i>Purchase 4 XP to help increase your level. Increasing your level allows you to place more units on the board</i></div>
+            <div>Gain 4 XP toward your next level. Levelling up increases your team size and gives you access to stronger champions in the store. You gain 2 XP for free at the begninning of each round</div>
         </>
     );
 };
@@ -52,8 +52,7 @@ const renderLockHandTooltip = (draft: DraftStore) => {
     return (
         <>
             <div>Toggle Lock [Shift + L]</div>
-            <div><i>Locking prevents a new hand of cards being drawn at the start of a new round.</i></div>
-            <div>Your hand is currently {draft.isHandLocked ? 'locked' : 'unlocked'}</div>
+            <div>{draft.isHandLocked ? 'Unlock' : 'Lock'} your current store offerings.</div>
         </>
     );
 };

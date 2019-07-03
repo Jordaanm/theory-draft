@@ -30,8 +30,10 @@ export const DraftSell: React.FC<DraftSellProps> = ({
 
     return (
         <div className={`draft-sell draft-area ${activeClass}`} ref={drop}>
-            <div className="message">
+            <div className="">
                 <i className="trash"></i>
+            </div>
+            <div className="message">
                 <span>Sell {name} for <Coin /> {cost} </span>
             </div>
             { canDrop && isOver && <div>
