@@ -17,7 +17,7 @@ export class SynergyItem extends React.Component<SynergyItemProps> {
         const currentBonusIndex = tier === 4 ? -1 : synergy.stages.length - tier;
         const nextBonus = tier === 1 ? -1 : synergy.stages[currentBonusIndex + 1].amount;
         
-        const bonusesToDisplay = synergy.stages.slice(0, currentBonusIndex + 1).map((stage, index) => ({
+        const bonusesToDisplay = synergy.stages.slice(0, currentBonusIndex + 2).map((stage, index) => ({
             ...stage,
             isActive: synergy.exact ? index === currentBonusIndex : index <= currentBonusIndex
         }));

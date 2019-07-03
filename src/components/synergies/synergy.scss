@@ -106,6 +106,10 @@
             height: 0px;
             border-bottom: 1px solid $goldMedium;
         }
+
+        .synergy-bonus:not(.active) {
+            opacity: 0.5;
+        }
     }
 
     &:hover {
