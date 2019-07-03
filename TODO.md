@@ -1,12 +1,10 @@
 # TODO
 
 ## Features
-
-* Synergy Bonus Descriptions
 * Round Tracking (creeps, carousel, pvp)
 
 ## UI
-* Improve Sell UI
+
 * Synergies UI
 * Merge Animation
 * Improve board hex rendering

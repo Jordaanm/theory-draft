@@ -3,117 +3,315 @@
     "synergies": {
         "assassin": {
             "name": "Assassin",
-            "stages": [3,6],
+            "passive": "At the start of combat, Assassins stealth for a short duration and jump behind the farthest enemy.",
+            "base": "Assassins have bonus critical strike damage:",
+            "stages": [
+                {
+                    "amount": 3,
+                    "bonus": "+150%"
+                },
+                {
+                    "amount": 6,
+                    "bonus": "+350%"
+                }
+            ],
             "exact": false
         },
         "blademaster": {
             "name": "Blademaster",
-            "stages": [2,4],
+            "base": "Blademasters have a 45% chance to perform a multi-attack.",
+            "stages": [
+                {
+                    "amount": 3,
+                    "bonus": "Double Strike"
+                },
+                {
+                    "amount": 6,
+                    "bonus": "Triple Strike"
+                }],
             "exact": false
         },
         "brawler": {
             "name": "Brawler",
-            "stages": [2,4],
+            "base": "Brawlers gain additional maximum health.",
+            "stages": [
+                {
+                    "amount": 2,
+                    "bonus": "+300"
+                },
+                {
+                    "amount": 4,
+                    "bonus": "+700"
+                }],
             "exact": false
         },
         "demon": {
             "name": "Demon",
-            "stages": [2,4,6],
+            "base": "Demons have a chance on-hit to deplete the target's current mana and deal true damage equal to the mana depleted.",
+            "stages": [
+                {
+                    "amount": 2,
+                    "bonus": "40%"
+                },
+                {
+                    "amount": 4,
+                    "bonus": "60%"
+                },
+                {
+                    "amount": 6,
+                    "bonus": "80%"
+                }],
             "exact": false
         },
         "dragon": {
             "name": "Dragon",
-            "stages": [2],
+            "base": "",
+            "stages": [
+                {
+                    "amount": 2,
+                    "bonus": "All Dragons are immune to magic damage"
+                }],
             "exact": false
         },
         "elementalist": {
             "name": "Elementalist",
-            "stages": [3],
+            "passive": "Elementalists' basic attacks grant twice as much mana.",
+            "base": "",
+            "stages": [
+                {
+                    "amount": 3,
+                    "bonus": "Summon an Elemental adjacent to one of your Elementalists, in the closest empty hex to an enemy. This effect will fail if there are no valid spaces."
+                }],
             "exact": false
         },
         "exile": {
             "name": "Exile",
-            "stages": [1],
+            "base": "",
+            "stages": [
+                {
+                    "amount": 1,
+                    "bonus": "Exiles start combat with a shield equal to 100% of maximum health when not placed adjacent to an ally. The shield does not scale with Ability power icon ability power."
+                }],
             "exact": false
         },
         "glacial": {
             "name": "Glacial",
-            "stages": [2,4,6],
+            "base": "Glacials have a chance on-hit to Stun icon stun for 2 seconds.",
+            "stages": [
+                {
+                    "amount": 2,
+                    "bonus": "20%"
+                },
+                {
+                    "amount": 4,
+                    "bonus": "30%"
+                },
+                {
+                    "amount": 6,
+                    "bonus": "45%"
+                }],
             "exact": false
         },
         "guardian": {
             "name": "Guardian",
-            "stages": [2],
+            "base": "",
+            "stages": [
+                {
+                    "amount": 2,
+                    "bonus": "Guardians will grant 40 armor to all units that start adjacent to a Guardian"
+                }],
             "exact": false
         },
         "gunslinger": {
             "name": "Gunslinger",
-            "stages": [2,4],
+            "base": "Gunslingers have a 50% chance for their attacks to hit additional enemies",
+            "stages": [
+                {
+                    "amount": 2,
+                    "bonus": "One additional random enemy."
+                },
+                {
+                    "amount": 4,
+                    "bonus": "All enemies in range."
+                }],
             "exact": false
         },
         "imperial": {
             "name": "Imperial",
-            "stages": [2,4],
+            "base": "A select number of Imperials deal double damage",
+            "stages": [
+                {
+                    "amount": 2,
+                    "bonus": "One random Imperial"
+                },
+                {
+                    "amount": 4,
+                    "bonus": "All Imperials"
+                }
+            ],
             "exact": false
         },
         "knight": {
             "name": "Knight",
-            "stages": [2,4,6],
+            "base": "Knights ignore a flat amount of damage from basic attacks",
+            "stages": [
+                {
+                    "amount": 2,
+                    "bonus": "20"
+                },
+                {
+                    "amount": 4,
+                    "bonus": "40"
+                },
+                {
+                    "amount": 6,
+                    "bonus": "80"
+                }
+            ],
             "exact": false
         },
         "ninja": {
             "name": "Ninja",
-            "stages": [1, 4],
+            "base": "",
+            "stages": [
+                {
+                    "amount": 1,
+                    "bonus": "This Ninja gains 40% attack damage."
+                },
+                {
+                    "amount": 4,
+                    "bonus": "All Ninjas gain 80% attack damage."
+                }
+            ],
             "exact": true
         },
         "noble": {
             "name": "Noble",
-            "stages": [3,6],
+            "base": "Grants 100 armor and basic attacks restore 35 health on-hit to the following:",
+            "stages": [
+                {
+                    "amount": 3,
+                    "bonus": "A random ally"
+                },
+                {
+                    "amount": 6,
+                    "bonus": "The whole team"
+                }],
             "exact": false
         },
         "phantom": {
             "name": "Phantom",
-            "stages": [2],
+            "base": "",
+            "stages": [
+                {
+                    "amount": 2,
+                    "bonus": "A random enemy will begin combat with 100 health. Works against epic monsters, but deals less damag"
+                }],
             "exact": false
         },
         "pirate": {
             "name": "Pirate",
-            "stages": [3],
+            "base": "",
+            "stages": [
+                {
+                    "amount": 3,
+                    "bonus": " you begin each PvP round with a chest that grants between 0 and 4 gold."
+                }
+            ],
             "exact": false
         },
         "ranger": {
             "name": "Ranger",
-            "stages": [2,4],
+            "base": "Every 3 seconds, Rangers have a chance to gain double attack speed for 3 seconds.",
+            "stages": [
+                {
+                    "amount": 2,
+                    "bonus": "25%"
+                },
+                {
+                    "amount": 4,
+                    "bonus": "65%"
+                }
+            ],
             "exact": false
         },
         "robot": {
             "name": "Robot",
-            "stages": [1],
+            "base": "",
+            "stages": [
+                {
+                    "amount": 1,
+                    "bonus": "Robots begin combat with full mana."
+                }
+            ],
             "exact": false
         },
         "shapeshifter": {
             "name": "Shapeshifter",
-            "stages": [3],
+            "base": "",
+            "stages": [
+                {
+                    "amount": 3,
+                    "bonus": "While 3 Shapeshifters are in play, activating their Special Ability will grant +100% maximum health, as well as healing for the amount gained."
+                }
+            ],
             "exact": false
         },
         "sorcerer": {
             "name": "Sorcerer",
-            "stages": [3,6],
+            "passive": "Sorcerers' basic attacks grant twice as much mana",
+            "base": "Sorcerers grant Ability power icon ability power to their team.",
+            "stages": [
+                {
+                    "amount": 3,
+                    "bonus": "+35"
+                },
+                {
+                    "amount": 6,
+                    "bonus": "+100"
+                }                
+            ],
             "exact": false
         },
         "void": {
             "name": "Void",
-            "stages": [2, 4],
+            "base": "",
+            "stages": [
+                {
+                    "amount": 3,
+                    "bonus": "Your team gains 50% armor penetration"
+                }
+            ],
             "exact": false
         },
         "wild": {
             "name": "Wild",
-            "stages": [2,4],
+            "base": "Wildlings generate Fury on-hit, up to 5. Each stack gives 7% attack speed",
+            "stages": [
+                {
+                    "amount": 2,
+                    "bonus": "All Wild allies"
+                },
+                {
+                    "amount": 4,
+                    "bonus": "All allies"
+                }
+            ],
             "exact": false
         },
         "yordle": {
             "name": "Yordle",
-            "stages": [3,6],
+            "base": "Yordles have a chance to Blind icon dodge enemy attacks",
+            "stages": [
+                {
+                    "amount": 3,
+                    "bonus": "20%"
+                },
+                {
+                    "amount": 6,
+                    "bonus": "50%"
+                }
+            ],
             "exact": false
         }
     }

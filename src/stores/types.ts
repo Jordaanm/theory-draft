@@ -36,16 +36,25 @@ export interface Coords {
     y: number;
 }
 
+export interface SynergyStage {
+    amount: number,
+    bonus: string
+}
+
 export interface SynergyData {
     name: string;
-    stages: number[];
+    base: string;
+    passive: string;
+    stages: SynergyStage[];
     exact: boolean;
 }
 
 export interface Synergy {
     id: string;
     name: string;
-    stages: number[];
+    base: string;
+    passive: string;
+    stages: SynergyStage[];
     exact: boolean;
     count: number;
     tier: number;

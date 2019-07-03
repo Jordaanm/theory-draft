@@ -1,7 +1,7 @@
 import { observable, action, computed, autorun } from 'mobx';
 
 import { synergies } from '../data/synergies.json';
-import { Unit, ChampData, ChampCard, UnitSelection, BoardUnit, SynergyData, Synergy } from './types';
+import { Unit, ChampData, ChampCard, UnitSelection, BoardUnit, SynergyData, Synergy, SynergyStage } from './types';
 import { BOARD_WIDTH, BOARD_HEIGHT } from '../utils';
 import { DataStore } from './data-store';
 
@@ -222,10 +222,10 @@ export class DraftStore {
             const count = (this.unitSynergies as any)[key] as number;
 
             let medalIndex = -1;
-            synergyData.stages.forEach((x, index) => {
-                if (synergyData.exact && count === x) {
+            synergyData.stages.forEach((x: SynergyStage, index: number) => {
+                if (synergyData.exact && count === x.amount) {
                     medalIndex = index;
-                } else if(synergyData && count >= x) {
+                } else if(synergyData && count >= x.amount) {
                     medalIndex = index;
                 }
             });

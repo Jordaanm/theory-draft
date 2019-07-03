@@ -77,6 +77,43 @@
         }
     }
 
+    .tooltip {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: auto;
+        min-width: 15em;
+        transform: translate(5em, -50%);
+        .tooltip-icon {
+            margin-right: 0.25em;
+        }
+        .tooltip-name {
+            display: flex;
+            color: $tooltipTitleFG;
+        }
+        .tooltip-icon {
+            display: inline-block;
+            height: 1.5em;
+            width: 1.5em;
+        }
+        .bonus-section {
+            text-align: left;
+        }
+        .separator {
+            width: 100%;
+            margin: 0.25em 0.5em;
+            height: 0px;
+            border-bottom: 1px solid $goldMedium;
+        }
+    }
+
+    &:hover {
+        .tooltip {
+            display: block;
+        }
+    }
+
     @media screen and (max-width: 1023px) {
         .synergy-name { display: none }
     }
