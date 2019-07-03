@@ -1,11 +1,9 @@
 import { observable, action, computed, autorun } from 'mobx';
 
-import * as tiers from '../data/tiers.json';
-import * as levels from '../data/levels.json';
-import * as champions from '../data/champions.json';
 import { synergies } from '../data/synergies.json';
 import { Unit, ChampData, ChampCard, UnitSelection, BoardUnit, SynergyData, Synergy } from './types';
 import { BOARD_WIDTH, BOARD_HEIGHT } from '../utils';
+import { DataStore } from './data-store';
 
 
 export class DraftStore {
@@ -15,6 +13,8 @@ export class DraftStore {
     public static BENCH_SIZE = 9;
     public static XP_PER_ROUND = 2;
     public static MAXIMIM_INTEREST = 5;
+
+    dataStore: DataStore;
 
     @observable
     pool: ChampCard[];
@@ -52,7 +52,8 @@ export class DraftStore {
     @observable
     isSplashOpen = true;
 
-    constructor() {
+    constructor(dataStore: DataStore) {
+        this.dataStore = dataStore;
         this.pool = [];
         this.currentHand = [];
         this.nextLevelXp = this.getXpForLevelUp(this.level + 1);
@@ -183,7 +184,7 @@ export class DraftStore {
         const champIds: string[] = champs.map(champ => champ.id);
         const uniqueChampIds: string[] = [...new Set(champIds)];
 
-        const champClasses: string[] = uniqueChampIds.map(id => champions.champions.find(champ => champ.id === id)).flatMap(champ => champ === undefined ? [] : champ.classes).sort();
+        const champClasses: string[] = uniqueChampIds.map(id => this.dataStore.champions.find(champ => champ.id === id)).flatMap(champ => champ === undefined ? [] : champ.classes).sort();
         const classCounts: object = champClasses.reduce((obj, id) => {
             obj[id] = (obj[id] || 0) + 1;
             return obj;
@@ -356,8 +357,8 @@ export class DraftStore {
     @action
     public drawCard() {
         const key = `level${this.level}`;
-        
-        const odds = (levels.levels as any)[key].tierOdds;
+        const levelData = this.dataStore.levels.get(key);
+        const odds = levelData ? levelData.tierOdds : [0,0,0,0,0];
         const roll = Math.random();
 
         const cost = this.getCost(roll, odds);
@@ -374,7 +375,7 @@ export class DraftStore {
 
     @action
     public initializePool() {
-        this.pool = champions.champions.flatMap(champ => {
+        this.pool = this.dataStore.champions.flatMap(champ => {
             const poolSize = this.getInitialPoolSizeForChamp(champ.id);
             return [...Array(poolSize)].map((_, index) => ({
                 champ,
@@ -487,7 +488,7 @@ export class DraftStore {
 
         //Merge and upgrade the champs
         idsToMerge.forEach(id => {
-            const champ = (champions.champions as ChampData[]).find(c => c.id === id);
+            const champ = (this.dataStore.champions).find(c => c.id === id);
             
             let index = -1;
             //Remove all of that unit from bench
@@ -533,19 +534,21 @@ export class DraftStore {
     }
 
     private getXpForLevelUp(currentLevel: number) {
-        return (levels.levels as any)[`level${currentLevel}`].xp;
+        const level = (this.dataStore.levels).get(`level${currentLevel}`);
+        return level ? level.xp : 0;
     }
 
     private getInitialPoolSizeForChamp(id: string): number {
-        const champ = champions.champions.find(x => x.id === id);
+        const { unitsPerTier, champions} = this.dataStore;
+        const champ = champions.find(x => x.id === id);
         if(champ == null) { return 0; }
 
         switch(champ.cost) {
-            case 1: return tiers.unitsPerTier.tier1;
-            case 2: return tiers.unitsPerTier.tier2;
-            case 3: return tiers.unitsPerTier.tier3;
-            case 4: return tiers.unitsPerTier.tier4;
-            case 5: return tiers.unitsPerTier.tier5;
+            case 1: return unitsPerTier.get("tier1") || 0;
+            case 2: return unitsPerTier.get("tier2") || 0;
+            case 3: return unitsPerTier.get("tier3") || 0;
+            case 4: return unitsPerTier.get("tier4") || 0;
+            case 5: return unitsPerTier.get("tier5") || 0;
             default: return 0;
         }
     }
@@ -561,7 +564,7 @@ export class DraftStore {
     }
 
     private getUnitsByCost(cost: number) {
-        return champions.champions.filter(champ => champ.cost === cost);
+        return this.dataStore.champions.filter(champ => champ.cost === cost);
     }
 
 }

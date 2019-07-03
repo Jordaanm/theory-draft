@@ -42,7 +42,7 @@
         animation: oscillate 4s infinite ease-in-out;
     }
 
-    .inner {
+    &> .inner {
         // @include image-contain();
         // background-image: url('./island.png');
         position: absolute;
@@ -80,14 +80,25 @@
         min-height: 4em;
     }
 
-    .actions {
+    &> .inner > .actions {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;    
+        width: 50%;
+        align-self: center;
         .action {
+            height: 3em;
             border-color: #9e6c36;
             color: #9e6c36;
+            margin-bottom: 1em;
             background-color: rgba(255,255,255,0.5);
 
             &:hover {
                 background-color: rgba(255,255,255,1);
+            }
+
+            &.minor {
+                font-size: 0.7em;
             }
         }
     }

@@ -2,8 +2,6 @@
 
 ## Features
 
-* Override Datasets
-
 * Round Tracking (creeps, carousel, pvp)
 
 ## UI
@@ -16,7 +14,7 @@
 
 ## Known Bugs
 
-* Duplicate cards
+* Sell cards => Account for tiers;
 
 ### Shortcuts
 

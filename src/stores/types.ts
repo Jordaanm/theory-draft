@@ -51,3 +51,8 @@ export interface Synergy {
     tier: number;
     active: boolean;    
 }
+
+export interface LevelData {
+    xp: number;
+    tierOdds: number[]
+}

@@ -15,6 +15,7 @@ import { DraftStore } from '../stores/draft-store';
 import { Simulation } from './simulation/simulation';
 import { Hotkeys } from './hotkeys';
 import { SplashScreen } from './splash/splash';
+import { DataStore } from '../stores/data-store';
 
 @observer
 export class MainPage extends React.Component {
@@ -22,9 +23,12 @@ export class MainPage extends React.Component {
     @observable
     draftStore: DraftStore = null;
 
+    dataStore: DataStore = null;
+
     constructor(props) {
         super(props);
-        this.draftStore = new DraftStore();
+        this.dataStore = new DataStore();
+        this.draftStore = new DraftStore(this.dataStore);
     }
 
     public render() {
@@ -33,7 +37,7 @@ export class MainPage extends React.Component {
         if(showSp1ash) {
             return (
                 <section className="main-page">
-                    <SplashScreen begin={() => this.draftStore.start()} />
+                    <SplashScreen data={this.dataStore} begin={() => this.draftStore.start()} />
                 </section>
             );
         }
