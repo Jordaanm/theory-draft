@@ -43,11 +43,11 @@ export class MainPage extends React.Component {
 				<DndProvider backend={MultiBackend(HTML5toTouch)}>
                     <Provider draft={this.draftStore} >
                         <>
-                            <div className="split">
-                                <div className="split-section aside">
+                            <div className="board-container">
+                                <div className="sidebar">
                                     <Simulation />
                                 </div>
-                                <div className="split-section main">
+                                <div className="board-and-bench">
                                     <Board />
                                     <Bench />
                                 </div>

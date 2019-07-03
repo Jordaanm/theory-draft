@@ -30,6 +30,7 @@
 
 .synergy-item {
     border-radius: 5px;
+    padding-left: 2em;
     background-color: rgba(0,0,0,0.5);
     margin-bottom: 1em;
     display: flex;
@@ -74,6 +75,10 @@
             width: auto;
             mix-blend-mode: difference;
         }
+    }
+
+    @media screen and (max-width: 1023px) {
+        .synergy-name { display: none }
     }
 }
 

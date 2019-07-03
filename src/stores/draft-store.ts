@@ -1,4 +1,4 @@
-import { observable, action, computed } from 'mobx';
+import { observable, action, computed, autorun } from 'mobx';
 
 import * as tiers from '../data/tiers.json';
 import * as levels from '../data/levels.json';
@@ -164,6 +164,18 @@ export class DraftStore {
     public get placedUnitCount() {
         return this.boardUnits.filter(bu => bu.unit).length;
     }
+
+    @observable
+    showPlaced: boolean = false;
+
+    public showPlacedDisposer = autorun(() => {
+        if (this.placedUnitCount !== -1) {
+            this.showPlaced = true;
+            setTimeout(() => {
+                this.showPlaced = false;
+            }, 500);          
+        }
+    });
 
     @computed
     public get unitSynergies() {

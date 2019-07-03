@@ -2,14 +2,17 @@
 
 ## Features
 
+* Override Datasets
+
 * Round Tracking (creeps, carousel, pvp)
 
 ## UI
-
+* More Accurate Tooltip recreations
+* Synergy Bonus Descriptions
 * Improve Sell UI
-* Improve board hex rendering
 * Synergies UI
 * Merge Animation
+* Improve board hex rendering
 
 ## Known Bugs
 

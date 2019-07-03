@@ -10,5 +10,14 @@ section.simulation {
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
+        width: 100%;
+    }
+
+    .level-section {
+        opacity: 0.9;
+        transition: opacity 0.2s;
+        &.fade {
+            opacity: 0;
+        }
     }
 }

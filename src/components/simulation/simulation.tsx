@@ -15,18 +15,17 @@ interface SimulationProps {
 export class Simulation extends React.Component<SimulationProps> {
     public render() {
         const { draft } = this.props;
+        const { level, showPlaced, placedUnitCount } = draft;
         if (!draft) { return null; }
+
+        const fadeClass = showPlaced ? '' : 'fade';
 
         return (
             <section className="simulation">
                 <div className="inner">
                     <SynergiesBar draft={draft} />
-                    <div className="level-section">
-                        <span>Units Placed: {draft.placedUnitCount} / { draft.level}</span>
-                    </div>
-                    <div className="round-section">
-                        <span>Current Round: {draft.roundCount}</span>
-                        <button onClick={() => draft.nextRound()}>Next Round</button>
+                    <div className={`level-section ${fadeClass}`}>
+                        <span>Units Placed: { placedUnitCount } / { level }</span>
                     </div>
                 </div>
             </section>

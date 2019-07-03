@@ -13,8 +13,8 @@ interface TooltipProps {
 const renderRefreshTooltip = () => {
     return (
         <>
-            <div>Refresh your hand of cards</div>
-            <div><i>Hotkey: Shift + D</i></div>
+            <div>Refresh [Shift + D]</div>
+            <div><i>Draw a new hand of cards</i></div>
         </>
     );
 };
@@ -22,8 +22,8 @@ const renderRefreshTooltip = () => {
 const renderBuyXpTooltip = () => {
     return (
         <>
-            <div>Buy 4 XP</div>
-            <div><i>Hotkey: Shift + F</i></div>
+            <div>Buy XP [Shift + F]</div>
+            <div><i>Purchase 4 XP to help increase your level. Increasing your level allows you to place more units on the board</i></div>
         </>
     );
 };
@@ -36,14 +36,35 @@ const renderIncomeTooltip = (draft: DraftStore) => {
             <div>Interest (Max 5) <Coin /> +{draft.calculateInterest()}</div>
             <div>Win/Lost Streak <Coin /> +{draft.calculateStreakBonus()}</div>
         </>
-    )
-}
+    );
+};
+
+const renderNextRoundTooltip = (draft: DraftStore) => {
+    return (
+        <>
+            <div>Go to the next round [Shift + R]</div>
+            <div>Current Round: {draft.roundCount}</div>
+        </>
+    );
+};
+
+const renderLockHandTooltip = (draft: DraftStore) => {
+    return (
+        <>
+            <div>Toggle Lock [Shift + L]</div>
+            <div><i>Locking prevents a new hand of cards being drawn at the start of a new round.</i></div>
+            <div>Your hand is currently {draft.isHandLocked ? 'locked' : 'unlocked'}</div>
+        </>
+    );
+};
 
 const getContent = (tooltip: string, draft: DraftStore): string|React.ReactElement => {
     switch(tooltip) {
         case 'refresh': return renderRefreshTooltip();
         case 'income': return renderIncomeTooltip(draft);
         case 'buyXp': return renderBuyXpTooltip();
+        case 'nextRound': return renderNextRoundTooltip(draft);
+        case 'lock': return renderLockHandTooltip(draft);
         default: return null;
     }
 }

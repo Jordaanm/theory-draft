@@ -23,7 +23,7 @@ export class SynergyItem extends React.Component<SynergyItemProps> {
                    <img className="" alt="icon" src={`img/class-icons/${synergy.id}.png`} />
                 </div>
                <span>
-                {synergy.name}: {synergy.count}
+                <span className="synergy-name">{synergy.name}: </span>{synergy.count}
                 {nextBonus > 0 && <span> / {nextBonus}</span>}
                </span>
             </div>

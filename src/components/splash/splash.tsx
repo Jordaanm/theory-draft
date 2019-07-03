@@ -8,8 +8,9 @@ interface SplashScreenProps {
 export const SplashScreen: React.FC<SplashScreenProps> = ({ begin }) => {
     return (
         <div className="splash">
+            <div className="island"></div>  
             <div className="inner">
-                <h1>TheoryDraft for</h1>
+                <h1>Theory Draft for</h1>
                 <div className="tft-logo"></div>
                 <p> A Drafting Simulator and Practice Tool</p>
                 <div className="tft-end-cap"></div>

@@ -7,6 +7,7 @@ import { DraftSidebar } from './sidebar/draft-sidebar';
 import { DraftMain } from './draft-main';
 import { DraftSell } from './draft-sell';
 import { Tooltip } from './tooltip/tooltip';
+import { Coin } from '../shared/coin';
 
 interface DraftProps {
     draft?: DraftStore;
@@ -29,17 +30,36 @@ export class Draft extends React.Component<DraftProps, DraftState> {
 
     public render() {
         const { draft } = this.props;
-
+        const { gold } = draft;
         const showSell = draft.activeUnit !== undefined;
 
         const setTooltip = ((area: string) => this.setState({
             activeTooltip: area
         }));
 
+        const lockClass = draft.isHandLocked ? 'closed' : 'open';
+
         return (
             <section className="draft">
-                <DraftSidebar draft={draft} hideAboveBar={showSell} setTooltip={setTooltip} />
-                <DraftMain draft={draft} hideAboveBar={showSell} setTooltip={setTooltip} />              
+                {!showSell && <>
+                     <div className="draft-gold-bar above-bar" 
+                        onMouseEnter={() => setTooltip('income')}
+                        onMouseLeave={() => setTooltip(null)}
+                    >
+                        <div className="draft-gold">
+                            <Coin/>{gold}
+                        </div>
+                    </div>
+                    <div className="draft-lock above-bar"
+                        onClick={() => draft.toggleHandLock()}
+                        onMouseEnter={() => setTooltip('lock')}
+                        onMouseLeave={() => setTooltip(null)}
+                    >
+                        <div className={`lock ${lockClass}`}></div>
+                    </div> 
+                </>}
+                <DraftSidebar draft={draft} setTooltip={setTooltip} />
+                <DraftMain draft={draft} />              
                 {showSell && <DraftSell draft={draft} />}
                 <Tooltip tooltip={this.state.activeTooltip} draft={draft} />
             </section>            

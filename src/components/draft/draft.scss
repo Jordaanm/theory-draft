@@ -29,7 +29,7 @@
 
     .above-bar {
         position: absolute;
-        top: 0;
+        top: 0.5em;
         left: 50%;
         transform: translate(-50%, -100%);
         @extend %ui-border-gold-upper;
@@ -42,55 +42,13 @@
         @extend %text-outline;
     }
 
-    .draft-sidebar {
-        flex: 1;
-        max-width: 12em;
-        display: flex;
-        flex-direction: column;
-
-        border-right: none;
-        border-bottom-left-radius: 3px;
-        border-top-left-radius: 3px;
-        border-bottom-right-radius: 0px;
-        border-top-right-radius: 0px;
-    }
-
-    .draft-sidebar-items {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .sidebar-item {
-        flex: 1;
-        border:2px solid goldenrod;
-        margin: 0.5em;
-        padding: 0.1em;
-        background-color: black;
-
-        &.refresh {
-            border-color: $refresh-bg;
-        }
-
-        &.xp {
-            border-color: $xp-bg;
-        }
-        
-        .content {
-            flex: 1;
-        };
-        .icon {
-          width: 4em;
-          background-position: center;
-          background-size: contain;
-          background-repeat: no-repeat;
-        }
-    }
-
     .draft-lock {
         padding: 0.5em;
         padding-bottom: 0;
+        left: 10%;
         .lock {
-            height: 2em;
+            height: 2.0em;
+            margin-bottom: 0.5em;
             width: 4em;
             @extend %icon-bg;
             @include ui-border();
@@ -101,26 +59,74 @@
         }
     }
 
-    .draft-main {
-        flex: 4;
-        border-left:none;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-    }
-
     .draft-gold-bar {
+        left: 60%;
         padding: 0.5em;
         padding-bottom: 0;
         .draft-gold {
-            padding: 0.5em 1em;
+            padding: 0.25em 1em;
+            margin-bottom: 0.5em;
             @include ui-border;
         }
+    }
+
+    .draft-sidebar {
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+
+        border-right: none;
+        border-bottom-left-radius: 3px;
+        border-top-left-radius: 3px;
+        border-bottom-right-radius: 0px;
+        border-top-right-radius: 0px;
+        
+        .draft-sidebar-items {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-item {
+            flex: 1;
+            border:2px solid goldenrod;
+            margin: 0.5em;
+            padding: 0.1em;
+            background-color: black;
+    
+            &.refresh {
+                border-color: $refresh-bg;
+            }
+    
+            &.xp {
+                border-color: $xp-bg;
+            }
+            
+            .content {
+                flex: 1;
+                align-self: center;
+            };
+            .icon {
+              width: 4em;
+              background-position: center;
+              background-size: contain;
+              background-repeat: no-repeat;
+            }
+        }
+    }
+
+    .draft-main {
+        // flex: 4;
+        width: 80%;
+        border-left:none;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
     }
 
     .hand {
         display: flex;
         z-index: 1;
         height: 100%;
+        overflow-x: auto;
     }
 
     .refresh-panel {
@@ -129,6 +135,7 @@
         background-color: $refresh-bg;
         padding: 0.5em;
         display: flex;
+        height: 100%;
     }
 
     .xp-panel {
