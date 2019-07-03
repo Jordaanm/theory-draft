@@ -18,7 +18,6 @@ export class AdvancedScreen extends React.Component<AdvancedScreenProps, Advance
     
     constructor(props) {
         super(props);
-        const data: DataStore = props.data;
 
         this.state = {
             activeDataset: null,

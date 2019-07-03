@@ -328,6 +328,29 @@ export class DraftStore {
         //If there was a unit to sell, give gold;
         if(unitExists) {
             this.gold += this.getUnitSalePrice(unit);
+            this.returnUnitToPool(unit);
+        }
+    }
+
+    @action
+    private  returnUnitToPool(unit: Unit) {
+        const {champ} = unit;
+        const unitsInPool = this.pool.filter(x => x.champ.id === champ.id);
+        const guids = unitsInPool.map(x => x.guid);
+
+        let iterations = 3**(unit.tier - 1);
+        
+        let index = 0;
+        while(iterations > 0) {
+            const guid = `${champ.id}_${index}`;
+            if(!guids.includes(guid)) {
+                --iterations;
+                this.pool.push({
+                    guid,
+                    champ
+                });
+            }
+            ++index;
         }
     }
 
