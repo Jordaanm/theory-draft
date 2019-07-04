@@ -8,6 +8,7 @@ interface HotKeysProps{
 
 export const Hotkeys: React.FC<HotKeysProps> = ({draft}) =>{
     useHotkeys("shift+r", () => draft.nextRound());
+    useHotkeys("shift+p", () => draft.toggleTimer());
     useHotkeys('shift+d', () => draft.refreshHand());
     useHotkeys('shift+f', () => draft.buyXP());
     useHotkeys('shift+l', () => draft.toggleHandLock());

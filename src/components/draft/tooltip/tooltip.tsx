@@ -39,6 +39,15 @@ const renderIncomeTooltip = (draft: DraftStore) => {
     );
 };
 
+const renderTimerTooltip = (draft: DraftStore) => {
+    return (
+        <>
+            <div>Toggle the Timer [Shift + P]</div>
+            <div>{draft.isPaused ? 'Resmue' : 'Pause'} the Round Timer</div>
+        </>
+    );
+}
+
 const renderNextRoundTooltip = (draft: DraftStore) => {
     return (
         <>
@@ -64,6 +73,7 @@ const getContent = (tooltip: string, draft: DraftStore): string|React.ReactEleme
         case 'buyXp': return renderBuyXpTooltip();
         case 'nextRound': return renderNextRoundTooltip(draft);
         case 'lock': return renderLockHandTooltip(draft);
+        case 'timer': return renderTimerTooltip(draft);
         default: return null;
     }
 }

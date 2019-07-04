@@ -32,7 +32,10 @@ export class DraftSidebar extends React.Component<DraftSidebarProps> {
                     />
                     <NextRoundPanel 
                         nextRound={() => draft.nextRound()}
+                        isPaused={draft.isPaused}
                         setTooltip={setTooltip}
+                        timer={draft.roundTimer}
+                        currentRound={draft.roundCount}
                     />
                 </div>
             </div>

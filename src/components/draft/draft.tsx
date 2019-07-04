@@ -38,7 +38,7 @@ export class Draft extends React.Component<DraftProps, DraftState> {
         }));
 
         const lockClass = draft.isHandLocked ? 'closed' : 'open';
-
+        const timerClass = draft.isPaused ? 'pause' : 'play';
         return (
             <section className="draft">
                 {!showSell && <>
@@ -48,6 +48,15 @@ export class Draft extends React.Component<DraftProps, DraftState> {
                     >
                         <div className="draft-gold">
                             <Coin/>{gold}
+                        </div>
+                    </div>
+                     <div className="draft-timer-bar above-bar" 
+                        onClick={() => draft.toggleTimer()}
+                        onMouseEnter={() => setTooltip('timer')}
+                        onMouseLeave={() => setTooltip(null)}
+                    >
+                        <div className="timer-bar">                    
+                            <div className={`timer-icon ${timerClass}`}></div>
                         </div>
                     </div>
                     <div className="draft-lock above-bar"

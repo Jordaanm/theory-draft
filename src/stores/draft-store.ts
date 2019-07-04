@@ -13,6 +13,7 @@ export class DraftStore {
     public static BENCH_SIZE = 9;
     public static XP_PER_ROUND = 2;
     public static MAXIMIM_INTEREST = 5;
+    public static TIME_PER_ROUND = 15;//seconds
 
     dataStore: DataStore;
 
@@ -71,6 +72,8 @@ export class DraftStore {
         this.drawHand();
         this.giveRandomStartingUnit();
         this.isSplashOpen = false;
+
+        this.startTimer();
     }
 
  /*****************************
@@ -252,14 +255,48 @@ export class DraftStore {
 
     @action
     public nextRound() {
-        this.roundCount += 1;      
+        this.roundCount += 1;   
+        this.roundTimer = DraftStore.TIME_PER_ROUND;   
+
         this.gold += this.calculateIncome();
         this.addXP(DraftStore.XP_PER_ROUND);
         if(!this.isHandLocked) {
             this.gold += DraftStore.REFRESH_COST;
             this.refreshHand();    
         }
+    }
 
+    @observable
+    roundTimer: number = DraftStore.TIME_PER_ROUND;
+
+    @observable
+    isPaused: boolean = true;
+
+    private roundInterval: any = null;
+
+    @action
+    public startTimer() {
+        this.isPaused = false;
+
+        if(this.roundInterval) {
+            clearInterval(this.roundInterval);
+        }
+
+        this.roundTimer = DraftStore.TIME_PER_ROUND;
+
+        this.roundInterval = setInterval(() => {
+            if(this.isPaused) { return; }
+            --this.roundTimer;
+
+            if(this.roundTimer <= 0) {
+                this.nextRound();
+            }
+        }, 1000);
+    }
+
+    @action
+    public toggleTimer() {
+        this.isPaused = !this.isPaused;
     }
 
     public calculateIncome(): number {
@@ -301,7 +338,7 @@ export class DraftStore {
             }
         });
 
-        this.currentHand = [];
+        this.currentHand.splice(0, 5);
 
         this.drawHand();
         this.gold -= DraftStore.REFRESH_COST;

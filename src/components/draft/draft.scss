@@ -45,7 +45,7 @@
     .draft-lock {
         padding: 0.5em;
         padding-bottom: 0;
-        left: 10%;
+        left: 5%;
         .lock {
             height: 2.0em;
             margin-bottom: 0.5em;
@@ -59,6 +59,22 @@
         }
     }
 
+    .draft-timer-bar {
+        padding: 0.5em;
+        padding-bottom: 0;
+        left: 15%;
+        .timer-icon {
+            height: 2.0em;
+            margin-bottom: 0.5em;
+            width: 4em;
+            @extend %icon-bg;
+            @include ui-border();
+            background-image: url('../../img/play.png');
+            &.pause {
+                background-image: url('../../img/pause.png');
+            }
+        }
+    }
     .draft-gold-bar {
         left: 60%;
         padding: 0.5em;
@@ -129,6 +145,11 @@
         overflow-x: auto;
     }
 
+    .next-round-panel {
+        display: flex;
+        padding: 0.5em;
+        background-color: #103435;
+    }
     .refresh-panel {
         color: white;
         @extend %text-outline;
