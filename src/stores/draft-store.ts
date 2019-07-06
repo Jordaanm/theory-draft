@@ -2,7 +2,6 @@ import { observable, action, computed, autorun } from 'mobx';
 
 import { synergies } from '../data/synergies.json';
 import { Unit, ChampData, ChampCard, UnitSelection, BoardUnit, SynergyData, Synergy, SynergyStage } from './types';
-import { BOARD_WIDTH, BOARD_HEIGHT } from '../utils';
 import { DataStore } from './data-store';
 
 
@@ -11,9 +10,10 @@ export class DraftStore {
     public static REFRESH_COST = 2;
     public static BUY_XP_COST = 4;
     public static BENCH_SIZE = 9;
+    public static BOARD_SIZE = 10;
     public static XP_PER_ROUND = 2;
     public static MAXIMIM_INTEREST = 5;
-    public static TIME_PER_ROUND = 15;//seconds
+    public static TIME_PER_ROUND = 30;//seconds
 
     dataStore: DataStore;
 
@@ -23,11 +23,20 @@ export class DraftStore {
     @observable
     currentHand: (ChampCard | null)[];
 
+    //All Units 0-8 = Bench, 9+ = Board
     @observable
-    benchedUnits: (Unit | null)[] = [];
+    allUnits: BoardUnit[] = [];
 
-    @observable
-    boardUnits: BoardUnit[] = [];
+    @computed
+    get benchedUnits(): BoardUnit[] {
+        return this.allUnits.slice(0,DraftStore.BENCH_SIZE);
+    }
+
+    @computed 
+    get boardUnits(): BoardUnit[] {
+        return this.allUnits.slice(DraftStore.BENCH_SIZE);
+    }
+
 
     @observable
     xp: number = 0;
@@ -58,16 +67,15 @@ export class DraftStore {
         this.pool = [];
         this.currentHand = [];
         this.nextLevelXp = this.getXpForLevelUp(this.level + 1);
-        this.benchedUnits = [...Array(DraftStore.BENCH_SIZE)].fill(null);
-        this.boardUnits = [...Array(BOARD_WIDTH * BOARD_HEIGHT)].map(
-            (_, index) => ({ unit: undefined, index } as BoardUnit)
+
+        this.allUnits = [...Array(DraftStore.BOARD_SIZE + DraftStore.BENCH_SIZE)].map(
+            (_, index) => ({unit: undefined, index})
         );
     }
 
     
     @action
-    public start() {
-        console.log("Lets Go!");     
+    public start() { 
         this.initializePool();
         this.drawHand();
         this.giveRandomStartingUnit();
@@ -92,7 +100,7 @@ export class DraftStore {
         this.pool.splice(poolIndex, 1);
         
         //Add to bench
-        this.benchedUnits[0] = {
+        this.allUnits[0].unit = {
             tier: 1,
             champ
         };
@@ -103,7 +111,6 @@ export class DraftStore {
         return selA !== undefined
             && selB !== undefined
             && selB.index === selA.index
-            && selB.isBenched === selA.isBenched        
     }
 
     @action unitPickedUp(selection: UnitSelection) {
@@ -116,68 +123,38 @@ export class DraftStore {
 
     @action
     public swapUnits(source: UnitSelection, dest: UnitSelection) {
-        if(source.isBenched) {
-            this.moveUnitToBench(dest.unit, source.index);
-        } else {
-            this.moveUnitToBoard(dest.unit, source.index);
-        }
-
-        if(dest.isBenched) {
-             this.moveUnitToBench(source.unit, dest.index);
-         } else {
-            this.moveUnitToBoard(source.unit, dest.index);
-         }
+        this.moveUnit(dest.unit, source.index);
+        this.moveUnit(source.unit, dest.index);
     }
 
-    @action
-    public shiftUnitToBench(selection: UnitSelection, index: number) {
-        //Only if bench is empty
-        if(this.benchedUnits[index] !== null) { 
+    @action shiftUnitToSlot(boardUnit: BoardUnit, index: number) {
+
+        console.log("DraftStore::shiftUnitToSlot", boardUnit, index);
+
+        //Only if the slot is empty
+        if (this.allUnits[index].unit !== undefined || !boardUnit.unit) {
             return;
         }
 
-        //Remove unit from current space
-        this.clearUnitFromCurrentSpace(selection);
-
-        //Move into new space
-        this.moveUnitToBench(selection.unit, index)
-    }
-
-    @action
-    public shiftUnitToBoard(selection: UnitSelection, index: number) {
-        //Only if board space is empty
-        if(this.boardUnits[index].unit !== undefined) { 
+        //If it's to be placed on the board, enforece the unit limit
+        if(index >= DraftStore.BENCH_SIZE && this.placedUnitCount >= this.level) {
             return;
         }
 
-        if(this.placedUnitCount >= this.level) {
-            return;
-        }
+        //Remove unit from current slot
+        this.clearUnitFromSlot(boardUnit);
 
-        //Remove unit from current space
-        this.clearUnitFromCurrentSpace(selection);
-
-        //Move into new space
-        this.moveUnitToBoard(selection.unit, index)
+        //Place into new slot
+        this.allUnits[index].unit = boardUnit.unit;
     }
 
-    private clearUnitFromCurrentSpace(selection: UnitSelection) {
-        if(selection.isBenched) {
-            this.benchedUnits[selection.index] = null;
-        } else {
-            this.boardUnits[selection.index].unit = undefined;
-        }
+    private clearUnitFromSlot(boardUnit: BoardUnit) {
+        this.allUnits[boardUnit.index].unit = undefined;
     }
 
     @action
-    private moveUnitToBench(unit: Unit, index: number) {
-        this.benchedUnits[index] = unit;
-    }
-
-    @action
-    private moveUnitToBoard(unit: Unit, index: number) {
-        const newBoardUnit = { index, unit } as BoardUnit;
-        this.boardUnits[index] = newBoardUnit;
+    private moveUnit(unit: Unit, index: number) {
+        this.allUnits[index].unit = unit;
     }
 
 /***************************
@@ -366,24 +343,11 @@ export class DraftStore {
 
     @action
     public sellUnit(unitSelection: UnitSelection) {
-        let unitExists = false;
-        const { unit, index, isBenched } = unitSelection;
+        const { unit, index } = unitSelection;
 
-        //Remove Unit;
-        if(isBenched) {
-            if(this.benchedUnits[index] !== null) {
-                this.benchedUnits[index] = null;
-                unitExists = true;
-            }
-        } else {
-            if(this.boardUnits[index].unit !== undefined) {
-                this.boardUnits[index].unit = undefined;
-                unitExists = true;
-            }
-        }
-
-        //If there was a unit to sell, give gold;
-        if(unitExists) {
+        //If there is a unit to sell, give gold;
+        if(this.allUnits[index].unit !== undefined) {
+            this.allUnits[index].unit = undefined;
             this.gold += this.getUnitSalePrice(unit);
             this.returnUnitToPool(unit);
         }
@@ -412,18 +376,7 @@ export class DraftStore {
     }
 
     public getUnitSalePrice(unit: Unit): number {
-        let tierBonus = 0;
-        switch (unit.tier) {
-            case 2: {
-                tierBonus = 2;
-                break; 
-            }
-            case 3: {
-                tierBonus = 4;
-                break;
-            }
-        }
-
+        let tierBonus = (unit.tier - 1) * 2;
         return unit.champ.cost + tierBonus;
     }
 
@@ -490,22 +443,18 @@ export class DraftStore {
         */
 
         //Add unit to bench
-        const firstEmpty = this.benchedUnits.findIndex(x => x === null);
+        const firstEmpty = this.benchedUnits.findIndex(x => x.unit === undefined);
         //Case 1
         if(firstEmpty >= 0) {
-            this.benchedUnits[firstEmpty] = ({
+            this.allUnits[firstEmpty].unit = ({
                 tier: 1,
                 champ
             });
 
         } else {
-            const matchingBenchUnits = this.benchedUnits
-                .filter(unit => unit !== null && unit.tier === 1 && unit.champ.id === champ.id);
-            const matchingBoardUnits = this.boardUnits
-                .map(bu => bu.unit || null)
-                .filter(unit => unit !== null && unit.tier === 1 && unit.champ.id === champ.id);
-
-            const matchingUnits = [...matchingBenchUnits, ...matchingBoardUnits];
+            const matchingUnits = this.allUnits
+                .map(bu => bu.unit)
+                .filter(unit => unit !== undefined && unit.tier === 1 && unit.champ.id === champ.id);
 
             const availableToBuy = this.currentHand
                 .filter(card => card != null && card.champ.id === champ.id) as ChampCard[];
@@ -547,7 +496,8 @@ export class DraftStore {
     private mergeUnits(tier: number = 1, extraCards: ChampCard[] = []) {
         const extraUnits: Unit[] = extraCards.map(card => ({champ: card.champ, tier: 1}));
         const boardUnits: (Unit|null)[] = this.boardUnits.map(bu => bu.unit || null);
-        const totalUnits: (Unit|null)[] = [...this.benchedUnits, ...boardUnits, ...extraUnits];
+        const benchedUnits: (Unit|null)[] = this.benchedUnits.map(bu => bu.unit || null);
+        const totalUnits: (Unit|null)[] = [...benchedUnits, ...boardUnits, ...extraUnits];
 
         const onlyCurrentTier = totalUnits.filter(c => c!== null && c.tier === tier) as Unit[];
         
@@ -570,38 +520,30 @@ export class DraftStore {
         idsToMerge.forEach(id => {
             const champ = (this.dataStore.champions).find(c => c.id === id);
             
+            //Remove all of that unit from bench and board
             let index = -1;
-            //Remove all of that unit from bench
-            while(-1 !== (index = this.benchedUnits.findIndex(unit => 
-                unit !== null &&
-                unit.champ.id === id &&
-                unit.tier === tier
-            ))) {
-                this.benchedUnits[index] = null;
-            }
-
-            //Remove all of that unit from the board
-            index = -1;
             let boardIndex = -1;
-            while(-1 !== (index = this.boardUnits.findIndex(boardUnit => 
+            while(-1 !== (index = this.allUnits.findIndex(boardUnit => 
                 boardUnit.unit !== undefined &&
                 boardUnit.unit.champ.id === id &&
                 boardUnit.unit.tier === tier
             ))) {
-                this.boardUnits[index].unit = undefined;
-                boardIndex = index;
+                this.allUnits[index].unit = undefined;
+                if (index >= DraftStore.BENCH_SIZE) {
+                    boardIndex = index;
+                }
             }
 
             //Add upgraded unit
             //Priorise returning to board
             if(boardIndex !== -1) {
-                this.boardUnits[boardIndex].unit = {
+                this.allUnits[boardIndex].unit = {
                     tier: tier + 1,
                     champ
                 } as Unit;
             } else {
-                const firstEmpty = this.benchedUnits.findIndex(x => x === null);
-                this.benchedUnits[firstEmpty] = {
+                const firstEmpty = this.allUnits.findIndex(x => x.unit === undefined);
+                this.allUnits[firstEmpty].unit = {
                     tier: tier + 1,
                     champ
                 } as Unit;    

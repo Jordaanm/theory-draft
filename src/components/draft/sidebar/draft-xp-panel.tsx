@@ -7,7 +7,7 @@ interface BuyXpPanelProps {
     xp: number;
     nextLevelXp: number;
     level: number;
-    setTooltip: (area?: string) => void;
+    setTooltip: (area: string) => void;
 }
 
 export const BuyXpPanel: React.FC<BuyXpPanelProps> = ({ buyXP, cost, xp, nextLevelXp, level, setTooltip }) => {
@@ -19,7 +19,7 @@ export const BuyXpPanel: React.FC<BuyXpPanelProps> = ({ buyXP, cost, xp, nextLev
 
     return (
         <div className="sidebar-item xp clickable" onClick={() => buyXP()}>
-            <div className="xp-panel" onMouseEnter={() => setTooltip('buyXp')} onMouseLeave={() => setTooltip(null)}>
+            <div className="xp-panel" onMouseEnter={() => setTooltip('buyXp')} onMouseLeave={() => setTooltip("")}>
                 <div className="details">
                     <div className="content">
                         <div className="label">Buy XP</div>

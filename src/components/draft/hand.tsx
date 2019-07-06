@@ -6,7 +6,7 @@ import { ChampCard } from '../../stores/types';
 
 
 interface HandProps {
-    hand: ChampCard[];
+    hand: (ChampCard|null)[];
     action: (card: ChampCard) => void;
 }
 
@@ -19,7 +19,7 @@ interface HandProps {
 
         return (
             <div className="hand">
-                {hand.map( (card, index) => Boolean(card) ? 
+                {hand.map( (card, index) => card !== null ? 
                     <Card card={card} key={card.guid} action={action}/> :
                     <BlankCard key={index + '-blank'} />
                 )}

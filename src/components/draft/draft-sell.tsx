@@ -46,8 +46,7 @@ export const DraftSell: React.FC<DraftSellProps> = ({
 const onDrop = (item: any, draft: DraftStore) => {
     const selection = {
         unit: item.unit,
-        index: item.index,
-        isBenched: item.type === Types.BENCH
+        index: item.index
     } as UnitSelection;
     draft.sellUnit(selection);
 };

@@ -5,7 +5,6 @@ import { DraftStore } from '../../stores/draft-store';
 import "./board.scss";
 import { BOARD_HEIGHT, BOARD_WIDTH } from '../../utils';
 import { BoardUnit, UnitSelection, Unit } from '../../stores/types';
-import { Types } from '../../stores/drag-drop';
 
 interface BoardProps {
     draft?: DraftStore;
@@ -45,8 +44,8 @@ export class Board extends React.Component<BoardProps> {
     private renderRow(boardUnits: BoardUnit[], row: number) {
         const {draft} = this.props;
         const { activeUnit } = draft;
-        const isOdd = row%2 === 1;
-        const activeBoardIndex = (activeUnit !== undefined && !activeUnit.isBenched) ? activeUnit.index : -1;
+        const isOdd = row % 2 === 1;
+        const activeBoardIndex = (activeUnit !== undefined && activeUnit.index >= DraftStore.BENCH_SIZE) ? activeUnit.index : -1;
 
         return (
             <div className="board__row" key={row}>
@@ -70,8 +69,7 @@ export class Board extends React.Component<BoardProps> {
         const { draft } = this.props;
         draft.unitPickedUp({
             unit,
-            index,
-            isBenched: false
+            index
         } as UnitSelection);
         
     }
@@ -83,22 +81,20 @@ export class Board extends React.Component<BoardProps> {
 
     private onDrop(source, dest) {
         const { draft } = this.props;
-        
+        console.log("onDrop", source, dest);
         const selectionA = {
             unit: source.unit,
-            index: source.index,
-            isBenched: source.type === Types.BENCH
+            index: source.index
         } as UnitSelection;
 
         const selectionB = {
             unit: dest.unit,
-            index: dest.index,
-            isBenched: dest.type === Types.BENCH
+            index: dest.index
         } as UnitSelection;
 
         //Is destination empty
         if(!dest.unit) {
-            draft.shiftUnitToBoard(selectionA, dest.index);
+            draft.shiftUnitToSlot(selectionA, dest.index);
         } else {
             draft.swapUnits(selectionA, selectionB);
         }

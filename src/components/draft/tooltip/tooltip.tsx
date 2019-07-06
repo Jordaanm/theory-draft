@@ -66,7 +66,7 @@ const renderLockHandTooltip = (draft: DraftStore) => {
     );
 };
 
-const getContent = (tooltip: string, draft: DraftStore): string|React.ReactElement => {
+const getContent = (tooltip: string, draft: DraftStore): string|React.ReactElement|null => {
     switch(tooltip) {
         case 'refresh': return renderRefreshTooltip();
         case 'income': return renderIncomeTooltip(draft);

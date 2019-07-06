@@ -10,21 +10,21 @@ import { Tooltip } from './tooltip/tooltip';
 import { Coin } from '../shared/coin';
 
 interface DraftProps {
-    draft?: DraftStore;
+    draft: DraftStore;
 }
 
 interface DraftState {
-    activeTooltip?: string;
+    activeTooltip: string;
 }
 
 @inject('draft')
 @observer
 export class Draft extends React.Component<DraftProps, DraftState> {
     
-    public constructor(props) {
+    public constructor(props: any) {
         super(props);
         this.state = {
-            activeTooltip: null
+            activeTooltip: ""
         };
     }
 
@@ -44,7 +44,7 @@ export class Draft extends React.Component<DraftProps, DraftState> {
                 {!showSell && <>
                      <div className="draft-gold-bar above-bar" 
                         onMouseEnter={() => setTooltip('income')}
-                        onMouseLeave={() => setTooltip(null)}
+                        onMouseLeave={() => setTooltip("")}
                     >
                         <div className="draft-gold">
                             <Coin/>{gold}
@@ -53,7 +53,7 @@ export class Draft extends React.Component<DraftProps, DraftState> {
                      <div className="draft-timer-bar above-bar" 
                         onClick={() => draft.toggleTimer()}
                         onMouseEnter={() => setTooltip('timer')}
-                        onMouseLeave={() => setTooltip(null)}
+                        onMouseLeave={() => setTooltip("")}
                     >
                         <div className="timer-bar">                    
                             <div className={`timer-icon ${timerClass}`}></div>
@@ -62,7 +62,7 @@ export class Draft extends React.Component<DraftProps, DraftState> {
                     <div className="draft-lock above-bar"
                         onClick={() => draft.toggleHandLock()}
                         onMouseEnter={() => setTooltip('lock')}
-                        onMouseLeave={() => setTooltip(null)}
+                        onMouseLeave={() => setTooltip("")}
                     >
                         <div className={`lock ${lockClass}`}></div>
                     </div> 

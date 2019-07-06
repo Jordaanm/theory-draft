@@ -4,7 +4,6 @@ import './bench.scss';
 import { inject, observer } from 'mobx-react';
 import { DraftStore } from '../../stores/draft-store';
 import { UnitSelection, Unit } from '../../stores/types';
-import { Types } from '../../stores/drag-drop';
 interface BenchProps {
     draft?: DraftStore;
 }
@@ -15,11 +14,11 @@ export class Bench extends React.Component<BenchProps> {
     public render() {
         const { draft } = this.props;
         const { benchedUnits, activeUnit } = draft;
-        const activeBenchIndex = (activeUnit !== undefined && activeUnit.isBenched) ? activeUnit.index : -1;
+        const activeBenchIndex = (activeUnit !== undefined && activeUnit.index < DraftStore.BENCH_SIZE) ? activeUnit.index : -1;
 
         return (
             <div className="bench">
-                {benchedUnits.map((unit, index) => <BenchSlot
+                {benchedUnits.map(({unit, index}) => <BenchSlot
                     unit={unit}
                     index={index}
                     isActive={activeBenchIndex === index}
@@ -36,8 +35,7 @@ export class Bench extends React.Component<BenchProps> {
         const { draft } = this.props;
         draft.unitPickedUp({
             unit,
-            index,
-            isBenched: true
+            index
         } as UnitSelection);
         
     }
@@ -52,18 +50,16 @@ export class Bench extends React.Component<BenchProps> {
         
         const selectionA = {
             unit: source.unit,
-            index: source.index,
-            isBenched: source.type === Types.BENCH
+            index: source.index
         } as UnitSelection;
         const selectionB = {
             unit: dest.unit,
-            index: dest.index,
-            isBenched: dest.type === Types.BENCH
+            index: dest.index
         } as UnitSelection;
 
         //Is destination empty
         if(!dest.unit) {
-            draft.shiftUnitToBench(selectionA, dest.index);
+            draft.shiftUnitToSlot(selectionA, dest.index);
         } else {
             draft.swapUnits(selectionA, selectionB);
         }
