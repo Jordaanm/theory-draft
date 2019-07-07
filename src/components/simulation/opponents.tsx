@@ -28,7 +28,11 @@ export class Opponents extends React.Component<OpponentsProps> {
     }
 
     public renderOpponent(opponent: Summoner, index: number) {
-        const units = opponent.allUnits.filter(x => x.unit !== undefined).map(x => x.unit);
+        const units = opponent.allUnits
+            .filter(x => x.unit !== undefined)
+            .map(x => x.unit)
+            .sort((a,b) => b.champ.name < a.champ.name ? 1 : -1)
+            .sort((a, b) => b.tier - a.tier);
         return (
             <div className="summoner" key={index}>
                 <div className="summoner-health">{opponent.health}</div>

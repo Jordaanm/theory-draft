@@ -56,14 +56,16 @@
     }
 
     .summoner__units {
-        display: flex;
-        flex-direction: column; 
+        display: none;
+        flex-direction: row; 
         flex-wrap: wrap;
         position: absolute;
-        left: -14em;
+        left: -1em;
         top: 25%;
-        transform: translate(100%, 0);
+        transform: translate(-100%, 0);
         max-height: 25em;
+        width: 48em;
+        align-content: flex-end
     }
 
     .summoner__unit {
@@ -71,7 +73,7 @@
         width: 6em;
     }
 
-    &:not(:hover) .summoner__units {
-        display: none;
+    &:hover .summoner__units {
+        display: flex;
     }
 }

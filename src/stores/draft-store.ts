@@ -1,9 +1,10 @@
 import { observable, action } from 'mobx';
-
+import { AI } from './ai';
 import { Unit, ChampCard, UnitSelection } from './types';
 import { DataStore } from './data-store';
 import { Summoner } from './summoner';
 
+const ai = new AI();
 
 export class DraftStore {
 
@@ -88,7 +89,12 @@ export class DraftStore {
         this.roundCount += 1;   
         this.roundTimer = DraftStore.TIME_PER_ROUND;   
 
-        this.summoners.forEach(s => s.nextRound());
+        this.summoners.forEach((summoner, index) => {
+            summoner.nextRound();
+            if(index > 0) {
+                ai.purchaseUnit(summoner);
+            }
+        });
     }
 
     @observable
