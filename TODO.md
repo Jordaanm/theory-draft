@@ -4,7 +4,8 @@
 * Round Tracking (creeps, carousel, pvp)
 
 ## UI
-
+* Better colors for unit rarity
+* Improve gradient on cards
 * Synergies UI
 * Merge Animation
 * Improve board hex rendering
