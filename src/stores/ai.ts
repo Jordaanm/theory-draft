@@ -10,20 +10,21 @@ interface CardPref {
 export class AI {
     purchaseUnit(summoner: Summoner): void {
         //Limit to affordable cards
-        const potentialCards = summoner.currentHand
-            .filter(x => x !== null && x.champ.cost < summoner.gold);
+        let potentialCards = summoner.currentHand
+            .filter(x => x !== null && x.champ.cost < summoner.gold) as ChampCard[];
     
         const spendingLimit = this.willingToSpend(summoner);
         let totalSpent = 0;
         
         while (potentialCards.length > 0 && totalSpent < spendingLimit ) {
-            //Purchase Random Card
-            const index = Math.floor(Math.random() * potentialCards.length);
-            const card = potentialCards.splice(index, 1)[0];
+            const card = this.getPurchasePreference(potentialCards, summoner, 0);
         
             if (card !== null) {
                 summoner.buyCard(card);
                 totalSpent += card.champ.cost;
+                potentialCards = potentialCards.filter(x => x.guid !== card.guid);
+            } else {
+                break;
             }
         }
 
@@ -47,8 +48,8 @@ export class AI {
     getPurchasePreference(cards: ChampCard[], summoner: Summoner, threshold: number): ChampCard|null {
 
         //Add weights for:
-        // +2 Has this champ at Tier 2
         // +1 Has this champ at Tier 1
+        // +3 Has this champ at Tier 2
         // -10 Has this champ at Tier 3
         // +1 Per synergy bonus
         // +2 For a 5 cost
@@ -101,7 +102,7 @@ export class AI {
 
         switch(topTier) {
             case 1: return 1;
-            case 2: return 2;
+            case 2: return 3;
             case 3: return -10;
             default: return 0;
         }

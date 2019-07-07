@@ -37,7 +37,8 @@ export class DraftStore {
     constructor(dataStore: DataStore) {
         this.dataStore = dataStore;
         this.pool = [];
-        this.summoners = [...Array(DraftStore.INITIAL_PLAYER_COUNT)].map(_ => new Summoner(this));
+        this.summoners = [...Array(DraftStore.INITIAL_PLAYER_COUNT)]
+            .map((_, index) => new Summoner(this, index === 0));
         //First summoner is always the player;
         this.player = this.summoners[0]; 
     }
@@ -161,16 +162,34 @@ export class DraftStore {
     public drawCard(summoner: Summoner) {
         const key = `level${summoner.level}`;
         const levelData = this.dataStore.levels.get(key);
+
+        const availableLevels = [...new Set(this.pool.map(x => x.champ.cost))];
+        
         const odds = levelData ? levelData.tierOdds : [0,0,0,0,0];
+
+        const oddsTotal = odds.map((x, index) => availableLevels
+            .includes(index + 1) ? x : 0)
+            .reduce((a, b) => a + b, 0);
+
+        const multiplier = 1 / oddsTotal;
+
+        const adjustedOdds = odds.map((x, index) => availableLevels
+            .includes(index + 1) ? x * multiplier : 0);
+
         const roll = Math.random();
 
-        const cost = this.getCost(roll, odds);
+        const cost = this.getCost(roll, adjustedOdds);
 
         const cardSet = this.pool.filter(x => x.champ.cost === cost);
+
+        if(cardSet.length === 0) {
+            return null;
+        }
+
         const index = Math.floor(Math.random() * cardSet.length);
         const card = cardSet[index];
 
-        const indexToRemove = this.pool.findIndex(c => c.guid === card.guid);
+        const indexToRemove = this.pool.findIndex(c => c !== null && c.guid === card.guid);
         this.pool.splice(indexToRemove, 1);
         
         return card;

@@ -47,12 +47,16 @@ export class Summoner {
     public get isAlive() {
         return this.health > 0;
     }
+
+    @observable
+    isPlayer: boolean;
     
-    constructor(draft: DraftStore) {
+    constructor(draft: DraftStore, isPlayer: boolean) {
         this.draft = draft;
 
         this.currentHand = [];
         this.nextLevelXp = this.getXpForLevelUp(this.level + 1);
+        this.isPlayer = isPlayer;
 
         this.allUnits = [...Array(DraftStore.BOARD_SIZE + DraftStore.BENCH_SIZE)].map(
             (_, index) => ({unit: undefined, index})
@@ -178,14 +182,17 @@ public calculatePassiveIncome(): number {
 
     @action
     public drawHand() {
-        while(this.currentHand.length < 5) {
+        while(this.currentHand.length < 5 && this.draft.pool.length > 0) {
             this.drawCard();
         }
     }
 
     @action
     public drawCard() {
-        const card = this.draft.drawCard(this);     
+        const card = this.draft.drawCard(this);
+        if (card === null) {
+            return;
+        }
         this.currentHand.push(card);
     }
     
