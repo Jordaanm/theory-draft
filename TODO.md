@@ -2,9 +2,10 @@
 
 ## Features
 * Round Tracking (creeps, carousel, pvp)
+* Opponents Lose Health, Drop Out
 
 ## UI
-* Synergies UI
+* Synergies Trapezoid
 * Merge Animation
 * Improve board hex rendering
 

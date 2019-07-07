@@ -24,13 +24,17 @@ export class SynergyItem extends React.Component<SynergyItemProps> {
 
         return (
             <div className={`synergy-item tier-${synergy.tier}`}>
-                <div className="icon">
-                   <img className="" alt="icon" src={`img/class-icons/${synergy.id}.png`} />
+                <div className="icon-border">
+                    <div className="icon">
+                        <div className="icon__inner">
+                        <img className="" alt="icon" src={`img/class-icons/${synergy.id}.png`} />
+                        </div>
+                    </div>
                 </div>
-               <span>
-                <span className="synergy-name">{synergy.name}: </span>{synergy.count}
-                {nextBonus > 0 && <span> / {nextBonus}</span>}
-               </span>
+               <div className="synergy-details">
+                <span className="synergy-name">{synergy.name}</span>
+                <span>{synergy.count}{nextBonus > 0 && <span> / {nextBonus}</span>}</span>
+               </div>
                <div className="tooltip">
                     <div className="tooltip-name">
                         <img className="tooltip-icon" alt="icon" src={`img/class-icons/${synergy.id}.png`} />

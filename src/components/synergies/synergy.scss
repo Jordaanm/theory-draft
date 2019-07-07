@@ -13,7 +13,7 @@
         border: 0.125em solid $tier-gold;
         background-color: transparent;
         position: absolute;
-        left: 0.25em;
+        left: -0.25em;
         bottom: -1.375em;
         transform: rotate(45deg);
     }
@@ -28,6 +28,12 @@
     }
 }
 
+.synergy-details {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
 .synergy-item {
     border-radius: 5px;
     padding-left: 2em;
@@ -37,7 +43,7 @@
     align-items: center;
     justify-content: flex-end;
     padding: 0.5em;
-    height: 2em;
+    height: 3em;
     position: relative;
 
     &.tier-1 {
@@ -58,16 +64,44 @@
     &.tier-4 {
         .icon {
             background-color: $tier-grey;
+            .icon__inner {
+                background-color: black;
+                img {
+                    filter: invert(1) brightness(0.5)
+                }
+            }
         }
     }
 
-    .icon {
+    .icon-border {
+        background-color: black;
         position: absolute;
-        left: -1em;
-        top: -0.4em;
+        left: -1.5em;
+        top: 0em;
         height: 3em;
         width: 3em;
-        clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
+        @include hexagon;        
+    }
+
+    .icon {
+        height: calc(100% - 6px);
+        width: calc(100% - 6px);
+        margin: 3px;
+        position: relative;
+        @include hexagon;
+
+        .icon__inner {
+            position: absolute;
+            height: calc(100% - 4px);
+            width: calc(100% - 4px);
+            @include hexagon;
+            margin: 2px;
+            background-image: linear-gradient(to bottom,
+                rgba(0,0,0,0.0),
+                rgba(0,0,0,0.0),
+                rgba(0,0,0,0.5)
+            );
+        }
 
         img {
             margin-top: 12.5%;

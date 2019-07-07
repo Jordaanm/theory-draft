@@ -18,7 +18,7 @@ $tooltipTitleFG: #ECDA97;
 $tier-gold: #CEB35B;
 $tier-silver: silver;
 $tier-bronze: #8C654A;
-$tier-grey: #303030;
+$tier-grey: #575757;
 
 $tftPrimary: #205257;
 $tftPrimaryDarker: #103435;
@@ -35,6 +35,10 @@ $tftPrimaryDarker: #103435;
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
+}
+
+@mixin hexagon {
+  clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
 }
 
 @mixin hero-bg() {
