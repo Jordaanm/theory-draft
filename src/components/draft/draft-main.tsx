@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { DraftStore } from '../../stores/draft-store';
 import { ChampCard } from '../../stores/types';
 import { Hand } from './hand';
 import { observer } from 'mobx-react';
+import { Summoner } from '../../stores/summoner';
 
 interface DraftMainProps {
-    draft: DraftStore;
+    player: Summoner;
 }
 
 @observer
@@ -13,8 +13,8 @@ export class DraftMain extends React.Component<DraftMainProps> {
     
     public render() {
 
-        const { draft } = this.props;
-        const { currentHand} = draft;
+        const { player } = this.props;
+        const { currentHand} = player;
 
         return (
             <div className="draft-main draft-area">
@@ -24,6 +24,6 @@ export class DraftMain extends React.Component<DraftMainProps> {
     }
 
     private buyCard(card: ChampCard) {
-        this.props.draft.buyCard(card);
+        this.props.player.buyCard(card);
     }
 }

@@ -1,13 +1,14 @@
 import * as React from 'react';
-import { DraftStore } from '../../stores/draft-store';
 import { observer } from 'mobx-react';
+
 import { Synergy } from '../../stores/types';
+import { Summoner } from '../../stores/summoner';
 import { SynergyTier } from './synergy-tier';
 
 import "./synergy.scss";
 
 interface SynergiesBarProps {
-    draft: DraftStore
+    player: Summoner;
 }
 
 @observer
@@ -32,6 +33,7 @@ export class SynergiesBar extends React.Component<SynergiesBarProps> {
     }
 
     private getSynergiesOfTier(tier: number): Synergy[] {
-        return this.props.draft.unitSynergiesWithTiers.filter(s => s.tier === tier);
+        const { player } = this.props;
+        return player.unitSynergiesWithTiers.filter(s => s.tier === tier);
     }
 }

@@ -5,26 +5,26 @@ import { DraftStore } from '../../stores/draft-store';
 import { Coin } from '../shared/coin';
 import { Types } from '../../stores/drag-drop';
 import { UnitSelection } from '../../stores/types';
+import { Summoner } from '../../stores/summoner';
+
 interface DraftSellProps {
-    draft: DraftStore;
+    player: Summoner
 }
 
-export const DraftSell: React.FC<DraftSellProps> = ({
-    draft
-}) => {
+export const DraftSell: React.FC<DraftSellProps> = ({ player }) => {
     const [{ isOver, canDrop }, drop] = useDrop({
         accept: [Types.BENCH, Types.BOARD],
-        drop: (item) => onDrop(item, draft),
+        drop: (item) => onDrop(item, player),
         collect: monitor => ({
             isOver: monitor.isOver(),
             canDrop: monitor.canDrop(),
         }),
     });
-    const { activeUnit } = draft;
+    const { activeUnit } = player;
     if(activeUnit === undefined || !activeUnit.unit) { return null; }
 
     const { name } = activeUnit.unit.champ;
-    const cost = draft.getUnitSalePrice(activeUnit.unit);
+    const cost = DraftStore.getUnitSalePrice(activeUnit.unit);
 
     const activeClass = canDrop && isOver ? 'active' : '';
 
@@ -43,10 +43,10 @@ export const DraftSell: React.FC<DraftSellProps> = ({
     );
 }
 
-const onDrop = (item: any, draft: DraftStore) => {
+const onDrop = (item: any, player: Summoner) => {
     const selection = {
         unit: item.unit,
         index: item.index
     } as UnitSelection;
-    draft.sellUnit(selection);
+    player.sellUnit(selection);
 };

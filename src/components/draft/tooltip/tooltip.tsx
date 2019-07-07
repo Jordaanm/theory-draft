@@ -4,6 +4,7 @@ import "./tooltip.scss";
 
 import { DraftStore } from '../../../stores/draft-store';
 import { Coin } from '../../shared/coin';
+import { Summoner } from '../../../stores/summoner';
 
 interface TooltipProps {
     tooltip: string;
@@ -28,13 +29,13 @@ const renderBuyXpTooltip = () => {
     );
 };
 
-const renderIncomeTooltip = (draft: DraftStore) => {
+const renderIncomeTooltip = (player: Summoner) => {
     return (
         <>
-            <h4>Total Income <Coin /> {draft.calculateIncome()}</h4>
-            <div>Passive Income <Coin /> +{draft.calculatePassiveIncome()}</div>
-            <div>Interest (Max 5) <Coin /> +{draft.calculateInterest()}</div>
-            <div>Win/Lost Streak <Coin /> +{draft.calculateStreakBonus()}</div>
+            <h4>Total Income <Coin /> {player.calculateIncome()}</h4>
+            <div>Passive Income <Coin /> +{player.calculatePassiveIncome()}</div>
+            <div>Interest (Max 5) <Coin /> +{player.calculateInterest()}</div>
+            <div>Win/Lost Streak <Coin /> +{player.calculateStreakBonus()}</div>
         </>
     );
 };
@@ -57,22 +58,23 @@ const renderNextRoundTooltip = (draft: DraftStore) => {
     );
 };
 
-const renderLockHandTooltip = (draft: DraftStore) => {
+const renderLockHandTooltip = (player: Summoner) => {
     return (
         <>
             <div>Toggle Lock [Shift + L]</div>
-            <div>{draft.isHandLocked ? 'Unlock' : 'Lock'} your current store offerings.</div>
+            <div>{player.isHandLocked ? 'Unlock' : 'Lock'} your current store offerings.</div>
         </>
     );
 };
 
 const getContent = (tooltip: string, draft: DraftStore): string|React.ReactElement|null => {
+    const { player } = draft;
     switch(tooltip) {
         case 'refresh': return renderRefreshTooltip();
-        case 'income': return renderIncomeTooltip(draft);
+        case 'income': return renderIncomeTooltip(player);
         case 'buyXp': return renderBuyXpTooltip();
         case 'nextRound': return renderNextRoundTooltip(draft);
-        case 'lock': return renderLockHandTooltip(draft);
+        case 'lock': return renderLockHandTooltip(player);
         case 'timer': return renderTimerTooltip(draft);
         default: return null;
     }

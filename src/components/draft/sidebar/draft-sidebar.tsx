@@ -4,9 +4,11 @@ import { observer } from 'mobx-react';
 import { RefreshPanel } from './draft-refresh-panel';
 import { BuyXpPanel } from './draft-xp-panel';
 import { NextRoundPanel } from './next-round-panel';
+import { Summoner } from '../../../stores/summoner';
 
 interface DraftSidebarProps {
     draft: DraftStore;
+    player: Summoner;
     setTooltip: (area: string) => void;
 }
 
@@ -15,16 +17,16 @@ export class DraftSidebar extends React.Component<DraftSidebarProps> {
     
     public render() {
 
-        const { draft, setTooltip } = this.props;
-        const { xp, nextLevelXp, level } = draft;
+        const { draft, player, setTooltip } = this.props;
+        const { xp, nextLevelXp, level } = player;
 
         return (
             <div className="draft-sidebar draft-area">
                 <div className="draft-sidebar-items">
-                    <RefreshPanel cost={DraftStore.REFRESH_COST} refresh={() => draft.refreshHand()} setTooltip={setTooltip}/>
+                    <RefreshPanel cost={DraftStore.REFRESH_COST} refresh={() => player.refreshHand()} setTooltip={setTooltip}/>
                     <BuyXpPanel
                         cost={DraftStore.BUY_XP_COST}
-                        buyXP={() => draft.buyXP()}
+                        buyXP={() => player.buyXP()}
                         setTooltip={setTooltip}
                         level={level}
                         xp={xp}

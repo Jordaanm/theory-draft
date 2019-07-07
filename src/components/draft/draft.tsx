@@ -8,8 +8,10 @@ import { DraftMain } from './draft-main';
 import { DraftSell } from './draft-sell';
 import { Tooltip } from './tooltip/tooltip';
 import { Coin } from '../shared/coin';
+import { Summoner } from '../../stores/summoner';
 
 interface DraftProps {
+    player: Summoner;
     draft: DraftStore;
 }
 
@@ -17,7 +19,7 @@ interface DraftState {
     activeTooltip: string;
 }
 
-@inject('draft')
+@inject('draft', 'player')
 @observer
 export class Draft extends React.Component<DraftProps, DraftState> {
     
@@ -29,15 +31,15 @@ export class Draft extends React.Component<DraftProps, DraftState> {
     }
 
     public render() {
-        const { draft } = this.props;
-        const { gold } = draft;
-        const showSell = draft.activeUnit !== undefined;
+        const { player, draft } = this.props;
+        const { gold } = player;
+        const showSell = player.activeUnit !== undefined;
 
         const setTooltip = ((area: string) => this.setState({
             activeTooltip: area
         }));
 
-        const lockClass = draft.isHandLocked ? 'closed' : 'open';
+        const lockClass = player.isHandLocked ? 'closed' : 'open';
         const timerClass = draft.isPaused ? 'pause' : 'play';
         return (
             <section className="draft">
@@ -60,16 +62,16 @@ export class Draft extends React.Component<DraftProps, DraftState> {
                         </div>
                     </div>
                     <div className="draft-lock above-bar"
-                        onClick={() => draft.toggleHandLock()}
+                        onClick={() => player.toggleHandLock()}
                         onMouseEnter={() => setTooltip('lock')}
                         onMouseLeave={() => setTooltip("")}
                     >
                         <div className={`lock ${lockClass}`}></div>
                     </div> 
                 </>}
-                <DraftSidebar draft={draft} setTooltip={setTooltip} />
-                <DraftMain draft={draft} />              
-                {showSell && <DraftSell draft={draft} />}
+                <DraftSidebar draft={draft} player={player} setTooltip={setTooltip} />
+                <DraftMain player={player} />              
+                {showSell && <DraftSell player={player} />}
                 <Tooltip tooltip={this.state.activeTooltip} draft={draft} />
             </section>            
         );

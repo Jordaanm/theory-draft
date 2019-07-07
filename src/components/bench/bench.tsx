@@ -1,19 +1,22 @@
 import * as React from 'react';
 import { BenchSlot } from './bench-slot';
-import './bench.scss';
 import { inject, observer } from 'mobx-react';
 import { DraftStore } from '../../stores/draft-store';
 import { UnitSelection, Unit } from '../../stores/types';
+import { Summoner } from '../../stores/summoner';
+
+import './bench.scss';
+
 interface BenchProps {
-    draft?: DraftStore;
+    player: Summoner;
 }
 
-@inject('draft')
+@inject('player')
 @observer
 export class Bench extends React.Component<BenchProps> {
     public render() {
-        const { draft } = this.props;
-        const { benchedUnits, activeUnit } = draft;
+        const { player } = this.props;
+        const { benchedUnits, activeUnit } = player;
         const activeBenchIndex = (activeUnit !== undefined && activeUnit.index < DraftStore.BENCH_SIZE) ? activeUnit.index : -1;
 
         return (
@@ -32,8 +35,8 @@ export class Bench extends React.Component<BenchProps> {
     }
 
     private onPickUpUnit(unit: Unit, index: number) {
-        const { draft } = this.props;
-        draft.unitPickedUp({
+        const { player } = this.props;
+        player.unitPickedUp({
             unit,
             index
         } as UnitSelection);
@@ -41,12 +44,12 @@ export class Bench extends React.Component<BenchProps> {
     }
 
     private onDropUnit() {
-        const { draft } = this.props;
-        draft.unitDropped();
+        const { player } = this.props;
+        player.unitDropped();
     }
 
     private onDrop(source, dest) {
-        const { draft } = this.props;
+        const { player } = this.props;
         
         const selectionA = {
             unit: source.unit,
@@ -59,9 +62,9 @@ export class Bench extends React.Component<BenchProps> {
 
         //Is destination empty
         if(!dest.unit) {
-            draft.shiftUnitToSlot(selectionA, dest.index);
+            player.shiftUnitToSlot(selectionA, dest.index);
         } else {
-            draft.swapUnits(selectionA, selectionB);
+            player.swapUnits(selectionA, selectionB);
         }
 
     }

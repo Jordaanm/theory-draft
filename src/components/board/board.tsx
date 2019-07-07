@@ -5,12 +5,13 @@ import { DraftStore } from '../../stores/draft-store';
 import "./board.scss";
 import { BOARD_HEIGHT, BOARD_WIDTH } from '../../utils';
 import { BoardUnit, UnitSelection, Unit } from '../../stores/types';
+import { Summoner } from '../../stores/summoner';
 
 interface BoardProps {
-    draft?: DraftStore;
+    player: Summoner;
 }
 
-@inject('draft')
+@inject('player')
 @observer
 export class Board extends React.Component<BoardProps> {
 
@@ -19,9 +20,9 @@ export class Board extends React.Component<BoardProps> {
     }
 
     public render() {
-        const { draft } = this.props;
+        const { player } = this.props;
 
-        if(!draft) { return; }
+        if(!player) { return; }
 
         const rows = [...Array(BOARD_HEIGHT)].map((_, index) => this.getRow(index + 1));
 
@@ -33,17 +34,17 @@ export class Board extends React.Component<BoardProps> {
     }
 
     private getRow(i: number): BoardUnit[] {
-        const { draft } = this.props;
+        const { player } = this.props;
         const start = BOARD_WIDTH * (i - 1);
         const end = BOARD_WIDTH * i;
 
-        return draft.boardUnits.slice(start, end);
+        return player.boardUnits.slice(start, end);
     }
 
 
     private renderRow(boardUnits: BoardUnit[], row: number) {
-        const {draft} = this.props;
-        const { activeUnit } = draft;
+        const { player } = this.props;
+        const { activeUnit } = player;
         const isOdd = row % 2 === 1;
         const activeBoardIndex = (activeUnit !== undefined && activeUnit.index >= DraftStore.BENCH_SIZE) ? activeUnit.index : -1;
 
@@ -66,8 +67,8 @@ export class Board extends React.Component<BoardProps> {
     }
 
     private onPickUpUnit(unit: Unit, index: number) {
-        const { draft } = this.props;
-        draft.unitPickedUp({
+        const { player } = this.props;
+        player.unitPickedUp({
             unit,
             index
         } as UnitSelection);
@@ -75,13 +76,13 @@ export class Board extends React.Component<BoardProps> {
     }
 
     private onDropUnit() {
-        const { draft } = this.props;
-        draft.unitDropped();
+        const { player } = this.props;
+        player.unitDropped();
     }
 
     private onDrop(source, dest) {
-        const { draft } = this.props;
-        console.log("onDrop", source, dest);
+        const { player } = this.props;
+
         const selectionA = {
             unit: source.unit,
             index: source.index
@@ -94,9 +95,9 @@ export class Board extends React.Component<BoardProps> {
 
         //Is destination empty
         if(!dest.unit) {
-            draft.shiftUnitToSlot(selectionA, dest.index);
+            player.shiftUnitToSlot(selectionA, dest.index);
         } else {
-            draft.swapUnits(selectionA, selectionB);
+            player.swapUnits(selectionA, selectionB);
         }
     }
     

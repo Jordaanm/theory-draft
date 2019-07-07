@@ -45,7 +45,7 @@ export class MainPage extends React.Component {
         return (
             <section className="main-page">
 				<DndProvider backend={MultiBackend(HTML5toTouch)}>
-                    <Provider draft={this.draftStore} >
+                    <Provider draft={this.draftStore} player={this.draftStore.player}>
                         <>
                             <div className="board-container">
                                 <div className="sidebar">
