@@ -1,0 +1,77 @@
+@import '../../styles/colors';
+
+.opponents {
+    padding: 1em;
+}
+
+.summoner {
+    display: flex;
+    margin-bottom: 1em;
+    position: relative;
+
+    .summoner-health {
+        padding: 0.5em 0.5em;
+        border: 2px solid $goldLight;
+        border-right-color: $ui-filler-dark;
+        background-color: $ui-filler-dark;
+        height: 2.5em;
+        margin-top: 1.25em;
+        margin-right: -0.5em;
+        z-index: 1;
+    }
+    
+    .summoner-avatar {
+        border-radius: 50%;
+        background-color: $ui-filler-dark;
+        border: 2px solid $goldLight;
+        height: 5em;
+        width: 5em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    .health-display {
+        border-radius: 50%;
+        background-color: $health-bg;
+        height: 4.5em;
+        width: 4.5em;
+        position: absolute;
+        left: 0.125em;
+        top: 0.125em;
+    }
+
+    .summoner-avatar__icon {
+        background-image: url('../../img/river-sprite.png');
+        @include hero-bg();
+        border-radius: 50%;
+        position: absolute;
+        left: 0.375em;
+        top: 0.375em;
+        height: 4em;
+        width: 4em;
+        z-index: 100;
+    }
+
+    .summoner__units {
+        display: flex;
+        flex-direction: column; 
+        flex-wrap: wrap;
+        position: absolute;
+        left: -14em;
+        top: 25%;
+        transform: translate(100%, 0);
+        max-height: 25em;
+    }
+
+    .summoner__unit {
+        height: 6em;
+        width: 6em;
+    }
+
+    &:not(:hover) .summoner__units {
+        display: none;
+    }
+}

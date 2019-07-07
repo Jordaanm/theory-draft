@@ -30,7 +30,7 @@
     background-color: black;
     color: white;
     @extend %text-outline;
-    @extend %hero-bg;
+    @include hero-bg();
     height: 100%;
     text-align: center;
 

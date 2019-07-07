@@ -68,7 +68,7 @@
         color: white;
         padding: 0.5em;
         @extend %text-outline;
-        @extend %hero-bg;
+        @include hero-bg();
     } 
         
     .banner .cost img {

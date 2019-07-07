@@ -22,7 +22,6 @@ export class Summoner {
         return this.allUnits.slice(DraftStore.BENCH_SIZE);
     }
 
-
     @observable
     xp: number = 0;
 
@@ -40,6 +39,14 @@ export class Summoner {
 
     @observable
     activeUnit?: UnitSelection = undefined;
+
+    @observable
+    health: number = 100;
+
+    @computed
+    public get isAlive() {
+        return this.health > 0;
+    }
     
     constructor(draft: DraftStore) {
         this.draft = draft;
@@ -72,6 +79,14 @@ export class Summoner {
             this.refreshHand();    
         }
     }
+
+/****************
+ *  HEALTH
+ ***************/
+@action
+public takeDamage(amount: number) {
+    this.health = Math.max(this.health - amount, 0);
+}
 
 /**************
  * INCOME

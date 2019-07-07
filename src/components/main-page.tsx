@@ -16,6 +16,7 @@ import { Simulation } from './simulation/simulation';
 import { Hotkeys } from './hotkeys';
 import { SplashScreen } from './splash/splash';
 import { DataStore } from '../stores/data-store';
+import { Opponents } from './simulation/opponents';
 
 @observer
 export class MainPage extends React.Component {
@@ -54,6 +55,9 @@ export class MainPage extends React.Component {
                                 <div className="board-and-bench">
                                     <Board />
                                     <Bench />
+                                </div>
+                                <div className="sidebar">
+                                    <Opponents />
                                 </div>
                             </div>
                             <Draft />
