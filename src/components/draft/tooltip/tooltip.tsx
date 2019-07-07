@@ -44,7 +44,7 @@ const renderTimerTooltip = (draft: DraftStore) => {
     return (
         <>
             <div>Toggle the Timer [Shift + P]</div>
-            <div>{draft.isPaused ? 'Resmue' : 'Pause'} the Round Timer</div>
+            <div>{draft.isPaused ? 'Resume' : 'Pause'} the Round Timer</div>
         </>
     );
 }

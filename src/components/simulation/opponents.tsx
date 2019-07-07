@@ -41,8 +41,8 @@ export class Opponents extends React.Component<OpponentsProps> {
                     <div className="summoner-avatar__icon"></div>
                 </div>
                 <div className="summoner__units">
-                        {units.map(x => 
-                            <div className="summoner__unit">
+                        {units.map((x, index) => 
+                            <div className="summoner__unit" key={`${index}_${x.tier}_${x.champ.id}`}>
                                 <Champion unit={x} />
                             </div>
                         )}

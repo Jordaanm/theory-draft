@@ -85,6 +85,7 @@
     padding: 0.5em;
     color: white;
     @extend %text-outline;
+    background-image: linear-gradient(-45deg, transparent, rgba(0,0,0,0.2));
 }
 
 .champ-card .banner .name {
