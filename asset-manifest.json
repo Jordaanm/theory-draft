@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/theory-draft/static/css/main.3da9e2bb.chunk.css",
+    "main.css": "/theory-draft/static/css/main.b8e73132.chunk.css",
     "main.js": "/theory-draft/static/js/main.9c7f989a.chunk.js",
     "main.js.map": "/theory-draft/static/js/main.9c7f989a.chunk.js.map",
     "runtime~main.js": "/theory-draft/static/js/runtime~main.7f99ac66.js",
@@ -9,10 +9,10 @@
     "static/js/2.ef2eb8c1.chunk.js": "/theory-draft/static/js/2.ef2eb8c1.chunk.js",
     "static/js/2.ef2eb8c1.chunk.js.map": "/theory-draft/static/js/2.ef2eb8c1.chunk.js.map",
     "index.html": "/theory-draft/index.html",
-    "precache-manifest.22aaf7fe319c25d138c893ca82add98f.js": "/theory-draft/precache-manifest.22aaf7fe319c25d138c893ca82add98f.js",
+    "precache-manifest.62d59ea9b25c356c02aab38987f6dc8d.js": "/theory-draft/precache-manifest.62d59ea9b25c356c02aab38987f6dc8d.js",
     "service-worker.js": "/theory-draft/service-worker.js",
     "static/css/2.3d5f8d40.chunk.css.map": "/theory-draft/static/css/2.3d5f8d40.chunk.css.map",
-    "static/css/main.3da9e2bb.chunk.css.map": "/theory-draft/static/css/main.3da9e2bb.chunk.css.map",
+    "static/css/main.b8e73132.chunk.css.map": "/theory-draft/static/css/main.b8e73132.chunk.css.map",
     "static/media/app.scss": "/theory-draft/static/media/BeaufortBold.4b2bd100.woff",
     "static/media/splash.scss": "/theory-draft/static/media/tft.a10940f6.png",
     "static/media/coin.scss": "/theory-draft/static/media/coin.97cee6e3.svg",
