@@ -5,7 +5,6 @@
 * Opponents Lose Health, Drop Out
 
 ## UI
-* Synergies Trapezoid
 * Merge Animation
 * Improve board hex rendering
 

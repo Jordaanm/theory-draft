@@ -75,7 +75,7 @@
         },
         {
             "name": "Braum",
-            "id": "Braum",
+            "id": "braum",
             "cost": 2,
             "classes": [
                 "glacial",
@@ -348,7 +348,7 @@
         },
         {
             "name": "Sejuani",
-            "id": "Sejuani",
+            "id": "sejuani",
             "cost": 4,
             "classes": [
                 "glacial",

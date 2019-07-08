@@ -41,6 +41,10 @@ $tftPrimaryDarker: #103435;
   clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
 }
 
+@mixin trapezoid {
+  clip-path: polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%);
+}
+
 @mixin hero-bg() {
     background-position: center;
     background-repeat: no-repeat;
