@@ -38,4 +38,12 @@
         font-size: 1.5em;
         // color: goldenrod;
     }        
+
+    &.champion--tier-2 {
+        animation: upgradeTier 0.5s ease-in-out;
+    }
+    
+    &.champion--tier-3 {
+        animation: upgradeTier 0.5s ease-in-out;
+    }
 }

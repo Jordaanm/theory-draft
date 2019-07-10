@@ -88,23 +88,18 @@ $tftPrimaryDarker: #103435;
     ) 1 25%;
 }
 
-%fancy-border {
-  position: relative;
-  border: 4px solid transparent;
-  border-radius: 16px;
-  /* background: linear-gradient(orange, violet); */
-  background-clip: padding-box;
-  padding: 10px;
-  /* just to show box-shadow still works fine */
-  box-shadow: 0 3px 9px black, inset 0 0 9px white;
-}
 
-%fancy-border--after {
-  position: absolute;
-  top: -4px; bottom: -4px;
-  left: -4px; right: -4px;
-  background: linear-gradient(#816C34, #725C31);
-  content: '';
-  z-index: -1;
-  border-radius: 16px;
+@keyframes upgradeTier {
+  0% {
+    filter: brightness(1);
+    transform: scale(1);
+  }
+  50% {
+    filter: brightness(3);
+    transform: scale(1.1);
+  }
+  100% {
+    filter: brightness(1);
+    transform: scale(1);
+  }
 }

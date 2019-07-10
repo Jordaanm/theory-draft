@@ -7,10 +7,6 @@ interface ChampionProps {
 
 export class Champion extends React.Component<ChampionProps> {
 
-    componentWillReceiveProps(newProps) {
-        console.log("Props Changed", {...this.props.unit}, {...newProps.unit});
-    }
-
     public render() {
         const { unit } = this.props;
         const { champ } = unit;
@@ -22,7 +18,7 @@ export class Champion extends React.Component<ChampionProps> {
         };
 
         return (
-            <div className="champion" style={style}>
+            <div className={`champion champion--tier-${unit.tier}`} style={style}>
                 <div className="champion-tier">{stars}</div>
                 <div className="champion-name">{champ.name}</div>
             </div>
