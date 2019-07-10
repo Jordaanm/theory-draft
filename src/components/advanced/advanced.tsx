@@ -41,6 +41,7 @@ export class AdvancedScreen extends React.Component<AdvancedScreenProps, Advance
             case "levels": return mapToObj(data.levels);
             case "tiers": return mapToObj(data.unitsPerTier);
             case "champs": return mapToObj(data.champions);
+            case "synergy": return mapToObj(data.synergies);
             default: return "";
         }
     }
@@ -54,6 +55,7 @@ export class AdvancedScreen extends React.Component<AdvancedScreenProps, Advance
             case "levels": return "Levels";
             case "tiers": return "Units Per Tier";
             case "champs": return "Champions";
+            case "synergy": return "Synergies";
             default: return "";
         }
     }
@@ -66,16 +68,17 @@ export class AdvancedScreen extends React.Component<AdvancedScreenProps, Advance
 
         if(activeDataset === 'levels') {
             data.setLevelsFromJson(updatedData);
-        } else if(activeDataset === 'tiers') {
+        } else if (activeDataset === 'tiers') {
             data.setUnitsPerTierFromJson(updatedData);
-        } else if(activeDataset === 'champs') {
+        } else if (activeDataset === 'champs') {
             data.setChampsFromJson(updatedData);
+        } else if (activeDataset === 'synergies') {
+            data.setSynergiesFromJson(updatedData);
         }
     }
 
     private setActiveDataset(val) {
-        return () => {
-            
+        return () => {            
             this.setState({
                 activeDataset: null
             }, () => this.setState({
@@ -104,6 +107,9 @@ export class AdvancedScreen extends React.Component<AdvancedScreenProps, Advance
                         </button>
                         <button className="action" onClick={setActive('levels')}>
                             Units Per Tier
+                        </button>
+                        <button className="action" onClick={setActive('synergy')}>
+                            Synergies
                         </button>
                     </div>
                     {activeDataset && <div className="editor-container">
