@@ -17,6 +17,7 @@ import { Hotkeys } from './hotkeys';
 import { SplashScreen } from './splash/splash';
 import { DataStore } from '../stores/data-store';
 import { Opponents } from './simulation/opponents';
+import { CheatMenu } from './cheat/cheat-menu';
 
 @observer
 export class MainPage extends React.Component {
@@ -61,6 +62,9 @@ export class MainPage extends React.Component {
                                 </div>
                             </div>
                             <Draft />
+                            {this.draftStore.player.isCheatMenuOpen && <>
+                                <CheatMenu draft={this.draftStore} />
+                            </>}
                         </>
                     </Provider>
                 </DndProvider>

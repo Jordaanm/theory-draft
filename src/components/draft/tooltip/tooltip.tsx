@@ -67,6 +67,12 @@ const renderLockHandTooltip = (player: Summoner) => {
     );
 };
 
+const renderCheatTooltip = () => {
+    return (
+        <div>Toggle Cheat Menu [C]</div>
+    );
+}
+
 const getContent = (tooltip: string, draft: DraftStore): string|React.ReactElement|null => {
     const { player } = draft;
     switch(tooltip) {
@@ -76,6 +82,7 @@ const getContent = (tooltip: string, draft: DraftStore): string|React.ReactEleme
         case 'nextRound': return renderNextRoundTooltip(draft);
         case 'lock': return renderLockHandTooltip(player);
         case 'timer': return renderTimerTooltip(draft);
+        case 'cheat': return renderCheatTooltip();
         default: return null;
     }
 }

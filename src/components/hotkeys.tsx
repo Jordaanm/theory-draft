@@ -13,5 +13,6 @@ export const Hotkeys: React.FC<HotKeysProps> = ({draft}) =>{
     useHotkeys('f', () => draft.player.buyXP());
     useHotkeys('l', () => draft.player.toggleHandLock());
     useHotkeys('e', () => draft.player.sellHoveredUnit());
+    useHotkeys('c', () => draft.player.showCheatMenu());
     return null;
 }

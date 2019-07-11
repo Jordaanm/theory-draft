@@ -64,7 +64,7 @@ $tftPrimaryDarker: #103435;
 }
 
 
-%ui-border-gold-upper {
+@mixin ui-border-gold-upper() {
   border-style: solid;
   border-width: 6px;
   border-radius: 3px;
@@ -76,7 +76,7 @@ $tftPrimaryDarker: #103435;
   ) 1 25%;
 }
 
-%ui-border-gold {
+@mixin ui-border-gold() {
     border-style: solid;
     border-width: 6px;
     border-radius: 3px;

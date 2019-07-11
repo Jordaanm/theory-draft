@@ -8,7 +8,7 @@
     position: relative;
     
     .draft-area {        
-        @extend %ui-border-gold;
+        @include ui-border-gold();
         border-radius: 3px;
         position: relative;
         background-color: black;
@@ -32,7 +32,7 @@
         top: 0.5em;
         left: 50%;
         transform: translate(-50%, -100%);
-        @extend %ui-border-gold-upper;
+        @include ui-border-gold-upper();
         border-bottom: none;
         border-radius: 3px;
         border-bottom-left-radius: 0;
@@ -75,6 +75,7 @@
             }
         }
     }
+    
     .draft-gold-bar {
         left: 60%;
         padding: 0.5em;
@@ -83,6 +84,20 @@
             padding: 0.25em 1em;
             margin-bottom: 0.5em;
             @include ui-border;
+        }
+    }
+
+    .draft-cheat {
+        padding: 0.5em;
+        padding-bottom: 0;
+        left: 90%;
+        .cheat-icon {
+            height: 2.0em;
+            margin-bottom: 0.5em;
+            width: 4em;
+            @extend %icon-bg;
+            @include ui-border();
+            background-image: url('../../img/cheat.png');
         }
     }
 

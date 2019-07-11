@@ -68,6 +68,13 @@ export class Draft extends React.Component<DraftProps, DraftState> {
                     >
                         <div className={`lock ${lockClass}`}></div>
                     </div> 
+                    <div className="draft-cheat above-bar"
+                        onClick={() => player.showCheatMenu()}
+                        onMouseEnter={() => setTooltip('cheat')}
+                        onMouseLeave={() => setTooltip("")}
+                    >
+                        <div className="cheat-icon"></div>
+                    </div> 
                 </>}
                 <DraftSidebar draft={draft} player={player} setTooltip={setTooltip} />
                 <DraftMain player={player} />              

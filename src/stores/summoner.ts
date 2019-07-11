@@ -88,12 +88,45 @@ export class Summoner {
     }
 
 /****************
+ *  CHEAT MENU
+ ***************/
+    @observable
+    isCheatMenuOpen: boolean = false;
+
+    @action
+    public addGold(amount: number) {
+        this.gold += amount;
+    }
+
+    @action
+    public addChamp(champ: ChampData, tier: number) {
+        const unit: Unit = {
+            champ,
+            tier
+        };
+
+        const index = this.allUnits.findIndex(x => x.unit === undefined);
+
+        if (index !== -1) {
+            this.allUnits[index].unit = unit;
+        }
+    }
+
+    @action
+    public showCheatMenu() { this.isCheatMenuOpen = true; }
+
+    @action
+    public hideCheatMenu() { this.isCheatMenuOpen = false; }
+
+
+/****************
  *  HEALTH
  ***************/
-@action
-public takeDamage(amount: number) {
-    this.health = Math.max(this.health - amount, 0);
-}
+
+     @action
+    public takeDamage(amount: number) {
+        this.health = Math.max(this.health - amount, 0);
+    }
 
 /**************
  * INCOME
