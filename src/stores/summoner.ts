@@ -32,7 +32,7 @@ export class Summoner {
     level: number = 1;
 
     @observable
-    gold: number = 3;
+    gold: number = 2;
 
     @observable
     isHandLocked: boolean = false;
