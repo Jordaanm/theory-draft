@@ -7,10 +7,11 @@ interface HotKeysProps{
 }
 
 export const Hotkeys: React.FC<HotKeysProps> = ({draft}) =>{
-    useHotkeys("shift+r", () => draft.nextRound());
-    useHotkeys("shift+p", () => draft.toggleTimer());
-    useHotkeys('shift+d', () => draft.player.refreshHand());
-    useHotkeys('shift+f', () => draft.player.buyXP());
-    useHotkeys('shift+l', () => draft.player.toggleHandLock());
+    useHotkeys("r", () => draft.nextRound());
+    useHotkeys("p", () => draft.toggleTimer());
+    useHotkeys('d', () => draft.player.refreshHand());
+    useHotkeys('f', () => draft.player.buyXP());
+    useHotkeys('l', () => draft.player.toggleHandLock());
+    useHotkeys('e', () => draft.player.sellHoveredUnit());
     return null;
 }

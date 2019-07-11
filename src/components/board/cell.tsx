@@ -11,6 +11,8 @@ interface CellProps {
     onPickUpUnit: (unit: Unit, index: number) => void;
     onDropUnit: () => void;
     onDrop:(source: any, dest: any) => void;
+    onHoverStart: (unit: Unit, index: number) => void;
+    onHoverEnd: () => void;
 }
 
 // const generatePreview = (type, item, style) => {
@@ -31,7 +33,9 @@ export const Cell: React.FC<CellProps> = ({
     isActive,
     onPickUpUnit,
     onDropUnit,
-    onDrop
+    onDrop,
+    onHoverStart,
+    onHoverEnd
  }) => {
     const { unit, index } = boardUnit;
     
@@ -62,7 +66,12 @@ export const Cell: React.FC<CellProps> = ({
     const overClass = isOver && canDrop ? 'drag-over' : '';
 
     return (
-        <div ref={drop} className={`cell ${dragClass} ${activeClass} ${overClass}`}>
+        <div
+            ref={drop}
+            className={`cell ${dragClass} ${activeClass} ${overClass}`}
+            onMouseEnter={() => onHoverStart(unit, index)}
+            onMouseLeave={() => onHoverEnd()}
+        >
             <div ref={unit ? drag : undefined} className="contents">
                 {Boolean(unit) && <Champion unit={unit} /> }
             </div>

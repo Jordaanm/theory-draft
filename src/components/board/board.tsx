@@ -59,6 +59,8 @@ export class Board extends React.Component<BoardProps> {
                         onPickUpUnit={(unit, index) => this.onPickUpUnit(unit, index)}
                         onDropUnit={() => this.onDropUnit()}
                         onDrop={(source, dest) => this.onDrop(source, dest)}                        
+                        onHoverStart={(unit, index) => this.onHoverStart(unit, index)}
+                        onHoverEnd={() => this.onHoverEnd()}                        
                     />
                 )}
                 {!isOdd && <div className="board-spacer spacer--right"></div>}
@@ -78,6 +80,19 @@ export class Board extends React.Component<BoardProps> {
     private onDropUnit() {
         const { player } = this.props;
         player.unitDropped();
+    }
+
+    private onHoverStart(unit: Unit, index: number) {
+        if(unit !== undefined) {
+            this.props.player.enterUnit({
+                unit,
+                index
+            } as BoardUnit);
+        }
+    }
+
+    private onHoverEnd() {
+        this.props.player.exitUnit();
     }
 
     private onDrop(source, dest) {

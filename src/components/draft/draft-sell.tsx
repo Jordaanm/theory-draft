@@ -39,6 +39,7 @@ export const DraftSell: React.FC<DraftSellProps> = ({ player }) => {
             { canDrop && isOver && <div>
                 Release to Sell
             </div> }
+            <div>[E] to sell unit while hovering over it</div>
         </div>
     );
 }

@@ -41,6 +41,9 @@ export class Summoner {
     activeUnit?: UnitSelection = undefined;
 
     @observable
+    hoveredUnit?: UnitSelection = undefined;
+
+    @observable
     health: number = 100;
 
     @computed
@@ -277,68 +280,68 @@ public calculatePassiveIncome(): number {
  * UNITS (BENCH AND BOARD)
  *************************/
 
-@action
-private mergeUnits(tier: number = 1, extraCards: ChampCard[] = []) {
-    const extraUnits: Unit[] = extraCards.map(card => ({champ: card.champ, tier: 1}));
-    const boardUnits: (Unit|null)[] = this.boardUnits.map(bu => bu.unit || null);
-    const benchedUnits: (Unit|null)[] = this.benchedUnits.map(bu => bu.unit || null);
-    const totalUnits: (Unit|null)[] = [...benchedUnits, ...boardUnits, ...extraUnits];
+    @action
+    private mergeUnits(tier: number = 1, extraCards: ChampCard[] = []) {
+        const extraUnits: Unit[] = extraCards.map(card => ({champ: card.champ, tier: 1}));
+        const boardUnits: (Unit|null)[] = this.boardUnits.map(bu => bu.unit || null);
+        const benchedUnits: (Unit|null)[] = this.benchedUnits.map(bu => bu.unit || null);
+        const totalUnits: (Unit|null)[] = [...benchedUnits, ...boardUnits, ...extraUnits];
 
-    const onlyCurrentTier = totalUnits.filter(c => c!== null && c.tier === tier) as Unit[];
-    
-    //Remap to count champions
-    const champCount = onlyCurrentTier.reduce((m: object, unit: Unit) => {
-        const id = unit.champ.id;
-        const val = (m as any)[id];
-        if (!val) {
-            (m as any)[id] = 1;
-        } else {
-            (m as any)[id] = val+1;
-        }
-        return m;
-    }, {});
-
-    //Find champs to merge
-    const idsToMerge = Object.keys(champCount).filter(x => (champCount as any)[x] >= 3);
-
-    //Merge and upgrade the champs
-    idsToMerge.forEach(id => {
-        const champ = (this.draft.dataStore.champions).find(c => c.id === id);
+        const onlyCurrentTier = totalUnits.filter(c => c!== null && c.tier === tier) as Unit[];
         
-        //Remove all of that unit from bench and board
-        let index = -1;
-        let boardIndex = -1;
-        while(-1 !== (index = this.allUnits.findIndex(boardUnit => 
-            boardUnit.unit !== undefined &&
-            boardUnit.unit.champ.id === id &&
-            boardUnit.unit.tier === tier
-        ))) {
-            this.allUnits[index].unit = undefined;
-            if (index >= DraftStore.BENCH_SIZE) {
-                boardIndex = index;
+        //Remap to count champions
+        const champCount = onlyCurrentTier.reduce((m: object, unit: Unit) => {
+            const id = unit.champ.id;
+            const val = (m as any)[id];
+            if (!val) {
+                (m as any)[id] = 1;
+            } else {
+                (m as any)[id] = val+1;
             }
-        }
+            return m;
+        }, {});
 
-        //Add upgraded unit
-        //Priorise returning to board
-        if(boardIndex !== -1) {
-            this.allUnits[boardIndex].unit = {
-                tier: tier + 1,
-                champ
-            } as Unit;
-        } else {
-            const firstEmpty = this.allUnits.findIndex(x => x.unit === undefined);
-            this.allUnits[firstEmpty].unit = {
-                tier: tier + 1,
-                champ
-            } as Unit;    
-        }
-    });
+        //Find champs to merge
+        const idsToMerge = Object.keys(champCount).filter(x => (champCount as any)[x] >= 3);
 
-    if (tier === 1) {
-        this.mergeUnits(2);
+        //Merge and upgrade the champs
+        idsToMerge.forEach(id => {
+            const champ = (this.draft.dataStore.champions).find(c => c.id === id);
+            
+            //Remove all of that unit from bench and board
+            let index = -1;
+            let boardIndex = -1;
+            while(-1 !== (index = this.allUnits.findIndex(boardUnit => 
+                boardUnit.unit !== undefined &&
+                boardUnit.unit.champ.id === id &&
+                boardUnit.unit.tier === tier
+            ))) {
+                this.allUnits[index].unit = undefined;
+                if (index >= DraftStore.BENCH_SIZE) {
+                    boardIndex = index;
+                }
+            }
+
+            //Add upgraded unit
+            //Priorise returning to board
+            if(boardIndex !== -1) {
+                this.allUnits[boardIndex].unit = {
+                    tier: tier + 1,
+                    champ
+                } as Unit;
+            } else {
+                const firstEmpty = this.allUnits.findIndex(x => x.unit === undefined);
+                this.allUnits[firstEmpty].unit = {
+                    tier: tier + 1,
+                    champ
+                } as Unit;    
+            }
+        });
+
+        if (tier === 1) {
+            this.mergeUnits(2);
+        }
     }
-}
 
     @action unitPickedUp(selection: UnitSelection) {
         this.activeUnit = selection;
@@ -346,6 +349,14 @@ private mergeUnits(tier: number = 1, extraCards: ChampCard[] = []) {
 
     @action unitDropped() {
         this.activeUnit = undefined;
+    }
+
+    @action enterUnit(boardUnit: BoardUnit) {
+        this.hoveredUnit = boardUnit as UnitSelection;
+    }
+
+    @action exitUnit() {
+        this.hoveredUnit = undefined;
     }
 
     @action
@@ -360,6 +371,12 @@ private mergeUnits(tier: number = 1, extraCards: ChampCard[] = []) {
         }
     }
 
+    @action
+    public sellHoveredUnit() {
+        if(this.hoveredUnit !== undefined) {
+            this.sellUnit(this.hoveredUnit);
+        }
+    }
     
     @action
     public swapUnits(source: UnitSelection, dest: UnitSelection) {

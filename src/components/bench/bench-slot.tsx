@@ -12,6 +12,8 @@ interface BenchSlotProps {
     onPickUpUnit: (unit: Unit, index: number) => void;
     onDropUnit: () => void;
     onDrop:(source: any, dest: any) => void;
+    onHoverStart: (unit: Unit, index: number) => void;
+    onHoverEnd: () => void;
 }
 
 export const BenchSlot: React.FC<BenchSlotProps> = ({
@@ -20,7 +22,9 @@ export const BenchSlot: React.FC<BenchSlotProps> = ({
     isActive,
     onPickUpUnit,
     onDropUnit,
-    onDrop
+    onDrop,
+    onHoverStart,
+    onHoverEnd
 }) => {    
     const [{isDragging}, drag] = useDrag({
         item: { unit, index, type: Types.BENCH },
@@ -48,7 +52,12 @@ export const BenchSlot: React.FC<BenchSlotProps> = ({
     const activeClass = isActive ? 'active' : '';
     const overClass = isOver && canDrop ? 'drag-over' : '';
     return (
-        <div ref={drop} className={`bench-slot ${activeClass} ${dragClass} ${overClass}`}>
+        <div
+            ref={drop}
+            className={`bench-slot ${activeClass} ${dragClass} ${overClass}`}
+            onMouseEnter={() => onHoverStart(unit, index)}
+            onMouseLeave={() => onHoverEnd()}
+        >
             <div ref={unit ? drag : undefined} className="bench-slot-inner">
                 {Boolean(unit) && <Champion unit={unit} />}
             </div>

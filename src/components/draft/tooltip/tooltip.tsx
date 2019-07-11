@@ -14,7 +14,7 @@ interface TooltipProps {
 const renderRefreshTooltip = () => {
     return (
         <>
-            <div>Refresh [Shift + D]</div>
+            <div>Refresh [D]</div>
             <div>Refresh the store with a new set of champions</div>
         </>
     );
@@ -23,7 +23,7 @@ const renderRefreshTooltip = () => {
 const renderBuyXpTooltip = () => {
     return (
         <>
-            <div>Buy XP [Shift + F]</div>
+            <div>Buy XP [F]</div>
             <div>Gain 4 XP toward your next level. Levelling up increases your team size and gives you access to stronger champions in the store. You gain 2 XP for free at the begninning of each round</div>
         </>
     );
@@ -43,7 +43,7 @@ const renderIncomeTooltip = (player: Summoner) => {
 const renderTimerTooltip = (draft: DraftStore) => {
     return (
         <>
-            <div>Toggle the Timer [Shift + P]</div>
+            <div>Toggle the Timer [P]</div>
             <div>{draft.isPaused ? 'Resume' : 'Pause'} the Round Timer</div>
         </>
     );
@@ -52,7 +52,7 @@ const renderTimerTooltip = (draft: DraftStore) => {
 const renderNextRoundTooltip = (draft: DraftStore) => {
     return (
         <>
-            <div>Go to the next round [Shift + R]</div>
+            <div>Go to the next round [R]</div>
             <div>Current Round: {draft.roundCount}</div>
         </>
     );
@@ -61,7 +61,7 @@ const renderNextRoundTooltip = (draft: DraftStore) => {
 const renderLockHandTooltip = (player: Summoner) => {
     return (
         <>
-            <div>Toggle Lock [Shift + L]</div>
+            <div>Toggle Lock [L]</div>
             <div>{player.isHandLocked ? 'Unlock' : 'Lock'} your current store offerings.</div>
         </>
     );
