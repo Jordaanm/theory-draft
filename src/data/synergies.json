@@ -1,5 +1,5 @@
 {
-    "version": "9.13",
+    "version": "9.16",
     "synergies": {
         "assassin": {
             "name": "Assassin",
@@ -8,7 +8,7 @@
             "stages": [
                 {
                     "amount": 3,
-                    "bonus": "+150%"
+                    "bonus": "+125%"
                 },
                 {
                     "amount": 6,
@@ -23,11 +23,15 @@
             "stages": [
                 {
                     "amount": 3,
-                    "bonus": "Double Strike"
+                    "bonus": "1 additional Strike"
                 },
                 {
                     "amount": 6,
-                    "bonus": "Triple Strike"
+                    "bonus": "2 additional Strikes"
+                },
+                {
+                    "amount": 9,
+                    "bonus": "4 additional Strikes"
                 }],
             "exact": false
         },
@@ -41,25 +45,29 @@
                 },
                 {
                     "amount": 4,
-                    "bonus": "+700"
+                    "bonus": "+600"
+                },
+                {
+                    "amount": 6,
+                    "bonus": "+1000"
                 }],
             "exact": false
         },
         "demon": {
             "name": "Demon",
-            "base": "Demons have a chance on-hit to deplete the target's current mana and deal true damage equal to the mana depleted.",
+            "base": "Demons have a 40% chance on-hit to burn 20 mana from their target and gain mana in return.",
             "stages": [
                 {
                     "amount": 2,
-                    "bonus": "40%"
+                    "bonus": "15 mana"
                 },
                 {
                     "amount": 4,
-                    "bonus": "60%"
+                    "bonus": "30 mana"
                 },
                 {
                     "amount": 6,
-                    "bonus": "80%"
+                    "bonus": "45 mana"
                 }],
             "exact": false
         },
@@ -69,7 +77,7 @@
             "stages": [
                 {
                     "amount": 2,
-                    "bonus": "All Dragons are immune to magic damage"
+                    "bonus": "All Dragons gain 83% resistance to magic damage"
                 }],
             "exact": false
         },
@@ -118,7 +126,7 @@
             "stages": [
                 {
                     "amount": 2,
-                    "bonus": "Guardians will grant 40 armor to all units that start adjacent to a Guardian"
+                    "bonus": "Guardians will grant 50 armor to all other units that start adjacent to a Guardian"
                 }],
             "exact": false
         },
@@ -132,7 +140,25 @@
                 },
                 {
                     "amount": 4,
-                    "bonus": "All enemies in range."
+                    "bonus": "Two additional random enemies."
+                },
+                {
+                    "amount": 6,
+                    "bonus": "Three additional random enemies."
+                }],
+            "exact": false
+        },
+        "hextech": {
+            "name": "Hextech",
+            "base": "Throw a bomb at an enemy unit with an item, and disables all items in a 1/2 hex radius for 8 seconds.",
+            "stages": [
+                {
+                    "amount": 2,
+                    "bonus": "1 hex radius."
+                },
+                {
+                    "amount": 4,
+                    "bonus": "2 hex radius."
                 }],
             "exact": false
         },
@@ -157,15 +183,15 @@
             "stages": [
                 {
                     "amount": 2,
-                    "bonus": "20"
+                    "bonus": "15"
                 },
                 {
                     "amount": 4,
-                    "bonus": "40"
+                    "bonus": "30"
                 },
                 {
                     "amount": 6,
-                    "bonus": "80"
+                    "bonus": "55"
                 }
             ],
             "exact": false
@@ -176,18 +202,18 @@
             "stages": [
                 {
                     "amount": 1,
-                    "bonus": "This Ninja gains 40% attack damage."
+                    "bonus": "This Ninja gains 50 attack damage and 50 ability power."
                 },
                 {
                     "amount": 4,
-                    "bonus": "All Ninjas gain 80% attack damage."
+                    "bonus": "All Ninjas gain 70 attack damage and 70 ability power."
                 }
             ],
             "exact": true
         },
         "noble": {
             "name": "Noble",
-            "base": "Grants 100 armor and basic attacks restore 35 health on-hit to the following:",
+            "base": "Grants 70 armor and 70 magic resistance and basic attacks restore 35 health on-hit to the following:",
             "stages": [
                 {
                     "amount": 3,
@@ -216,8 +242,7 @@
                 {
                     "amount": 3,
                     "bonus": " you begin each PvP round with a chest that grants between 0 and 4 gold."
-                }
-            ],
+                }],
             "exact": false
         },
         "ranger": {
@@ -231,8 +256,7 @@
                 {
                     "amount": 4,
                     "bonus": "65%"
-                }
-            ],
+                }],
             "exact": false
         },
         "robot": {
@@ -242,19 +266,21 @@
                 {
                     "amount": 1,
                     "bonus": "Robots begin combat with full mana."
-                }
-            ],
+                }],
             "exact": false
         },
         "shapeshifter": {
             "name": "Shapeshifter",
-            "base": "",
+            "base": "When Shapeshifters activate their Special Ability, they gain additional maximum health, as well as healing for the amount gained.",
             "stages": [
                 {
                     "amount": 3,
-                    "bonus": "While 3 Shapeshifters are in play, activating their Special Ability will grant +100% maximum health, as well as healing for the amount gained."
-                }
-            ],
+                    "bonus": "+60% of maximum health"
+                },
+                {
+                    "amount": 6,
+                    "bonus": "+120% of maximum health"
+                }],
             "exact": false
         },
         "sorcerer": {
@@ -264,7 +290,7 @@
             "stages": [
                 {
                     "amount": 3,
-                    "bonus": "+35"
+                    "bonus": "+40"
                 },
                 {
                     "amount": 6,
@@ -286,7 +312,7 @@
         },
         "wild": {
             "name": "Wild",
-            "base": "Wildlings generate Fury on-hit, up to 5. Each stack gives 7% attack speed",
+            "base": "Wildlings generate Fury on-hit, up to 5. Each stack gives 12% attack speed",
             "stages": [
                 {
                     "amount": 2,
@@ -305,11 +331,11 @@
             "stages": [
                 {
                     "amount": 3,
-                    "bonus": "20%"
+                    "bonus": "30%"
                 },
                 {
                     "amount": 6,
-                    "bonus": "50%"
+                    "bonus": "55%"
                 }
             ],
             "exact": false
