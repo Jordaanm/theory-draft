@@ -1,5 +1,5 @@
 {
-    "version": "v9.13",
+    "version": "v9.16",
     "champions": [
         {
             "name": "Aatrox",
@@ -390,6 +390,15 @@
             "classes": [
                 "yordle",
                 "gunslinger"
+            ]
+        },
+        {
+            "name": "Twisted Fate",
+            "id": "twistedfate",
+            "cost": 3,
+            "classes": [
+                "pirate",
+                "sorcerer"
             ]
         },
         {
