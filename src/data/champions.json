@@ -83,6 +83,15 @@
             ]
         },
         {
+            "name": "Camille",
+            "id": "camille",
+            "cost": 1,
+            "classes": [
+                "blademaster",
+                "hextech"
+            ]
+        },
+        {
             "name": "Cho'Gath",
             "id": "chogath",
             "cost": 3,
@@ -172,6 +181,24 @@
             "classes": [
                 "pirate",
                 "gunslinger"
+            ]
+        },
+        {
+            "name": "Jayce",
+            "id": "jayce",
+            "cost": 2,
+            "classes": [
+                "shapeshifter",
+                "hextech"
+            ]
+        },
+        {
+            "name": "Jinx",
+            "id": "jinx",
+            "cost": 4,
+            "classes": [
+                "gunslinger",
+                "hextech"
             ]
         },
         {
@@ -417,6 +444,15 @@
             "classes": [
                 "sorcerer",
                 "yordle"
+            ]
+        },
+        {
+            "name": "Vi",
+            "id": "vi",
+            "cost": 3,
+            "classes": [
+                "brawler",
+                "guardian"
             ]
         },
         {
