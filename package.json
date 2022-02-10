@@ -13,7 +13,7 @@
     "jsoneditor-react": "^1.0.1",
     "mobx": "^5.10.1",
     "mobx-react": "^6.1.1",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "opn": "^6.0.0",
     "react": "^16.8.6",
     "react-dnd": "^8.0.3",
