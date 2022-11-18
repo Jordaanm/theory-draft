@@ -22,7 +22,7 @@
     "react-dnd-touch-backend": "^0.8.3",
     "react-dom": "^16.8.6",
     "react-hotkeys-hook": "^1.4.0",
-    "react-scripts": "3.0.1",
+    "react-scripts": "5.0.1",
     "typescript": "^3.5.2"
   },
   "scripts": {
